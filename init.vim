@@ -133,6 +133,7 @@ Plug 'spiiph/vim-space' " {{{
 let g:space_no_character_movements = 1
 "}}}
 Plug 'tpope/vim-fugitive' | Plug 'gregsexton/gitv', { 'on': ['Gitv']}
+Plug 'jreybert/vimagit'
 Plug 'Konfekt/FastFold'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-scripts/TaskList.vim'
