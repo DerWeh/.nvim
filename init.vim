@@ -98,7 +98,7 @@ Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
 " let g:limelight_bop = '^\s*\n^\w'
 " let g:limelight_eop = '\ze\n^\s*\n^\w'
 "}}}
-Plug 'chrisbra/NrrwRgn', {'on': ['NR', 'NW','NRV','NUD','NRP']}
+Plug 'chrisbra/NrrwRgn'
 
 Plug 'tpope/vim-speeddating'
 Plug 'dhruvasagar/vim-table-mode'
