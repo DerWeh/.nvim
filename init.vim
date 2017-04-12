@@ -196,6 +196,19 @@ augroup END
 "let g:ale_lint_on_insert_leave = 1
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'roxma/nvim-completion-manager' "{{{
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
+"let g:cm_refresh_default_min_word_len = [[1,3],[5,2]]
+"imap <c-j>     <Plug>(neosnippet_expand_or_jump)
+"vmap <c-j>     <Plug>(neosnippet_expand_or_jump)
+"inoremap <silent> <c-u> <c-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<cr>
+"vmap <c-u>     <Plug>(neosnippet_expand_target)
+"" expand parameters
+"let g:neosnippet#enable_completed_snippet=1
+""}}}
 
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' "| Plug 'Shougo/echodoc.vim'
 "Plug 'Shougo/context_filetype.vim' " doesn't work
