@@ -204,6 +204,13 @@ let g:qf_auto_open_loclist = 0
 let g:qf_auto_open_quickfix = 0
 let g:qf_mapping_ack_style = 1"}}}
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify' "{{{
+let g:startify_fortune_use_unicode = 1
+let g:startify_custom_header = []
+let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
+      \{'z': '~/.zshrc'},
+      \{'p': '~/pyplot'}]
+"}}}
 "Plug 'blueyed/cursorcross.vim'
 
 " -------------------- nvim specific -----------------
