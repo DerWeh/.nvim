@@ -605,6 +605,7 @@ let g:jedi#use_tabs_not_buffers     = 0
 "}}}
 
 "Unite{{{
+autocmd FileType denite,unite setl nospell
 if executable('ag')
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
