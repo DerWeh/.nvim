@@ -73,8 +73,8 @@ let &colorcolumn='80,'.join(range(120,999),',')
 
 
 " =============== nvim =============================
-let g:python_host_prog = '/home/andreas/.pyenv/shims/python2'
-let g:python3_host_prog = '/home/andreas/.pyenv/shims/python3'
+let g:python_host_prog = '/home/andreas/.pyenv/versions/2.7.13/bin/python2.7'
+let g:python3_host_prog = '/home/andreas/.pyenv/versions/3.6.1/bin/python3.6'
 
 
 " =============== Plug-in Management =================={{{
@@ -113,7 +113,9 @@ Plug 'heavenshell/vim-pydocstring', { 'for': 'python', 'on':  '<Plug>pydocstring
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'} "{{{
+let g:jedi#force_py_version = 3
+"}}}
 Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
 let g:python_highlight_builtins = 1
 let g:python_highlight_builtin_funcs = 1
