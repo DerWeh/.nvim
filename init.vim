@@ -140,7 +140,7 @@ Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.
 " ------------------- Unite --------------------------
 Plug 'Shougo/unite.vim'
       \ | Plug 'Shougo/unite-outline' | Plug 'Shougo/unite-session'
-      \ | Plug 'osyo-manga/unite-quickfix'
+      \ | Plug 'osyo-manga/unite-quickfix' | Plug 'Shougo/unite-outline'
       \ | Plug 'kmnk/vim-unite-giti'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
@@ -172,7 +172,9 @@ let g:yankring_replace_n_pkey = '<C-p>'
 "}}}
 Plug 'google/vim-searchindex'
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
-let g:far#source = 'agnvim'
+if executable('ag')
+  let g:far#source = 'agnvim'
+endif
 "}}}
 Plug 'easymotion/vim-easymotion' " {{{
 let g:EasyMotion_smartcase = 1
@@ -264,7 +266,8 @@ Plug 'Yggdroot/indentLine' "{{{
 let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
 let g:indentLine_setConceal = 0
 "}}}
-Plug 'vim-airline/vim-airline' " |  Plug 'vim-airline/vim-airline-themes' "{{{
+Plug 'vim-airline/vim-airline' "{{{
+Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#vcs_priority = ['git']
 set laststatus=2
@@ -453,8 +456,9 @@ nmap <leader>u [unite]
 nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files file_rec file_mru<CR>
-nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
+nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names unite:file_rec/neovim file_old<CR>
+"nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
+nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 " }}}
 
@@ -601,37 +605,52 @@ let g:jedi#use_tabs_not_buffers     = 0
 "}}}
 
 "Unite{{{
+if executable('ag')
+  call denite#custom#var('file_rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--hidden'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-imap <buffer> <C-n>   <Plug>(unite_select_next_line)
-imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
+  imap <buffer> <C-n>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
 
-nmap <buffer> <C-n>   <Plug>(unite_select_next_line)
-nmap <buffer> <C-p>   <Plug>(unite_select_previous_line)
+  nmap <buffer> <C-n>   <Plug>(unite_select_next_line)
+  nmap <buffer> <C-p>   <Plug>(unite_select_previous_line)
 
-nmap <silent><buffer><expr> Enter unite#do_action('switch')
-nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-nmap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
+  nmap <silent><buffer><expr> Enter unite#do_action('switch')
+  nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  nmap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
+  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-imap <silent><buffer><expr> Enter unite#do_action('switch')
-imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-imap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
+  imap <silent><buffer><expr> Enter unite#do_action('switch')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  imap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-nmap <buffer> <C-g> <Plug>(unite_toggle_auto_preview)
+  nmap <buffer> <C-g> <Plug>(unite_toggle_auto_preview)
 
-nnoremap <buffer> <ESC> :UniteClose<cr>
-nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
-nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
-nmap <buffer><silent> <c-r> <Plug>(unite_redraw)
+  nnoremap <buffer> <ESC> :UniteClose<cr>
+  nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
+  nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
+  nmap <buffer><silent> <c-r> <Plug>(unite_redraw)
 endfunction
 
 "if executable('ag') == 1
 "let g:unite_source_grep_command = 'ag'
-"let g:unite_source_rec_async_command =
-      "\['ag', '--follow', '--nocolor', '--hidden', '-g', '']
+let g:unite_source_rec_async_command =
+      \['ag', '--follow', '--nocolor', '--hidden', '-g', '']
 "let g:unite_source_grep_default_opts =
       "\ '-i --vimgrep --hidden --ignore ' .
       "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
