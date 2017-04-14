@@ -178,7 +178,7 @@ let g:qf_auto_open_loclist = 0
 let g:qf_auto_open_quickfix = 0
 let g:qf_mapping_ack_style = 1"}}}
 Plug 'mbbill/undotree'
-"Plug 'blueyed/cursorcross.vim'
+Plug 'blueyed/cursorcross.vim'
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
