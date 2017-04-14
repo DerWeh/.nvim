@@ -108,7 +108,6 @@ Plug 'heavenshell/vim-pydocstring', { 'for': 'python', 'on':  '<Plug>pydocstring
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-au FileType python set foldlevel=1
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 " ------------------- rst -----------------------------
