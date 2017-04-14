@@ -171,7 +171,9 @@ let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
 "}}}
 Plug 'google/vim-searchindex'
-Plug 'brooth/far.vim', {'on': ['Far', 'Farp', 'F']}
+Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
+let g:far#source = 'agnvim'
+"}}}
 Plug 'easymotion/vim-easymotion' " {{{
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
@@ -658,8 +660,10 @@ call vimfiler#custom#profile('explorer', 'context', {
       \ })
 autocmd FileType vimfiler nmap <buffer> i :VimFilerPrompt<CR>
 let g:vimfiler_tree_leaf_icon = '¦'
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
+"let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_opened_icon = ''
+"let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_tree_closed_icon = ''
 " let g:vimfiler_file_icon = '-'
 " let g:vimfiler_marked_file_icon = '*'
 "}}}
