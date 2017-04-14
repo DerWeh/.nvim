@@ -109,6 +109,22 @@ Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
+let g:python_highlight_builtins = 1
+let g:python_highlight_builtin_funcs = 1
+let g:python_highlight_builtin_objs = 1
+let g:python_highlight_builtin_funcs_kwarg = 0
+let g:python_highlight_exceptions = 0
+let g:python_highlight_string_formatting = 0
+let g:python_highlight_string_format = 0
+let g:python_highlight_string_templates = 0
+let g:python_highlight_indent_errors = 0
+let g:python_highlight_space_errors = 0
+let g:python_highlight_doctests = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_operators = 0
+let g:python_highlight_file_headers_as_comments = 1
+"}}}
 
 " ------------------- rst -----------------------------
 Plug 'Rykka/riv.vim', {'for': ['rst']}
@@ -239,7 +255,7 @@ Plug 'Yggdroot/indentLine' "{{{
 let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
 let g:indentLine_setConceal = 0
 "}}}
-Plug 'vim-airline/vim-airline' |  Plug 'vim-airline/vim-airline-themes' "{{{
+Plug 'vim-airline/vim-airline' " |  Plug 'vim-airline/vim-airline-themes' "{{{
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#vcs_priority = ['git']
 set laststatus=2
@@ -313,8 +329,23 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
+
 " personal modified
-Plug 'DerWeh/papercolor-theme'
+Plug 'DerWeh/papercolor-theme'"{{{
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+"}}}
 Plug 'DerWeh/vim-ipython', {'for': 'python', 'on': ['IPython', 'IPythonNew']}
 
 " Add plug-in to &runtimepath
