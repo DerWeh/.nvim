@@ -72,6 +72,11 @@ set ttyfast
 let &colorcolumn='80,'.join(range(120,999),',')
 
 
+" =============== nvim =============================
+let g:python_host_prog = '/home/andreas/.pyenv/shims/python2'
+let g:python3_host_prog = '/home/andreas/.pyenv/shims/python3'
+
+
 " =============== Plug-in Management =================={{{
 call plug#begin('~/.config/nvim/plugged')
 function! Cond(cond, ...)
