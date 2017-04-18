@@ -24,12 +24,12 @@ set backspace=2
 
 " ================ Backup Settings===================
 set writebackup
-if !isdirectory(expand('~').'/.vim/.backup')
+if !isdirectory(expand('~').'/.config/nvim/.backup')
   silent !mkdir ~/.vim/.backup > /dev/null 2>&1
 endif
 let &backupext = '~' . substitute(expand('%:p'), '/', '%', 'g')
 set backup backupdir=~/.vim/.backup//
-if !isdirectory(expand('~').'/.vim/.undo')
+if !isdirectory(expand('~').'/.config/nvim/.undo')
   silent !mkdir ~/.vim/backups > /dev/null 2>&1
 endif
 set undofile undodir=~/.vim/.undo//  " ending with `//` creates unique names
@@ -72,6 +72,11 @@ set ttyfast
 let &colorcolumn='80,'.join(range(120,999),',')
 
 
+" =============== nvim =============================
+let g:python_host_prog = '/home/andreas/.pyenv/versions/2.7.13/bin/python2.7'
+let g:python3_host_prog = '/home/andreas/.pyenv/versions/3.6.1/bin/python3.6'
+
+
 " =============== Plug-in Management =================={{{
 call plug#begin('~/.config/nvim/plugged')
 function! Cond(cond, ...)
@@ -108,8 +113,25 @@ Plug 'heavenshell/vim-pydocstring', { 'for': 'python', 'on':  '<Plug>pydocstring
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-au FileType python set foldlevel=1
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'} "{{{
+let g:jedi#force_py_version = 3
+"}}}
+Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
+let g:python_highlight_builtins = 1
+let g:python_highlight_builtin_funcs = 1
+let g:python_highlight_builtin_objs = 1
+let g:python_highlight_builtin_funcs_kwarg = 0
+let g:python_highlight_exceptions = 0
+let g:python_highlight_string_formatting = 0
+let g:python_highlight_string_format = 0
+let g:python_highlight_string_templates = 0
+let g:python_highlight_indent_errors = 0
+let g:python_highlight_space_errors = 0
+let g:python_highlight_doctests = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_operators = 0
+let g:python_highlight_file_headers_as_comments = 1
+"}}}
 
 " ------------------- rst -----------------------------
 Plug 'Rykka/riv.vim', {'for': ['rst']}
@@ -118,7 +140,7 @@ Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.
 " ------------------- Unite --------------------------
 Plug 'Shougo/unite.vim'
       \ | Plug 'Shougo/unite-outline' | Plug 'Shougo/unite-session'
-      \ | Plug 'osyo-manga/unite-quickfix'
+      \ | Plug 'osyo-manga/unite-quickfix' | Plug 'Shougo/unite-outline'
       \ | Plug 'kmnk/vim-unite-giti'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
@@ -149,7 +171,11 @@ let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
 "}}}
 Plug 'google/vim-searchindex'
-Plug 'brooth/far.vim', {'on': ['Far', 'Farp', 'F']}
+Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
+if executable('ag')
+  let g:far#source = 'agnvim'
+endif
+"}}}
 Plug 'easymotion/vim-easymotion' " {{{
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
@@ -178,6 +204,13 @@ let g:qf_auto_open_loclist = 0
 let g:qf_auto_open_quickfix = 0
 let g:qf_mapping_ack_style = 1"}}}
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify' "{{{
+let g:startify_fortune_use_unicode = 1
+let g:startify_custom_header = []
+let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
+      \{'z': '~/.zshrc'},
+      \{'p': '~/pyplot'}]
+"}}}
 Plug 'blueyed/cursorcross.vim'
 
 " -------------------- nvim specific -----------------
@@ -240,7 +273,8 @@ Plug 'Yggdroot/indentLine' "{{{
 let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
 let g:indentLine_setConceal = 0
 "}}}
-Plug 'vim-airline/vim-airline' |  Plug 'vim-airline/vim-airline-themes' "{{{
+Plug 'vim-airline/vim-airline' "{{{
+Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#vcs_priority = ['git']
 set laststatus=2
@@ -314,8 +348,23 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
+
 " personal modified
-Plug 'DerWeh/papercolor-theme'
+Plug 'DerWeh/papercolor-theme'"{{{
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+"}}}
 Plug 'DerWeh/vim-ipython', {'for': 'python', 'on': ['IPython', 'IPythonNew']}
 
 " Add plug-in to &runtimepath
@@ -414,8 +463,9 @@ nmap <leader>u [unite]
 nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files file_rec file_mru<CR>
-nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
+nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names unite:file_rec/neovim file_old<CR>
+"nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
+nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 " }}}
 
@@ -562,37 +612,53 @@ let g:jedi#use_tabs_not_buffers     = 0
 "}}}
 
 "Unite{{{
+autocmd FileType denite,unite setl nospell
+if executable('ag')
+  call denite#custom#var('file_rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--hidden'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-imap <buffer> <C-n>   <Plug>(unite_select_next_line)
-imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
+  imap <buffer> <C-n>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
 
-nmap <buffer> <C-n>   <Plug>(unite_select_next_line)
-nmap <buffer> <C-p>   <Plug>(unite_select_previous_line)
+  nmap <buffer> <C-n>   <Plug>(unite_select_next_line)
+  nmap <buffer> <C-p>   <Plug>(unite_select_previous_line)
 
-nmap <silent><buffer><expr> Enter unite#do_action('switch')
-nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-nmap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
+  nmap <silent><buffer><expr> Enter unite#do_action('switch')
+  nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  nmap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
+  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-imap <silent><buffer><expr> Enter unite#do_action('switch')
-imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-imap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
+  imap <silent><buffer><expr> Enter unite#do_action('switch')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
+  imap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
 
-nmap <buffer> <C-g> <Plug>(unite_toggle_auto_preview)
+  nmap <buffer> <C-g> <Plug>(unite_toggle_auto_preview)
 
-nnoremap <buffer> <ESC> :UniteClose<cr>
-nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
-nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
-nmap <buffer><silent> <c-r> <Plug>(unite_redraw)
+  nnoremap <buffer> <ESC> :UniteClose<cr>
+  nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
+  nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
+  nmap <buffer><silent> <c-r> <Plug>(unite_redraw)
 endfunction
 
 "if executable('ag') == 1
 "let g:unite_source_grep_command = 'ag'
-"let g:unite_source_rec_async_command =
-      "\['ag', '--follow', '--nocolor', '--hidden', '-g', '']
+let g:unite_source_rec_async_command =
+      \['ag', '--follow', '--nocolor', '--hidden', '-g', '']
 "let g:unite_source_grep_default_opts =
       "\ '-i --vimgrep --hidden --ignore ' .
       "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
@@ -621,8 +687,10 @@ call vimfiler#custom#profile('explorer', 'context', {
       \ })
 autocmd FileType vimfiler nmap <buffer> i :VimFilerPrompt<CR>
 let g:vimfiler_tree_leaf_icon = '¦'
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
+"let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_opened_icon = ''
+"let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_tree_closed_icon = ''
 " let g:vimfiler_file_icon = '-'
 " let g:vimfiler_marked_file_icon = '*'
 "}}}
