@@ -394,7 +394,7 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 "}}}
-Plug 'DerWeh/vim-ipython', {'for': 'python', 'on': ['IPython', 'IPythonNew']}
+Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 
 " Add plug-in to &runtimepath
 call plug#end()
