@@ -13,6 +13,7 @@ set noerrorbells
 set diffopt+=vertical
 set shortmess+=c
 
+let g:maplocalleader="'"
 let g:mapleader=','
 
 set clipboard+=unnamedplus
