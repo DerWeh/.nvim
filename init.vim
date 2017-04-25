@@ -133,6 +133,9 @@ let g:python_highlight_operators = 0
 let g:python_highlight_file_headers_as_comments = 1
 "}}}
 
+" ------------------- tex -----------------------------
+Plug 'lervag/vimtex'
+
 " ------------------- rst -----------------------------
 Plug 'Rykka/riv.vim', {'for': ['rst']}
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
@@ -581,7 +584,9 @@ let g:context_filetype#same_filetypes = 1
 let g:echodoc_enable_at_startup = 0
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#statement_length = 80
-let g:deoplete#omni#input_patterns = {}
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
 
 " jedi Configuration from https://github.com/zeekay/vice-complete{{{
 
@@ -609,6 +614,19 @@ let g:jedi#use_tabs_not_buffers     = 0
 "let g:deoplete#omni#input_patterns.python = '\([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 "}}}
 
+" ------------------- vimtex ---------------------
+"let g:deoplete#omni#input_patterns.tex = '\\(?:'
+"      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+"      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+"      \ . '|hyperref\s*\[[^]]*'
+"      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ .')'
+let g:deoplete#omni#input_patterns.tex = '\\.*'
 "}}}
 
 "Unite{{{
@@ -697,6 +715,7 @@ let g:vimfiler_tree_closed_icon = ''
 
 " Latex {{{
 let g:tex_conceal= 'adgm'
+let g:tex_flavor = 'latex'
 "}}}
 
 " Riv {{{
