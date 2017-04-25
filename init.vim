@@ -470,7 +470,7 @@ nmap <leader>u [unite]
 nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names unite:file_rec/neovim file_old<CR>
+nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 "nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
