@@ -707,28 +707,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 call unite#custom#source('files,file,file/new,buffer,file_rec,file_rec/async,file_mru', 'matchers', 'matcher_fuzzy')
 "}}}
 
-" VimFiler {{{
-let g:vimfiler_as_default_explorer = 1
-call vimfiler#custom#profile('explorer', 'context', {
-      \  'safe': 0,
-      \  'simple': 0
-      \ })
-autocmd FileType vimfiler noremap <buffer> i :VimFilerPrompt<CR>
-let g:vimfiler_tree_leaf_icon = '¦'
-"let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_opened_icon = ''
-"let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_tree_closed_icon = ''
-" let g:vimfiler_file_icon = '-'
-" let g:vimfiler_marked_file_icon = '*'
-"}}}
-
 " Latex {{{
 let g:tex_conceal= 'adgm'
-"}}}
-
-" Riv {{{
-let g:riv_python_rst_hl=1
 "}}}
 
 "}}}
