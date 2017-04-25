@@ -215,6 +215,9 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
       \{'z': '~/.zshrc'},
       \{'p': '~/pyplot'}]
 "}}}
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 "Plug 'blueyed/cursorcross.vim'
 
 " -------------------- nvim specific -----------------
