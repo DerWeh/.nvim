@@ -25,14 +25,14 @@ set backspace=2
 " ================ Backup Settings===================
 set writebackup
 if !isdirectory(expand('~').'/.config/nvim/.backup')
-  silent !mkdir ~/.vim/.backup > /dev/null 2>&1
+  silent !mkdir ~/.config/nvim/.backup > /dev/null 2>&1
 endif
 let &backupext = '~' . substitute(expand('%:p'), '/', '%', 'g')
-set backup backupdir=~/.vim/.backup//
+set backup backupdir=~/.config/nvim/.backup//
 if !isdirectory(expand('~').'/.config/nvim/.undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  silent !mkdir ~/.config/nvim/.undo > /dev/null 2>&1
 endif
-set undofile undodir=~/.vim/.undo//  " ending with `//` creates unique names
+set undofile undodir=~/.config/nvim/.undo//  " ending with `//` creates unique names
 
 
 "" ================ Caps Lock ========================
