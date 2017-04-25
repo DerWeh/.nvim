@@ -273,7 +273,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:neosnippet#enable_completed_snippet=1
 ""}}}
 
-Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' "| Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/echodoc.vim'
 "Plug 'Shougo/context_filetype.vim' " doesn't work
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
@@ -609,6 +609,8 @@ let g:context_filetype#same_filetypes = 1
 let g:echodoc_enable_at_startup = 0
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#statement_length = 80
+let g:echodoc_enable_at_startup = 1
+let g:echodoc#highlight_arguments='Visual'
 let g:deoplete#omni#input_patterns = {}
 
 " jedi Configuration from https://github.com/zeekay/vice-complete{{{
