@@ -171,6 +171,7 @@ Plug 'Shougo/unite.vim'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 
+let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
@@ -606,43 +607,13 @@ if has('conceal')
 endif
 
 let g:context_filetype#same_filetypes = 1
-let g:echodoc_enable_at_startup = 0
-let g:deoplete#sources#jedi#show_docstring = 1
-let g:deoplete#sources#jedi#statement_length = 80
 let g:echodoc_enable_at_startup = 1
 let g:echodoc#highlight_arguments='Visual'
 let g:deoplete#omni#input_patterns = {}
-
-" jedi Configuration from https://github.com/zeekay/vice-complete{{{
-
-"au FileType python setl omnifunc=jedi#completions
-
-" Needed for deoplete/neocomplcache
-let g:jedi#auto_vim_configuration   = 0
-let g:jedi#completions_enabled      = 1
-let g:jedi#completions_command      = ''
-
-" Call signatures
-let g:jedi#show_call_signatures     = 1
-let g:jedi#show_call_signatures_delay = 0
-
-let g:jedi#auto_initialization      = 1
-let g:jedi#goto_assignments_command = 'gd'
-let g:jedi#goto_definitions_command = 'gD'
-let g:jedi#popup_on_dot             = 0
-let g:jedi#popup_select_first       = 0
-"let g:jedi#rename_command           = '<leader>jr'
-let g:jedi#usages_command           = '<leader>ju'
-let g:jedi#use_splits_not_buffers   = 'right'
-let g:jedi#use_tabs_not_buffers     = 0
-
-"let g:deoplete#omni#input_patterns.python = '\([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 "}}}
 
-"}}}
-
-"Unite{{{
-autocmd FileType denite,unite setl nospell
+"Unite/Denite{{{
+autocmd FileType denite setl nospell
 if executable('ag')
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
