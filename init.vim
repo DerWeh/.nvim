@@ -238,6 +238,8 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
       \{'p': '~/pyplot'}]
 "}}}
 Plug 'blueyed/cursorcross.vim'
+Plug 'nixon/vim-vmath'
+vnoremap <silent> ++ y:call VMATH_Analyse()<CR>gv
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
