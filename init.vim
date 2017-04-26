@@ -73,9 +73,7 @@ let &colorcolumn='80,'.join(range(120,999),',')
 
 
 " =============== nvim =============================
-let g:python_host_prog = '/home/andreas/.pyenv/versions/2.7.13/bin/python2.7'
-let g:python3_host_prog = '/home/andreas/.pyenv/versions/3.6.1/bin/python3.6'
-
+source ~/.config/nvim/.pythonprovider.vim
 
 " =============== Plug-in Management =================={{{
 call plug#begin('~/.config/nvim/plugged')
