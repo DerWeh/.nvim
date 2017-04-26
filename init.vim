@@ -141,15 +141,15 @@ Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'} "{{{
 let g:jedi#force_py_version = 3
 "}}}
-Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
+Plug 'hdima/python-syntax', {'for': 'python'} "{{{
 let g:python_highlight_builtins = 1
 let g:python_highlight_builtin_funcs = 1
 let g:python_highlight_builtin_objs = 1
 let g:python_highlight_builtin_funcs_kwarg = 0
-let g:python_highlight_exceptions = 0
-let g:python_highlight_string_formatting = 0
-let g:python_highlight_string_format = 0
-let g:python_highlight_string_templates = 0
+let g:python_highlight_exceptions = 1
+let g:python_highlight_string_formatting = 1
+let g:python_highlight_string_format = 1
+let g:python_highlight_string_templates = 1
 let g:python_highlight_indent_errors = 0
 let g:python_highlight_space_errors = 0
 let g:python_highlight_doctests = 1
@@ -243,9 +243,11 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
 Plug 'blueyed/cursorcross.vim'
 Plug 'nixon/vim-vmath'
 vnoremap <silent> ++ y:call VMATH_Analyse()<CR>gv
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', {'on': ['<Plug>(EasyAlign)', 'EasyAlign','<Plug>(LiveEasyAlign)', 'LiveEasyAlign']} "{{{
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+"}}}
+
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
@@ -354,7 +356,7 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 
-"" powerline symbols
+" powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -408,6 +410,7 @@ call plug#end()
 
 " ===================== Color Settings ==============={{{
 set t_Co=256                       " turn syntax highlighting on
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
 colorscheme PaperColor
 syntax enable                      " keeps highlighting  ;
