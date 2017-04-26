@@ -200,6 +200,13 @@ let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
 "}}}
 Plug 'google/vim-searchindex'
+Plug 'haya14busa/incsearch.vim', {'on': ['<Plug>(incsearch-forward)', '<Plug>(incsearch-stay)', '<Plug>(incsearch-backward)']} "{{{
+let g:incsearch#magic = '\v'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+"}}}
+
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
   let g:far#source = 'agnvim'
@@ -459,27 +466,25 @@ set foldtext=CustomFoldText()
 
 
 " ===================== Key Mappings ================={{{
-nnoremap ; :|                       " faster `commands` using ;
+nnoremap ; :|                                                      " faster `commands` using ;
 nnoremap : ;
-vnoremap ; :|                       " faster `commands` using ;
+vnoremap ; :|                                                      " faster `commands` using ;
 vnoremap : ;
 
-nnoremap / /\v|                     " use Python regular expressions
-vnoremap / /\v|                     " use Python regular expressions
 
-nnoremap p p=`]<C-o>|               " Auto indent pasted text
+nnoremap p p=`]<C-o>|                                              " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
 cnoremap w!! w !sudo tee % >/dev/null
-nmap Q <Nop>|  " Remove mapping for `Ex` mode
+nmap Q <Nop>|                                                      " Remove mapping for `Ex` mode
 
-nnoremap <F2> :w<CR>|  " in normal mode F2 will save the file
-inoremap <F2> <C-o>:w<CR>|  " in insert mode F2 will exit insert, save, enters insert again
-set pastetoggle=<F3>|  " toggle paste mode for pasting code without intend
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>|  " switch between header/source with F4
-noremap <leader>h :nohl<CR>|  " Remove highlight from search results
+nnoremap <F2> :w<CR>|                                              " in normal mode F2 will save the file
+inoremap <F2> <C-o>:w<CR>|                                         " in insert mode F2 will exit insert, save, enters insert again
+set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
+noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
+noremap <c-h> :<C-u>nohl<CR>|                                      " Remove highlight from search results
 
-" -------------------- Plugin Mappings ---------------
+                      " -------------------- Plugin Mappings ---------------
 " Plug-in mapping{{{
 nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
@@ -497,7 +502,7 @@ nmap <C-w>f <C-w><Bar><C-w>_
 nnoremap <F1> :Denite -buffer-name=help help<CR>
 nnoremap [unite] <Nop>
 nmap <leader>u [unite]
-nnoremap [unite] :Unite |
+nnoremap [unite] :Unite
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
