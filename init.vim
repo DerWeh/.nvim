@@ -206,6 +206,18 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 "}}}
+Plug 'haya14busa/vim-asterisk', {'on': ['<Plug>(asterisk-*)', '<Plug>(asterisk-#)', '<Plug>(asterisk-g*)',
+      \ '<Plug>(asterisk-g#)', '<Plug>(asterisk-z*)', '<Plug>(asterisk-gz*)', '<Plug>(asterisk-z#)', '<Plug>(asterisk-gz#)']} "{{{
+let g:asterisk#keeppos = 1
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+"}}}
 
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
@@ -482,7 +494,7 @@ nnoremap <F2> :w<CR>|                                              " in normal m
 inoremap <F2> <C-o>:w<CR>|                                         " in insert mode F2 will exit insert, save, enters insert again
 set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
 noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
-noremap <c-h> :<C-u>nohl<CR>|                                      " Remove highlight from search results
+noremap <leader>h :<C-u>nohl<CR>|                                      " Remove highlight from search results
 
                       " -------------------- Plugin Mappings ---------------
 " Plug-in mapping{{{
