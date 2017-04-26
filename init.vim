@@ -25,14 +25,14 @@ set backspace=2
 " ================ Backup Settings===================
 set writebackup
 if !isdirectory(expand('~').'/.config/nvim/.backup')
-  silent !mkdir ~/.vim/.backup > /dev/null 2>&1
+  silent !mkdir ~/.config/nvim/.backup > /dev/null 2>&1
 endif
 let &backupext = '~' . substitute(expand('%:p'), '/', '%', 'g')
-set backup backupdir=~/.vim/.backup//
+set backup backupdir=~/.config/nvim/.backup//
 if !isdirectory(expand('~').'/.config/nvim/.undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  silent !mkdir ~/.config/nvim/.undo > /dev/null 2>&1
 endif
-set undofile undodir=~/.vim/.undo//  " ending with `//` creates unique names
+set undofile undodir=~/.config/nvim/.undo//  " ending with `//` creates unique names
 
 
 "" ================ Caps Lock ========================
@@ -94,6 +94,30 @@ Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
 Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']} "{{{
 " let g:vimwiki_folding = 'expr'
 let g:vimwiki_table_mappings = 0
+function! VimwikiLinkHandler(link) "{{{ Use Vim to open links with the
+  " 'vlocal:' or 'vfile:' schemes.  E.g.:
+  "   1) [[vfile:///~/Code/PythonProject/abc123.py]], and
+  "   2) [[vlocal:./|Wiki Home]]
+  let s:link = a:link
+  if s:link =~ 'vlocal:' || s:link =~ 'vfile:'
+    let s:link = s:link[1:]
+  else
+    return 0
+  endif
+  let [idx, scheme, path, subdir, lnk, ext, url] =
+       \ vimwiki#base#resolve_scheme(s:link, 0)
+  if g:vimwiki_debug
+    echom 'LinkHandler: idx='.idx.', scheme=[v]'.scheme.', path='.path.
+         \ ', subdir='.subdir.', lnk='.lnk.', ext='.ext.', url='.url
+  endif
+  if url == ''
+    echom 'Vimwiki Error: Unable to resolve link!'
+    return 0
+  else
+    call vimwiki#base#edit_file('tabnew', url, [], 0)
+    return 1
+  endif
+endfunction " }}}
 "}}}
 Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
 let g:golden_ratio_autocommand = 0
@@ -103,6 +127,8 @@ Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
 " let g:limelight_bop = '^\s*\n^\w'
 " let g:limelight_eop = '\ze\n^\s*\n^\w'
 "}}}
+Plug 'will133/vim-dirdiff', {'on': ['DirDiff']}
+let g:DirDiffExcludes = ".*,*.exe,*.swp"
 Plug 'chrisbra/NrrwRgn'
 
 Plug 'tpope/vim-speeddating'
@@ -145,6 +171,7 @@ Plug 'Shougo/unite.vim'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 
+let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
@@ -212,6 +239,8 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
       \{'p': '~/pyplot'}]
 "}}}
 Plug 'blueyed/cursorcross.vim'
+Plug 'nixon/vim-vmath'
+vnoremap <silent> ++ y:call VMATH_Analyse()<CR>gv
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
@@ -245,7 +274,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:neosnippet#enable_completed_snippet=1
 ""}}}
 
-Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets' "| Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/echodoc.vim'
 "Plug 'Shougo/context_filetype.vim' " doesn't work
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
@@ -365,7 +394,7 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 "}}}
-Plug 'DerWeh/vim-ipython', {'for': 'python', 'on': ['IPython', 'IPythonNew']}
+Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 
 " Add plug-in to &runtimepath
 call plug#end()
@@ -578,41 +607,13 @@ if has('conceal')
 endif
 
 let g:context_filetype#same_filetypes = 1
-let g:echodoc_enable_at_startup = 0
-let g:deoplete#sources#jedi#show_docstring = 1
-let g:deoplete#sources#jedi#statement_length = 80
+let g:echodoc_enable_at_startup = 1
+let g:echodoc#highlight_arguments='Visual'
 let g:deoplete#omni#input_patterns = {}
-
-" jedi Configuration from https://github.com/zeekay/vice-complete{{{
-
-"au FileType python setl omnifunc=jedi#completions
-
-" Needed for deoplete/neocomplcache
-let g:jedi#auto_vim_configuration   = 0
-let g:jedi#completions_enabled      = 1
-let g:jedi#completions_command      = ''
-
-" Call signatures
-let g:jedi#show_call_signatures     = 1
-let g:jedi#show_call_signatures_delay = 0
-
-let g:jedi#auto_initialization      = 1
-let g:jedi#goto_assignments_command = 'gd'
-let g:jedi#goto_definitions_command = 'gD'
-let g:jedi#popup_on_dot             = 0
-let g:jedi#popup_select_first       = 0
-"let g:jedi#rename_command           = '<leader>jr'
-let g:jedi#usages_command           = '<leader>ju'
-let g:jedi#use_splits_not_buffers   = 'right'
-let g:jedi#use_tabs_not_buffers     = 0
-
-"let g:deoplete#omni#input_patterns.python = '\([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 "}}}
 
-"}}}
-
-"Unite{{{
-autocmd FileType denite,unite setl nospell
+"Unite/Denite{{{
+autocmd FileType denite setl nospell
 if executable('ag')
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -628,41 +629,6 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '.git/', '.ropeproject/', '__pycache__/',
       \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
 
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  imap <buffer> <C-n>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
-
-  nmap <buffer> <C-n>   <Plug>(unite_select_next_line)
-  nmap <buffer> <C-p>   <Plug>(unite_select_previous_line)
-
-  nmap <silent><buffer><expr> Enter unite#do_action('switch')
-  nmap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-  nmap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-
-  imap <silent><buffer><expr> Enter unite#do_action('switch')
-  imap <silent><buffer><expr> <C-t> unite#do_action('tabswitch')
-  imap <silent><buffer><expr> <C-s> unite#do_action('splitswitch')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplitswitch')
-
-  nmap <buffer> <C-g> <Plug>(unite_toggle_auto_preview)
-
-  nnoremap <buffer> <ESC> :UniteClose<cr>
-  nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
-  nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
-  nmap <buffer><silent> <c-r> <Plug>(unite_redraw)
-endfunction
-
-"if executable('ag') == 1
-"let g:unite_source_grep_command = 'ag'
-let g:unite_source_rec_async_command =
-      \['ag', '--follow', '--nocolor', '--hidden', '-g', '']
-"let g:unite_source_grep_default_opts =
-      "\ '-i --vimgrep --hidden --ignore ' .
-      "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-"endif
 
 call unite#custom#profile('default', 'context', {
 \   'direction': 'botright',
@@ -679,28 +645,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 call unite#custom#source('files,file,file/new,buffer,file_rec,file_rec/async,file_mru', 'matchers', 'matcher_fuzzy')
 "}}}
 
-" VimFiler {{{
-let g:vimfiler_as_default_explorer = 1
-call vimfiler#custom#profile('explorer', 'context', {
-      \  'safe': 0,
-      \  'simple': 0
-      \ })
-autocmd FileType vimfiler nmap <buffer> i :VimFilerPrompt<CR>
-let g:vimfiler_tree_leaf_icon = '¦'
-"let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_opened_icon = ''
-"let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_tree_closed_icon = ''
-" let g:vimfiler_file_icon = '-'
-" let g:vimfiler_marked_file_icon = '*'
-"}}}
-
 " Latex {{{
 let g:tex_conceal= 'adgm'
-"}}}
-
-" Riv {{{
-let g:riv_python_rst_hl=1
 "}}}
 
 "}}}
