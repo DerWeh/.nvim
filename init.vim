@@ -380,7 +380,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " ------------------- text objects -------------------
 Plug 'kana/vim-textobj-user'
-Plug 'vim-scripts/argtextobj.vim'
+Plug 'gaving/vim-textobj-argument'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
