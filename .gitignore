@@ -2,3 +2,4 @@ plugged/*
 tags
 .backup
 .undo
+.pythonprovider.vim

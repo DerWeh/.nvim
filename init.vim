@@ -13,6 +13,7 @@ set noerrorbells
 set diffopt+=vertical
 set shortmess+=c
 
+let g:maplocalleader="'"
 let g:mapleader=','
 
 set clipboard+=unnamedplus
@@ -73,9 +74,7 @@ let &colorcolumn='80,'.join(range(120,999),',')
 
 
 " =============== nvim =============================
-let g:python_host_prog = '/home/andreas/.pyenv/versions/2.7.13/bin/python2.7'
-let g:python3_host_prog = '/home/andreas/.pyenv/versions/3.6.1/bin/python3.6'
-
+source ~/.config/nvim/.pythonprovider.vim
 
 " =============== Plug-in Management =================={{{
 call plug#begin('~/.config/nvim/plugged')
@@ -142,15 +141,15 @@ Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'} "{{{
 let g:jedi#force_py_version = 3
 "}}}
-Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
+Plug 'hdima/python-syntax', {'for': 'python'} "{{{
 let g:python_highlight_builtins = 1
 let g:python_highlight_builtin_funcs = 1
 let g:python_highlight_builtin_objs = 1
 let g:python_highlight_builtin_funcs_kwarg = 0
-let g:python_highlight_exceptions = 0
-let g:python_highlight_string_formatting = 0
-let g:python_highlight_string_format = 0
-let g:python_highlight_string_templates = 0
+let g:python_highlight_exceptions = 1
+let g:python_highlight_string_formatting = 1
+let g:python_highlight_string_format = 1
+let g:python_highlight_string_templates = 1
 let g:python_highlight_indent_errors = 0
 let g:python_highlight_space_errors = 0
 let g:python_highlight_doctests = 1
@@ -158,6 +157,9 @@ let g:python_highlight_class_vars = 1
 let g:python_highlight_operators = 0
 let g:python_highlight_file_headers_as_comments = 1
 "}}}
+
+" ------------------- tex -----------------------------
+Plug 'lervag/vimtex'
 
 " ------------------- rst -----------------------------
 Plug 'Rykka/riv.vim', {'for': ['rst']}
@@ -198,6 +200,25 @@ let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
 "}}}
 Plug 'google/vim-searchindex'
+Plug 'haya14busa/incsearch.vim', {'on': ['<Plug>(incsearch-forward)', '<Plug>(incsearch-stay)', '<Plug>(incsearch-backward)']} "{{{
+let g:incsearch#magic = '\v'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+"}}}
+Plug 'haya14busa/vim-asterisk', {'on': ['<Plug>(asterisk-*)', '<Plug>(asterisk-#)', '<Plug>(asterisk-g*)',
+      \ '<Plug>(asterisk-g#)', '<Plug>(asterisk-z*)', '<Plug>(asterisk-gz*)', '<Plug>(asterisk-z#)', '<Plug>(asterisk-gz#)']} "{{{
+let g:asterisk#keeppos = 1
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+"}}}
+
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
   let g:far#source = 'agnvim'
@@ -241,6 +262,11 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
 Plug 'blueyed/cursorcross.vim'
 Plug 'nixon/vim-vmath'
 vnoremap <silent> ++ y:call VMATH_Analyse()<CR>gv
+Plug 'junegunn/vim-easy-align', {'on': ['<Plug>(EasyAlign)', 'EasyAlign','<Plug>(LiveEasyAlign)', 'LiveEasyAlign']} "{{{
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+"}}}
+
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
@@ -349,7 +375,7 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 
-"" powerline symbols
+" powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -373,7 +399,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " ------------------- text objects -------------------
 Plug 'kana/vim-textobj-user'
-Plug 'vim-scripts/argtextobj.vim'
+Plug 'gaving/vim-textobj-argument'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
@@ -403,6 +429,7 @@ call plug#end()
 
 " ===================== Color Settings ==============={{{
 set t_Co=256                       " turn syntax highlighting on
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
 colorscheme PaperColor
 syntax enable                      " keeps highlighting  ;
@@ -451,27 +478,25 @@ set foldtext=CustomFoldText()
 
 
 " ===================== Key Mappings ================={{{
-nnoremap ; :|                       " faster `commands` using ;
+nnoremap ; :|                                                      " faster `commands` using ;
 nnoremap : ;
-vnoremap ; :|                       " faster `commands` using ;
+vnoremap ; :|                                                      " faster `commands` using ;
 vnoremap : ;
 
-nnoremap / /\v|                     " use Python regular expressions
-vnoremap / /\v|                     " use Python regular expressions
 
-nnoremap p p=`]<C-o>|               " Auto indent pasted text
+nnoremap p p=`]<C-o>|                                              " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
 cnoremap w!! w !sudo tee % >/dev/null
-nmap Q <Nop>|  " Remove mapping for `Ex` mode
+nmap Q <Nop>|                                                      " Remove mapping for `Ex` mode
 
-nnoremap <F2> :w<CR>|  " in normal mode F2 will save the file
-inoremap <F2> <C-o>:w<CR>|  " in insert mode F2 will exit insert, save, enters insert again
-set pastetoggle=<F3>|  " toggle paste mode for pasting code without intend
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>|  " switch between header/source with F4
-noremap <leader>h :nohl<CR>|  " Remove highlight from search results
+nnoremap <F2> :w<CR>|                                              " in normal mode F2 will save the file
+inoremap <F2> <C-o>:w<CR>|                                         " in insert mode F2 will exit insert, save, enters insert again
+set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
+noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
+noremap <leader>h :<C-u>nohl<CR>|                                      " Remove highlight from search results
 
-" -------------------- Plugin Mappings ---------------
+                      " -------------------- Plugin Mappings ---------------
 " Plug-in mapping{{{
 nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
@@ -489,7 +514,7 @@ nmap <C-w>f <C-w><Bar><C-w>_
 nnoremap <F1> :Denite -buffer-name=help help<CR>
 nnoremap [unite] <Nop>
 nmap <leader>u [unite]
-nnoremap [unite] :Unite |
+nnoremap [unite] :Unite
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
@@ -610,6 +635,19 @@ let g:context_filetype#same_filetypes = 1
 let g:echodoc_enable_at_startup = 1
 let g:echodoc#highlight_arguments='Visual'
 let g:deoplete#omni#input_patterns = {}
+" ------------------- vimtex ---------------------
+"let g:deoplete#omni#input_patterns.tex = '\\(?:'
+"      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+"      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+"      \ . '|hyperref\s*\[[^]]*'
+"      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+"      \ .')'
+let g:deoplete#omni#input_patterns.tex = '\\.*'
 "}}}
 
 "Unite/Denite{{{
@@ -647,6 +685,7 @@ call unite#custom#source('files,file,file/new,buffer,file_rec,file_rec/async,fil
 
 " Latex {{{
 let g:tex_conceal= 'adgm'
+let g:tex_flavor = 'latex'
 "}}}
 
 "}}}
