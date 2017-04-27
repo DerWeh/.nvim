@@ -139,9 +139,9 @@ Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'} "{{{
-let g:jedi#force_py_version = 3
+let g:jedi#force_py_version = 2
 "}}}
-Plug 'hdima/python-syntax', {'for': 'python'} "{{{
+Plug 'vim-python/python-syntax', {'for': 'python'} "{{{
 let g:python_highlight_builtins = 1
 let g:python_highlight_builtin_funcs = 1
 let g:python_highlight_builtin_objs = 1
@@ -162,16 +162,21 @@ let g:python_highlight_file_headers_as_comments = 1
 Plug 'lervag/vimtex'
 
 " ------------------- rst -----------------------------
-Plug 'Rykka/riv.vim', {'for': ['rst']}
+Plug 'Rykka/riv.vim', {'for': ['rst', 'python']}
+let g:riv_python_rst_hl=1
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
 
 " ------------------- Unite --------------------------
 Plug 'Shougo/unite.vim'
       \ | Plug 'Shougo/unite-outline' | Plug 'Shougo/unite-session'
       \ | Plug 'osyo-manga/unite-quickfix' | Plug 'Shougo/unite-outline'
-      \ | Plug 'kmnk/vim-unite-giti'
+      \ | Plug 'kmnk/vim-unite-giti' | Plug 'rafaqz/citation.vim'
+let g:citation_vim_bibtex_file='~/citation/out.bib'
+let g:citation_vim_mode='bibtex'
+let g:citation_vim_cache_path='~/.config/nvim/cache'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
+let g:vimfiler_as_default_explorer = 1
 
 let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
@@ -218,6 +223,7 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 "}}}
+Plug 'vim-scripts/vis', {'on': ['B', 'S']}
 
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
@@ -311,7 +317,7 @@ Plug 'zchee/deoplete-jedi', {'for': ['python']}
 "    \ 'python': ['/cfs/home/w/e/wehandre/.local/bin/pyls'],
 "    \ }
 "}}}
-Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' } " {{{
+Plug 'c0r73x/neotags.nvim', {'on': 'NeotagsToggle', 'do': ':UpdateRemotePlugins' } " {{{
 set regexpengine=1
 let g:neotags_enabled=0
 "}}}
@@ -403,6 +409,7 @@ Plug 'gaving/vim-textobj-argument'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
+Plug 'mattn/webapi-vim'
 
 " personal modified
 Plug 'DerWeh/papercolor-theme'"{{{
@@ -496,7 +503,7 @@ set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
 noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
 noremap <leader>h :<C-u>nohl<CR>|                                      " Remove highlight from search results
 
-                      " -------------------- Plugin Mappings ---------------
+" -------------------- Plugin Mappings ---------------
 " Plug-in mapping{{{
 nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
@@ -514,9 +521,17 @@ nmap <C-w>f <C-w><Bar><C-w>_
 nnoremap <F1> :Denite -buffer-name=help help<CR>
 nnoremap [unite] <Nop>
 nmap <leader>u [unite]
-nnoremap [unite] :Unite
+nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
+nnoremap <silent>[unite]c       :<C-u>Unite -buffer-name=citation -start-insert -default-action=append      citation/key<cr>
+nnoremap <silent>[unite]co :<C-u>Unite -input=<C-R><C-W> -default-action=start -force-immediately citation/file<cr>
+nnoremap <silent>[unite]cf :<C-u>Unite -input=<C-R><C-W> -default-action=file -force-immediately citation/file<cr>
+nnoremap <silent>[unite]ci :<C-u>Unite -input=<C-R><C-W> -default-action=preview -force-immediately citation/combined<cr>
+nnoremap <silent>[unite]cs :<C-u>Unite  -default-action=yank  citation/key:<C-R><C-W><cr>
+vnoremap <silent>[unite]cs :<C-u>exec "Unite  -default-action=start citation/key:" . escape(@*,' ') <cr>
+nnoremap <silent>[unite]cx :<C-u>exec "Unite  -default-action=start citation/key:" . escape(input('Search Key : '),' ') <cr>
+
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 "nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
