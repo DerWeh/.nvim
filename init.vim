@@ -21,7 +21,9 @@ filetype plugin indent on
 
 
 set backspace=2
-
+augroup vimrc
+  autocmd!
+augroup END
 
 " ================ Backup Settings===================
 set writebackup
@@ -37,8 +39,8 @@ set undofile undodir=~/.config/nvim/.undo//  " ending with `//` creates unique n
 
 
 "" ================ Caps Lock ========================
-au VimEnter,FocusGained * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
-au VimLeave,FocusLost * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'"
+autocmd vimrc VimEnter,FocusGained * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
+autocmd vimrc VimLeave,FocusLost * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'"
 
 
 " ================ Indentation ======================
@@ -127,7 +129,7 @@ Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
 " let g:limelight_eop = '\ze\n^\s*\n^\w'
 "}}}
 Plug 'will133/vim-dirdiff', {'on': ['DirDiff']}
-let g:DirDiffExcludes = ".*,*.exe,*.swp"
+let g:DirDiffExcludes = '.*,*.exe,*.swp'
 Plug 'chrisbra/NrrwRgn'
 
 Plug 'tpope/vim-speeddating'
@@ -281,7 +283,7 @@ let g:neomake_python_enabled_makers = ['pyflakes', 'pylint']
 let g:neomake_autolint_sign_column_always = 1
 let g:neomake_error_sign = {'texthl': 'Debug'}
 augroup my_neomake_highlights
-  au!
+  autocmd!
   autocmd ColorScheme *
         \ hi link NeomakeError SpellBad |
         \ hi link NeomakeWarning SpellCap
@@ -439,7 +441,7 @@ set background=light
 colorscheme PaperColor
 syntax enable                      " keeps highlighting  ;
 highlight ExtraWhitespace ctermbg=LightRed guibg=#:ffafd7
-au InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd vimrc InsertLeave * match ExtraWhitespace /\s\+$/
                                    " Show whitespace
 set showmatch                      " highlight matching braces
 set nocursorcolumn
@@ -561,15 +563,11 @@ vmap > >gv
 "}}}
 
 " go to last cursor position upon opening files
-if has('autocmd')
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \| exe "normal! g'\"" | endif
-endif
+autocmd vimrc BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+      \| exe "normal! g'\"" | endif
 
 
-if has('autocmd')
-  au BufAdd,BufNewFile,BufRead * call s:diff_lang_settings()
-endif
+autocmd vimrc BufAdd,BufNewFile,BufRead * call s:diff_lang_settings()
 function! s:diff_lang_settings() "{{{
   if &diff || &readonly || !&modifiable
     setl nospell
@@ -597,7 +595,7 @@ set formatoptions+=t
 set formatoptions+=q
 set formatoptions+=l
 set formatoptions+=j
-au FileType vim setlocal fo-=r fo-=o
+autocmd vimrc FileType vim setlocal fo-=r fo-=o
 set formatoptions-=r
 set formatoptions-=o
 "}}}
@@ -664,7 +662,7 @@ let g:deoplete#omni#input_patterns.tex = '\\.*'
 "}}}
 
 "Unite/Denite{{{
-autocmd FileType denite setl nospell
+autocmd vimrc FileType denite setl nospell
 if executable('ag')
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
