@@ -162,8 +162,8 @@ let g:python_highlight_file_headers_as_comments = 1
 Plug 'lervag/vimtex'
 
 " ------------------- rst -----------------------------
-Plug 'Rykka/riv.vim', {'for': ['rst', 'python']}
-let g:riv_python_rst_hl=1
+Plug 'Rykka/riv.vim', {'for': ['rst']}
+" let g:riv_python_rst_hl=1
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
 
 " ------------------- Unite --------------------------
@@ -224,6 +224,7 @@ map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 "}}}
 Plug 'vim-scripts/vis', {'on': ['B', 'S']}
+Plug 'tpope/vim-unimpaired'
 
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
@@ -276,7 +277,7 @@ nmap ga <Plug>(EasyAlign)
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
-      \| Plug 'dojoteef/neomake-autolint'"{{{
+      \| Plug 'dojoteef/neomake-autolint' "{{{
 let g:neomake_python_enabled_makers = ['pyflakes', 'pylint']
 let g:neomake_autolint_sign_column_always = 1
 let g:neomake_error_sign = {'texthl': 'Debug'}
