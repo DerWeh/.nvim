@@ -92,32 +92,6 @@ let g:colorizer_startup = 0
 " }}}
 Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
 Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']} "{{{
-" let g:vimwiki_folding = 'expr'
-let g:vimwiki_table_mappings = 0
-function! VimwikiLinkHandler(link) "{{{ Use Vim to open links with the
-  " 'vlocal:' or 'vfile:' schemes.  E.g.:
-  "   1) [[vfile:///~/Code/PythonProject/abc123.py]], and
-  "   2) [[vlocal:./|Wiki Home]]
-  let s:link = a:link
-  if s:link =~ 'vlocal:' || s:link =~ 'vfile:'
-    let s:link = s:link[1:]
-  else
-    return 0
-  endif
-  let [idx, scheme, path, subdir, lnk, ext, url] =
-       \ vimwiki#base#resolve_scheme(s:link, 0)
-  if g:vimwiki_debug
-    echom 'LinkHandler: idx='.idx.', scheme=[v]'.scheme.', path='.path.
-         \ ', subdir='.subdir.', lnk='.lnk.', ext='.ext.', url='.url
-  endif
-  if url == ''
-    echom 'Vimwiki Error: Unable to resolve link!'
-    return 0
-  else
-    call vimwiki#base#edit_file('tabnew', url, [], 0)
-    return 1
-  endif
-endfunction " }}}
 "}}}
 Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
 let g:golden_ratio_autocommand = 0
