@@ -178,6 +178,7 @@ Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 let g:vimfiler_as_default_explorer = 1
 
+let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
@@ -596,7 +597,6 @@ if !exists(':DiffOrig')
 endif
 
 " format options{{{
-set textwidth=0
 set linebreak  " Break line without break the word.
 
 let &showbreak='➣➣\'
@@ -607,7 +607,6 @@ set formatoptions+=t
 set formatoptions+=q
 set formatoptions+=l
 set formatoptions+=j
-au FileType vim setlocal fo-=r fo-=o
 set formatoptions-=r
 set formatoptions-=o
 "}}}
