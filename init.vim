@@ -2,6 +2,7 @@
 
 " set UTF-8 encoding
 set encoding=utf-8 fenc=utf-8 termencoding=utf-8
+scriptencoding utf-8
 set nocompatible
 
 " ================ General Config ====================
@@ -178,7 +179,6 @@ Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 let g:vimfiler_as_default_explorer = 1
 
-let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
