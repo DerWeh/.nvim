@@ -325,10 +325,9 @@ Plug 'zchee/deoplete-jedi', {'for': ['python']}
 "    \ 'python': ['/cfs/home/w/e/wehandre/.local/bin/pyls'],
 "    \ }
 "}}}
-Plug 'c0r73x/neotags.nvim', {'on': 'NeotagsToggle', 'do': ':UpdateRemotePlugins' } " {{{
-set regexpengine=1
-let g:neotags_enabled=0
-"}}}
+set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
+Plug 'ludovicchabant/vim-gutentags'
+"Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kassio/neoterm', {'on': ['T', 'Tnew', 'Tmap', 'Topen', 'Ttoggle'], 'do': ':UpdateRemotePlugins' } " {{{
 let g:neoterm_autoscroll = 1
 let g:neoterm_fixedsize = 1
@@ -420,7 +419,6 @@ Plug 'gaving/vim-textobj-argument'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
-Plug 'mattn/webapi-vim'
 
 " personal modified
 Plug 'DerWeh/papercolor-theme'"{{{
