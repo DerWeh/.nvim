@@ -324,6 +324,7 @@ let g:neotags_enabled=0
 "}}}
 Plug 'kassio/neoterm', {'on': ['T', 'Tnew', 'Tmap', 'Topen', 'Ttoggle'], 'do': ':UpdateRemotePlugins' } " {{{
 let g:neoterm_autoscroll = 1
+let g:neoterm_fixedsize = 1
 let g:neoterm_size = &lines
 "}}}
 "Plug 'bfredl/nvim-ipy' "{{{
