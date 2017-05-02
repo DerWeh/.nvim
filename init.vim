@@ -92,32 +92,6 @@ let g:colorizer_startup = 0
 " }}}
 Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
 Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']} "{{{
-" let g:vimwiki_folding = 'expr'
-let g:vimwiki_table_mappings = 0
-function! VimwikiLinkHandler(link) "{{{ Use Vim to open links with the
-  " 'vlocal:' or 'vfile:' schemes.  E.g.:
-  "   1) [[vfile:///~/Code/PythonProject/abc123.py]], and
-  "   2) [[vlocal:./|Wiki Home]]
-  let s:link = a:link
-  if s:link =~ 'vlocal:' || s:link =~ 'vfile:'
-    let s:link = s:link[1:]
-  else
-    return 0
-  endif
-  let [idx, scheme, path, subdir, lnk, ext, url] =
-       \ vimwiki#base#resolve_scheme(s:link, 0)
-  if g:vimwiki_debug
-    echom 'LinkHandler: idx='.idx.', scheme=[v]'.scheme.', path='.path.
-         \ ', subdir='.subdir.', lnk='.lnk.', ext='.ext.', url='.url
-  endif
-  if url == ''
-    echom 'Vimwiki Error: Unable to resolve link!'
-    return 0
-  else
-    call vimwiki#base#edit_file('tabnew', url, [], 0)
-    return 1
-  endif
-endfunction " }}}
 "}}}
 Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
 let g:golden_ratio_autocommand = 0
@@ -465,7 +439,7 @@ set foldmethod=marker
 fu! CustomFoldText()
   "get first non-blank line
   let l:fs = v:foldstart
-  while getline(l:fs) =~ '^\s*$' | let l:fs = nextnonblank(l:fs + 1)
+  while getline(l:fs) =~# '^\s*$' | let l:fs = nextnonblank(l:fs + 1)
   endwhile
   if l:fs > v:foldend
     let l:line = getline(v:foldstart)
@@ -592,7 +566,7 @@ endfunction "}}}
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 if !exists(':DiffOrig')
-  command DiffOrig vert new | set bt=nofile | r ++edit# | 0d_ | diffthis
+  command DiffOrig vert new | set buftype=nofile | read ++edit# | 0d_ | diffthis
             \ | wincmd p | diffthis
 endif
 
@@ -631,7 +605,7 @@ inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' :
 
 function! s:check_back_space() "{{{
   let l:col = col('.') - 1
-  return !l:col || getline('.')[l:col - 1]  =~ '\s'
+  return !l:col || getline('.')[l:col - 1]  =~# '\s'
 endfunction"}}}
 let g:neosnippet#enable_completed_snippet = 1
 " enable neosnippet
