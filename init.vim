@@ -288,9 +288,16 @@ augroup my_neomake_highlights
         \ hi link NeomakeWarning SpellCap
 augroup END
 "}}}
-"Plug 'w0rp/ale'{{{
+"Plug 'w0rp/ale' "{{{
+"let g:ale_lint_on_enter = 1
 "let g:ale_lint_on_insert_leave = 1
-"}}}
+"let g:ale_sign_column_always = 1
+"let g:ale_sign_error = '✖'
+"let g:ale_sign_warning = '⚠'
+""let g:ale_linters = {'python': ['mypy', 'pylint']}
+"let g:ale_linters = {'python': ['pylint']}
+"let g:ale_echo_msg_format = '%linter%»%s'
+""}}}
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'roxma/nvim-completion-manager' "{{{
@@ -333,8 +340,10 @@ let g:neoterm_size = &lines
 
 "Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine' "{{{
-let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
+let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
 let g:indentLine_setConceal = 0
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_first_char = '│'
 "}}}
 Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
