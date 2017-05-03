@@ -156,6 +156,9 @@ let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
+Plug 'wesleyche/SrcExpl', {'on': ['SrcExpl', 'SrcExplToggle']}"{{{
+let g:SrcExpl_isUpdateTags = 0
+"}}}
 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
