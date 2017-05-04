@@ -6,13 +6,13 @@ scriptencoding utf-8
 set nocompatible
 
 " ================ General Config ====================
-set showcmd                     "Show incomplete cmds down the bottom
-set noshowmode                  "Don't show current mode down the bottom
-set autoread                    "Reload files changed outside vim
+set showcmd           " show incomplete cmds down the bottom
+set noshowmode        " don't show current mode down the bottom
+set autoread          " reload files changed outside vim
 set visualbell
 set noerrorbells
 set diffopt+=vertical
-set shortmess+=c
+set shortmess+=c      " don't give |ins-completion-menu| messages.
 
 let g:maplocalleader="'"
 let g:mapleader=','
@@ -145,10 +145,7 @@ Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.
 Plug 'Shougo/unite.vim'
       \ | Plug 'Shougo/unite-outline' | Plug 'Shougo/unite-session'
       \ | Plug 'osyo-manga/unite-quickfix' | Plug 'Shougo/unite-outline'
-      \ | Plug 'kmnk/vim-unite-giti' | Plug 'rafaqz/citation.vim'
-let g:citation_vim_bibtex_file='~/citation/out.bib'
-let g:citation_vim_mode='bibtex'
-let g:citation_vim_cache_path='~/.config/nvim/cache'
+      \ | Plug 'kmnk/vim-unite-giti'
 Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 let g:vimfiler_as_default_explorer = 1
@@ -316,10 +313,11 @@ let g:neoterm_size = &lines
 
 "Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine' "{{{
-let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
+let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown', 'vimfiler', 'tagbar', 'Scratch', 'startify']
 let g:indentLine_setConceal = 0
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_first_char = '│'
+let g:indentLine_faster = 1
 "}}}
 Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
@@ -374,7 +372,7 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+let g:airline_symbols.readonly = '' " ⊘
 let g:airline_symbols.linenr = ''
 
 "" old vim-powerline symbols
@@ -425,12 +423,11 @@ set t_Co=256                       " turn syntax highlighting on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
 colorscheme PaperColor
-syntax enable                      " keeps highlighting  ;
-highlight ExtraWhitespace ctermbg=LightRed guibg=#:ffafd7
+syntax enable                      " keeps highlighting
+highlight ExtraWhitespace ctermbg=LightRed guibg=#ffafd7
 au InsertLeave * match ExtraWhitespace /\s\+$/
                                    " Show whitespace
 set showmatch                      " highlight matching braces
-set nocursorcolumn
 syntax sync minlines=100 maxlines=260
 set synmaxcol=800                  " Don't try to highlight lines longer than 800 characters,
                                    "in order to speed up the view port.
@@ -471,23 +468,24 @@ set foldtext=CustomFoldText()
 
 
 " ===================== Key Mappings ================={{{
-nnoremap ; :|                                                      " faster `commands` using ;
+nnoremap ; :|                     " faster `commands` using ;
 nnoremap : ;
-vnoremap ; :|                                                      " faster `commands` using ;
+vnoremap ; :|                     " faster `commands` using ;
 vnoremap : ;
 
 
-nnoremap p p=`]<C-o>|                                              " Auto indent pasted text
+nnoremap p p=`]<C-o>|             " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
 cnoremap w!! w !sudo tee % >/dev/null
-nmap Q <Nop>|                                                      " Remove mapping for `Ex` mode
+nmap Q <Nop>|                     " Remove mapping for `Ex` mode
 
-nnoremap <F2> :w<CR>|                                              " in normal mode F2 will save the file
-inoremap <F2> <C-o>:w<CR>|                                         " in insert mode F2 will exit insert, save, enters insert again
-set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
-noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
-noremap <leader>h :<C-u>nohl<CR>|                                      " Remove highlight from search results
+nnoremap <F2> :w<CR>|             " in normal mode F2 will save the file
+inoremap <F2> <C-o>:w<CR>|        " in insert mode F2 will exit insert, save, enters insert again
+set pastetoggle=<F3>|             " toggle paste mode for pasting code without intend
+noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>|
+                                  " switch between header/source with F4
+noremap <leader>h :<C-u>nohl<CR>| " Remove highlight from search results
 
 " -------------------- Plugin Mappings ---------------
 " Plug-in mapping{{{
