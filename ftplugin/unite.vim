@@ -32,3 +32,19 @@ if executable('ag') == 1
         "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 endif
 
+call unite#custom#profile('default', 'context', {
+\   'direction': 'botright',
+\ })
+call unite#custom#profile('outline', 'context', {'direction': 'topleft'})
+
+call unite#custom_source('file_rec,file_rec/async,file_rec/neovim,file_mru,file,buffer,grep',
+    \ 'ignore_pattern', join([
+    \ '\.git/',
+    \ '__cache__/',
+    \ '\.undo/',
+    \ '\.backup/',
+    \ '__pycache__/',
+    \ ], '\|'))
+call unite#custom#source('files,file,file/async,file/new,buffer, '.
+      \ 'file_rec,file_rec/async, file_rec/git, file_rec/neovim, file_mru, '.
+      \ 'file_include, file_list, file_point', 'matchers', 'matcher_fuzzy')

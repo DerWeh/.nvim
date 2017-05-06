@@ -2,6 +2,7 @@
 
 " set UTF-8 encoding
 set encoding=utf-8 fenc=utf-8 termencoding=utf-8
+scriptencoding utf-8
 set nocompatible
 
 " ================ General Config ====================
@@ -93,32 +94,6 @@ let g:colorizer_startup = 0
 " }}}
 Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
 Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']} "{{{
-" let g:vimwiki_folding = 'expr'
-let g:vimwiki_table_mappings = 0
-function! VimwikiLinkHandler(link) "{{{ Use Vim to open links with the
-  " 'vlocal:' or 'vfile:' schemes.  E.g.:
-  "   1) [[vfile:///~/Code/PythonProject/abc123.py]], and
-  "   2) [[vlocal:./|Wiki Home]]
-  let s:link = a:link
-  if s:link =~ 'vlocal:' || s:link =~ 'vfile:'
-    let s:link = s:link[1:]
-  else
-    return 0
-  endif
-  let [idx, scheme, path, subdir, lnk, ext, url] =
-       \ vimwiki#base#resolve_scheme(s:link, 0)
-  if g:vimwiki_debug
-    echom 'LinkHandler: idx='.idx.', scheme=[v]'.scheme.', path='.path.
-         \ ', subdir='.subdir.', lnk='.lnk.', ext='.ext.', url='.url
-  endif
-  if url == ''
-    echom 'Vimwiki Error: Unable to resolve link!'
-    return 0
-  else
-    call vimwiki#base#edit_file('tabnew', url, [], 0)
-    return 1
-  endif
-endfunction " }}}
 "}}}
 Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
 let g:golden_ratio_autocommand = 0
@@ -164,8 +139,8 @@ let g:python_highlight_file_headers_as_comments = 1
 Plug 'lervag/vimtex'
 
 " ------------------- rst -----------------------------
-Plug 'Rykka/riv.vim', {'for': ['rst', 'python']}
-let g:riv_python_rst_hl=1
+Plug 'Rykka/riv.vim', {'for': ['rst']}
+" let g:riv_python_rst_hl=1
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
 
 " ------------------- Unite --------------------------
@@ -180,7 +155,6 @@ Plug 'thinca/vim-qfreplace', {'on': 'Qfreplace'}
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt', 'for' : 'vimfiler'}
 let g:vimfiler_as_default_explorer = 1
 
-let g:vimfiler_as_default_explorer = 1
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 " }}}
@@ -226,6 +200,7 @@ map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 "}}}
 Plug 'vim-scripts/vis', {'on': ['B', 'S']}
+Plug 'tpope/vim-unimpaired'
 
 Plug 'brooth/far.vim' " , {'on': ['Far', 'Farp', 'F']} {{{
 if executable('ag')
@@ -278,7 +253,7 @@ nmap ga <Plug>(EasyAlign)
 
 " -------------------- nvim specific -----------------
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
-      \| Plug 'dojoteef/neomake-autolint'"{{{
+      \| Plug 'dojoteef/neomake-autolint' "{{{
 let g:neomake_python_enabled_makers = ['pyflakes', 'pylint']
 let g:neomake_autolint_sign_column_always = 1
 let g:neomake_error_sign = {'texthl': 'Debug'}
@@ -289,9 +264,16 @@ augroup my_neomake_highlights
         \ hi link NeomakeWarning SpellCap
 augroup END
 "}}}
-"Plug 'w0rp/ale'{{{
+"Plug 'w0rp/ale' "{{{
+"let g:ale_lint_on_enter = 1
 "let g:ale_lint_on_insert_leave = 1
-"}}}
+"let g:ale_sign_column_always = 1
+"let g:ale_sign_error = '✖'
+"let g:ale_sign_warning = '⚠'
+""let g:ale_linters = {'python': ['mypy', 'pylint']}
+"let g:ale_linters = {'python': ['pylint']}
+"let g:ale_echo_msg_format = '%linter%»%s'
+""}}}
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'roxma/nvim-completion-manager' "{{{
@@ -324,6 +306,7 @@ Plug 'ludovicchabant/vim-gutentags'
 "Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kassio/neoterm', {'on': ['T', 'Tnew', 'Tmap', 'Topen', 'Ttoggle'], 'do': ':UpdateRemotePlugins' } " {{{
 let g:neoterm_autoscroll = 1
+let g:neoterm_fixedsize = 1
 let g:neoterm_size = &lines
 "}}}
 "Plug 'bfredl/nvim-ipy' "{{{
@@ -332,8 +315,10 @@ let g:neoterm_size = &lines
 
 "Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine' "{{{
-let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
+let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
 let g:indentLine_setConceal = 0
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_first_char = '│'
 "}}}
 Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
@@ -584,7 +569,6 @@ if !exists(':DiffOrig')
 endif
 
 " format options{{{
-set textwidth=0
 set linebreak  " Break line without break the word.
 
 let &showbreak='➣➣\'
@@ -595,7 +579,6 @@ set formatoptions+=t
 set formatoptions+=q
 set formatoptions+=l
 set formatoptions+=j
-autocmd vimrc FileType vim setlocal fo-=r fo-=o
 set formatoptions-=r
 set formatoptions-=o
 "}}}
@@ -659,39 +642,6 @@ let g:deoplete#omni#input_patterns = {}
 "      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
 "      \ .')'
 let g:deoplete#omni#input_patterns.tex = '\\.*'
-"}}}
-
-"Unite/Denite{{{
-autocmd vimrc FileType denite setl nospell
-if executable('ag')
-  call denite#custom#var('file_rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'default_opts', ['-i', '--hidden'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-endif
-
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-      \ [ '.git/', '.ropeproject/', '__pycache__/',
-      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-
-
-call unite#custom#profile('default', 'context', {
-\   'direction': 'botright',
-\ })
-call unite#custom#profile('outline', 'context', {'direction': 'topleft'})
-
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-    \ 'ignore_pattern', join([
-    \ '\.git/',
-    \ '__cache__/',
-    \ '\.undo',
-    \ '\.backup',
-    \ ], '\|'))
-call unite#custom#source('files,file,file/new,buffer,file_rec,file_rec/async,file_mru', 'matchers', 'matcher_fuzzy')
 "}}}
 
 " Latex {{{
