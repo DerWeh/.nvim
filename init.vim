@@ -453,7 +453,8 @@ nnoremap g<C-k> <C-w>k:let &winheight = &lines * 7 / 10<cr>
 onoremap g<C-h> <C-w>h<C-w>_
 nnoremap g<C-l> <C-w>l<C-w>_
 " delete window with d<C-?>
-nnoremap d<C-j> <C-w>j<C-w>c nnoremap d<C-k> <C-w>k<C-w>c
+nnoremap d<C-j> <C-w>j<C-w>c
+nnoremap d<C-k> <C-w>k<C-w>c
 nnoremap d<C-h> <C-w>h<C-w>c
 nnoremap d<C-l> <C-w>l<C-w>c
 
