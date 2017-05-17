@@ -12,6 +12,7 @@ set backspace=2
 augroup vimrc
   autocmd!
 augroup END
+let s:vimdir = expand('~').'/.config/nvim'
 
 set autoread                    "Reload files changed outside vim
 set visualbell
@@ -29,7 +30,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=n
 endif
 
-" ================= command line ================ {{{1
+" ================= Command line ================ {{{1
 set showcmd                     "Show incomplete cmds down the bottom
 set noshowmode                  "Don't show current mode down the bottom
 set shortmess+=c "don't give |ins-completion-menu| messages
@@ -41,14 +42,15 @@ set wildignore+=*.pyc,__cache__,*.o,*.obj
 " ================= Backup Settings ============= {{{1
 set writebackup
 if !isdirectory(expand('~').'/.config/nvim/.backup')
-  silent !mkdir ~/.config/nvim/.backup > /dev/null 2>&1
+  silent execute '!mkdir '.s:vimdir.'/.backup > /dev/null 2>&1'
 endif
 let &backupext = '~' . substitute(expand('%:p'), '/', '%', 'g')
-set backup backupdir=~/.config/nvim/.backup//
+execute 'set backup backupdir='.s:vimdir.'/.backup//'
 if !isdirectory(expand('~').'/.config/nvim/.undo')
-  silent !mkdir ~/.config/nvim/.undo > /dev/null 2>&1
+  silent execute '!mkdir '.s:vimdir.'/.undo > /dev/null 2>&1'
 endif
-set undofile undodir=~/.config/nvim/.undo//  " ending with `//` creates unique names
+" ending with `//` creates unique names
+execute 'set undofile undodir='.s:vimdir.'/.undo//'
 
 
 " ================= Search ====================== {{{1
@@ -90,7 +92,7 @@ let &colorcolumn='80,'.join(range(120,999),',')
 
 
 " ================= Nvim ======================== {{{1
-source ~/.config/nvim/.pythonprovider.vim
+execute 'source '.s:vimdir.'/.pythonprovider.vim'
 
 
 " ================= Diff-mode =================== {{{1
@@ -159,7 +161,8 @@ set completeopt=menu,preview,longest
 
 
 " ================= Plug-ins ==================== {{{1
-call plug#begin('~/.config/nvim/plugged')
+" Make sure you use single quotes
+call plug#begin(s:vimdir.'/plugged')
 function! s:cond(cond, ...)
   let l:opts = get(a:000, 0, {})
   return a:cond ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
