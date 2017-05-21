@@ -427,8 +427,8 @@ vnoremap : ;
 nnoremap p p=`]<C-o>|                                              " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
-cnoremap w!! w !sudo tee % >/dev/null " writing files needing sudo
-nmap Q <Nop>|                                                      " Remove mapping for `Ex` mode
+cabbrev w!! w !sudo tee % >/dev/null| " writing files needing sudo
+nmap Q <Nop>|                          " Remove mapping for `Ex` mode
 
 nnoremap <F2> :w<CR>|                                              " save file via F2
 inoremap <F2> <C-o>:w<CR>|                                         " save file via F2
