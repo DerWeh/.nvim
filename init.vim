@@ -136,7 +136,7 @@ let g:python_highlight_file_headers_as_comments = 1
 "}}}
 
 " ------------------- tex -----------------------------
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
 
 " ------------------- rst -----------------------------
 Plug 'Rykka/riv.vim', {'for': ['rst']}
@@ -648,6 +648,10 @@ let g:deoplete#omni#input_patterns.tex = '\\.*'
 " Latex {{{
 let g:tex_conceal= 'adgm'
 let g:tex_flavor = 'latex'
+let g:vimtex_latexmk_progname = 'nvr'
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
 "}}}
 
 "}}}
