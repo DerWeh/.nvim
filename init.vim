@@ -421,8 +421,9 @@ call plug#end()
 
 
 " ===================== Color Settings ==============={{{
-set t_Co=256                       " turn syntax highlighting on
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"set t_Co=256                       " turn syntax highlighting on
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 set background=light
 colorscheme PaperColor
 syntax enable                      " keeps highlighting
