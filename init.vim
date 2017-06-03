@@ -559,5 +559,6 @@ nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 
 " =============================================== {{{1
+let g:tex_flavor = 'latex'
 
 " ===============================================
