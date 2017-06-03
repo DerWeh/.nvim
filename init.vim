@@ -484,10 +484,7 @@ set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
 colorscheme PaperColor
-syntax enable     " keeps highlighting  ;
-highlight ExtraWhitespace ctermbg=LightRed guibg=#ffafd7
-autocmd vimrc InsertLeave * match ExtraWhitespace /\s\+$/
-                  " Show whitespace
+syntax enable     " keeps highlighting
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
 set synmaxcol=800 " Don't try to highlight lines longer than 800 characters,
