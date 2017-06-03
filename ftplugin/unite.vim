@@ -1,4 +1,5 @@
 setlocal nospell
+silent call airline#extensions#load()
 
 imap <buffer> <C-n>   <Plug>(unite_select_next_line)
 imap <buffer> <C-p>   <Plug>(unite_select_previous_line)
