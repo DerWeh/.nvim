@@ -34,3 +34,24 @@ let g:jedi#use_tabs_not_buffers     = 0
 
 "let g:deoplete#omni#input_patterns.python = '\([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 "}}}
+
+if exists('*s:my_plug_insertenter_python')
+    finish
+endif
+
+function! s:my_plug_insertenter_python()
+  " see https://github.com/davidhalter/jedi-vim/issues/696#issuecomment-293886106
+  if &filetype ==# 'python'
+    let l:plugs = ['jedi-vim']
+    call call('plug#load', l:plugs)
+    autocmd! vimplug_load_on_insertmode_python
+    call jedi#configure_call_signatures()
+  endif
+endfunction
+
+augroup vimplug_load_on_insertmode_python
+  autocmd!
+  autocmd InsertEnter * call s:my_plug_insertenter_python()
+augroup END
+
+nmap <silent> <Leader>pd <Plug>(pydocstring)
