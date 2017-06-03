@@ -1,0 +1,69 @@
+" =============== Plug-in Management =================={{{
+
+
+" ------------------- Unite --------------------------
+      \ | Plug 'rafaqz/citation.vim'
+let g:citation_vim_bibtex_file='~/citation/out.bib'
+let g:citation_vim_mode='bibtex'
+let g:citation_vim_cache_path='~/.config/nvim/cache'
+
+
+Plug 'spiiph/vim-space' " {{{
+let g:space_no_character_movements = 1
+"}}}
+
+
+
+" -------------------- nvim specific -----------------
+"Plug 'roxma/nvim-completion-manager' "{{{
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"let g:cm_matcher = {'module': 'cm_matchers.fuzzy_matcher', 'case': 'smartcase'}
+"let g:cm_refresh_default_min_word_len = [[1,3],[5,2]]
+"imap <c-j>     <Plug>(neosnippet_expand_or_jump)
+"vmap <c-j>     <Plug>(neosnippet_expand_or_jump)
+"inoremap <silent> <c-u> <c-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<cr>
+"vmap <c-u>     <Plug>(neosnippet_expand_target)
+"" expand parameters
+"let g:neosnippet#enable_completed_snippet=1
+""}}}
+
+
+"Plug 'Shougo/context_filetype.vim' " doesn't work
+" doesn't seem to properly work so far
+"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' } "{{{
+"let g:LanguageClient_serverCommands = {
+"    \ 'python': ['/cfs/home/w/e/wehandre/.local/bin/pyls'],
+"    \ }
+"}}}
+sword et regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
+"Plug 'c0r73x/neotags.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
+" personal modified
+
+" Add plug-in to &runtimepath
+call plug#end()
+" }}}
+
+" ===================== Key Mappings ================={{{
+
+" -------------------- Plugin Mappings ---------------
+" Plug-in mapping{{{
+
+"Unite mappings
+" generate unite prefix, nmap ? [unite] can use it then
+nnoremap <silent>[unite]c       :<C-u>Unite -buffer-name=citation -start-insert -default-action=append      citation/key<cr>
+nnoremap <silent>[unite]co :<C-u>Unite -input=<C-R><C-W> -default-action=start -force-immediately citation/file<cr>
+nnoremap <silent>[unite]cf :<C-u>Unite -input=<C-R><C-W> -default-action=file -force-immediately citation/file<cr>
+nnoremap <silent>[unite]ci :<C-u>Unite -input=<C-R><C-W> -default-action=preview -force-immediately citation/combined<cr>
+nnoremap <silent>[unite]cs :<C-u>Unite  -default-action=yank  citation/key:<C-R><C-W><cr>
+vnoremap <silent>[unite]cs :<C-u>exec "Unite  -default-action=start citation/key:" . escape(@*,' ') <cr>
+nnoremap <silent>[unite]cx :<C-u>exec "Unite  -default-action=start citation/key:" . escape(input('Search Key : '),' ') <cr>
+
+" }}}
+
+
+let g:context_filetype#same_filetypes = 1
+"}}}
