@@ -6,7 +6,7 @@ scriptencoding utf-8
 set nocompatible
 
 
-" ================= general setup =============== {{{1
+" ================= General setup =============== {{{1
 filetype plugin indent on
 set backspace=2
 augroup vimrc
@@ -78,6 +78,7 @@ set expandtab
 " ================= Format Options ============== {{{1
 set linebreak        " Break line without break the word.
 let &showbreak='➣➣\'
+set nowrap
 set formatoptions+=n " recognize numbered lists
 set formatoptions+=2 " use second line for indent for indented paragraphs
 set formatoptions+=w " trailing whitespace indicates paragraph continuation
@@ -317,9 +318,11 @@ Plug 'tpope/vim-unimpaired'
 Plug 'justinmk/vim-sneak' "{{{
 let g:sneak#label = 1
 "}}}
+" Plug 'easymotion/vim-easymotion'
 
 " ----------------- Editing ---------------------- {{{2
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary' " smaller than nerdcommenter, but lack partial and multi-line comments
 Plug 'junegunn/vim-easy-align', {'on': ['<Plug>(EasyAlign)', 'EasyAlign','<Plug>(LiveEasyAlign)', 'LiveEasyAlign']} "{{{
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -371,6 +374,18 @@ Plug 'mhinz/vim-signify' "{{{
 let g:signify_vcs_list = ['git']
 "}}}
 
+" ----------------- Coding ----------------------- {{{2
+Plug 'ludovicchabant/vim-gutentags'
+" set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
+
+" ----------------- File type --------------------- {{{2
+Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
+" let g:riv_python_rst_hl=1
+"}}}
+Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
+
+
 " ----------------- Linting ---------------------- {{{2
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
       \| Plug 'dojoteef/neomake-autolint' "{{{
@@ -398,6 +413,68 @@ let g:tagbar_autoshowtag = 1
 noremap <F8> <Esc>:Tagbar<CR>
 noremap g<F8> <Esc>:TagbarShow<CR>
 " }}}
+Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']}
+Plug 'mhinz/vim-startify' "{{{
+let g:startify_fortune_use_unicode = 1
+let g:startify_custom_header = []
+let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
+      \{'z': '~/.zshrc'},
+      \{'p': '~/pyplot'}]
+"}}}
+
+" ----------------- Utility ---------------------- {{{2
+Plug 'nixon/vim-vmath' "{{{
+vnoremap <silent> ++ y:call VMATH_Analyse()<CR>gv "}}}
+Plug 'romainl/vim-qf' "{{{
+let g:qf_auto_open_loclist = 0
+let g:qf_auto_open_quickfix = 0
+let g:qf_mapping_ack_style = 1 "}}}
+Plug 'lilydjwg/colorizer', { 'on':  ['<Plug>Colorizer', 'ColorHighlight', 'ColorToggle']} " {{{
+let g:colorizer_startup = 0
+" }}}
+Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
+Plug 'vim-scripts/vis', {'on': ['B', 'S']}
+Plug 'will133/vim-dirdiff', {'on': ['DirDiff']} "{{{
+let g:DirDiffExcludes = '.*,*.exe,*.swp'
+"}}}
+Plug 'vim-scripts/TaskList.vim'
+
+" ----------------- Readability ------------------ {{{2
+Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
+" let g:limelight_bop = '^\s*\n^\w'
+" let g:limelight_eop = '\ze\n^\s*\n^\w'
+"}}}
+Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
+let g:golden_ratio_autocommand = 0
+let g:golden_ratio_exclude_nonmodifiable = 1
+" }}}
+Plug 'chrisbra/NrrwRgn'
+
+" ----------------- Denite ----------------------- {{{2
+Plug 'Shougo/denite.nvim', {'on': ['Denite', 'DeniteCursorWord']}
+autocmd! User denite.nvim execute 'source '.fnameescape(s:vimdir).'/ftplugin/denite.vim'
+Plug 'Shougo/unite.vim' " , {'on': ['Unite', 'UniteCursorWord']}
+autocmd! User unite.vim execute 'source '.fnameescape(s:vimdir).'/ftplugin/unite.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite-session'
+Plug 'osyo-manga/unite-quickfix'
+Plug 'thinca/vim-qfreplace'
+Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
+let g:vimfiler_as_default_explorer = 1
+
+" ----------------- Python ----------------------- {{{2
+Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
+Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+" Plug 'tmhedberg/SimpylFold', {'for': 'python'}  "very slow startup
+" TODO: add further commands for which `jedi` should be loaded.
+Plug 'davidhalter/jedi-vim', {'on': []} "{{{
+let g:jedi#force_py_version = 2
+"}}}
+Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
+
+" ----------------- Folding ---------------------- {{{2
+Plug 'Konfekt/FastFold'
 
 call plug#end()
 
