@@ -496,24 +496,24 @@ set lazyredraw    " can lead to problems with splits?
 set ttyfast
 
 " ================= Key-mappings ================ {{{1
-nnoremap ; :|                                                      " faster `commands` using ;
+nnoremap ; :|                          " faster `commands` using ;
 nnoremap : ;
-vnoremap ; :|                                                      " faster `commands` using ;
+vnoremap ; :|                          " faster `commands` using ;
 vnoremap : ;
 
-nnoremap p p=`]<C-o>|                                              " Auto indent pasted text
+nnoremap p p=`]<C-o>|                  " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
 cabbrev w!! w !sudo tee % >/dev/null| " writing files needing sudo
 nmap Q <Nop>|                          " Remove mapping for `Ex` mode
 
-nnoremap <F2> :w<CR>|                                              " save file via F2
-inoremap <F2> <C-o>:w<CR>|                                         " save file via F2
-set pastetoggle=<F3>| " toggle paste mode for pasting code without intend
+nnoremap <F2> :w<CR>|                  " save file via F2
+inoremap <F2> <C-o>:w<CR>|             " save file via F2
+set pastetoggle=<F3>|                  " toggle paste mode for pasting code without intend
 
-noremap <leader>h :<C-u>nohl<CR>|                                      " Remove highlight from search results
+noremap <leader>h :<C-u>nohl<CR>|      " Remove highlight from search results
 
-vmap < <gv " reselect after shifting indent
+vmap < <gv                             " reselect after shifting indent
 vmap > >gv
 
 " ----------------- Window Management ------------- {{{2
@@ -537,7 +537,29 @@ nnoremap d<C-j> <C-w>j<C-w>c
 nnoremap d<C-k> <C-w>k<C-w>c
 nnoremap d<C-h> <C-w>h<C-w>c
 nnoremap d<C-l> <C-w>l<C-w>c
+nmap <C-w>r <Plug>(golden_ratio_resize)
+nmap <C-w>f <C-w><Bar><C-w>_
 
+" noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
+
+" ----------------- Plug-in Mappings ------------- {{{2
+nnoremap <leader>fe :VimFilerExplorer<CR>
+nmap <leader>ct <Plug>Colorizer
+nnoremap <silent> <F10> :YRShow<CR>
+nmap <Leader>ww <Plug>VimwikiIndex
+nmap <Leader>wt <Plug>VimwikiTabIndex
+nmap <Leader>ws <Plug>VimwikiUISelect
+
+" ----------------- Denite/Unite ----------------- {{{2
+nnoremap <F1> :Denite -buffer-name=help help<CR>
+nnoremap [unite] <Nop>
+nmap <leader>u [unite]
+nnoremap [unite] :Unite |
+nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
+nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
+nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
+nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
+nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 
 " =============================================== {{{1
 
