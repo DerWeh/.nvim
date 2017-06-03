@@ -186,6 +186,7 @@ let g:papercolor_theme_options = {
   \   }
   \ }
 "}}}
+Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
 "let g:airline_extensions = ['tabline', 'vimagit', 'branch', 'quickfix', 'hunks']
@@ -483,7 +484,7 @@ call plug#end()
 set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
-colorscheme PaperColor
+colorscheme one
 syntax enable     " keeps highlighting
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
