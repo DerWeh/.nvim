@@ -452,10 +452,8 @@ let g:golden_ratio_exclude_nonmodifiable = 1
 Plug 'chrisbra/NrrwRgn'
 
 " ----------------- Denite ----------------------- {{{2
-Plug 'Shougo/denite.nvim', {'on': ['Denite', 'DeniteCursorWord']}
-autocmd! User denite.nvim execute 'source '.fnameescape(s:vimdir).'/ftplugin/denite.vim'
-Plug 'Shougo/unite.vim' " , {'on': ['Unite', 'UniteCursorWord']}
-autocmd! User unite.vim execute 'source '.fnameescape(s:vimdir).'/ftplugin/unite.vim'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite-session'
 Plug 'osyo-manga/unite-quickfix'
@@ -563,5 +561,75 @@ nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 
 " =============================================== {{{1
 let g:tex_flavor = 'latex'
+
+" Denite "{{{
+if executable('ag')
+  call denite#custom#var('file_rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--hidden'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
+
+" call denite#custom#var('menu', 'menus', s:menus)
+let s:menus = {}
+
+let s:menus.search = {
+      \ 'description': 'Search using grep'
+      \ }
+
+let s:menus.search.command_candidates = [
+      \ ['▷ Grep in CURRENT directory                     ⌘ <space>//',
+          \ 'Denite -buffer-name=grep grep:.'],
+      \ ['▷ Grep in CUSTOM directory                     ⌘ <space>/',
+          \ 'Denite -buffer-name=grep grep:`input("Enter directory: ")`'],
+      \ ['▷ Grep for CURSORWORD                     ⌘ <space>/',
+          \ 'DeniteCursorWord -buffer-name=grep grep:.'],
+      \]
+
+call denite#custom#var('menu', 'menus', s:menus)
+"}}}
+
+" Unite "{{{
+if executable('ag') == 1
+  "let g:unite_source_grep_command = 'ag'
+  let g:unite_source_rec_async_command =
+        \['ag', '--follow', '--nocolor', '--hidden', '-g', '']
+  "let g:unite_source_grep_default_opts =
+        "\ '-i --vimgrep --hidden --ignore ' .
+        "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+endif
+
+call unite#custom#profile('default', 'context', {
+\   'direction': 'botright',
+\ })
+call unite#custom#profile('outline', 'context', {'direction': 'topleft'})
+
+call unite#custom_source('file_rec,file_rec/async,file_rec/neovim,file_mru,file,buffer,grep',
+    \ 'ignore_pattern', join([
+    \ '\.git/',
+    \ '__cache__/',
+    \ '\.undo/',
+    \ '\.backup/',
+    \ '__pycache__/',
+    \ ], '\|'))
+
+call unite#custom#source('files,file,file/async,file/new,buffer, '.
+      \ 'file_rec,file_rec/async, file_rec/git, file_rec/neovim, file_mru, '.
+      \ 'file_include, file_list, file_point', 'matchers', 'matcher_fuzzy')
+
+
+call unite#custom#profile('action', 'context', {
+      \ 'start_insert' : 1
+      \ })
+"}}}
 
 " ===============================================
