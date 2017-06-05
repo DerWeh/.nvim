@@ -459,6 +459,7 @@ autocmd! User unite.vim execute 'source '.fnameescape(s:vimdir).'/ftplugin/unite
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite-session'
 Plug 'osyo-manga/unite-quickfix'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'thinca/vim-qfreplace'
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
 let g:vimfiler_as_default_explorer = 1
@@ -499,6 +500,7 @@ nnoremap : ;
 vnoremap ; :|                          " faster `commands` using ;
 vnoremap : ;
 
+tnoremap <ESC> <C-\><C-n>
 nnoremap p p=`]<C-o>|                  " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
