@@ -635,18 +635,20 @@ let g:echodoc_enable_at_startup = 1
 let g:echodoc#highlight_arguments='Visual'
 let g:deoplete#omni#input_patterns = {}
 " ------------------- vimtex ---------------------
-"let g:deoplete#omni#input_patterns.tex = '\\(?:'
-"      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-"      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-"      \ . '|hyperref\s*\[[^]]*'
-"      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-"      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-"      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-"      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-"      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-"      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-"      \ .')'
-let g:deoplete#omni#input_patterns.tex = '\\.*'
+let g:deoplete#omni#input_patterns.tex = '\\(?:'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|\w+'
+      \ .')'
+      "\ .'|\\.*'
+"let g:deoplete#omni#input_patterns.tex = '\\.*'
 "}}}
 
 " Latex {{{
