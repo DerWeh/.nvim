@@ -522,6 +522,9 @@ nnoremap <silent>[unite]cx :<C-u>exec "Unite  -default-action=start citation/key
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 "nnoremap <space>/ :Unite -buffer-name=grep -no-empty -no-resize grep<cr>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
+nnoremap <space><leader>/ :Denite -buffer-name=grep grep:.::!<cr>
+nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
+nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 " }}}
 
