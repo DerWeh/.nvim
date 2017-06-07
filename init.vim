@@ -380,7 +380,7 @@ Plug 'ludovicchabant/vim-gutentags'
 " set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
 
 " ----------------- File type --------------------- {{{2
-Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
 " let g:riv_python_rst_hl=1
 "}}}
@@ -438,7 +438,7 @@ Plug 'vim-scripts/vis', {'on': ['B', 'S']}
 Plug 'will133/vim-dirdiff', {'on': ['DirDiff']} "{{{
 let g:DirDiffExcludes = '.*,*.exe,*.swp'
 "}}}
-Plug 'vim-scripts/TaskList.vim'
+" Plug 'vim-scripts/TaskList.vim' " replaced by Denite:grep
 
 " ----------------- Readability ------------------ {{{2
 Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
@@ -483,7 +483,7 @@ call plug#end()
 set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
-colorscheme one
+colorscheme PaperColor
 syntax enable     " keeps highlighting
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
@@ -557,6 +557,9 @@ nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
+nnoremap <space><leader>/ :Denite -buffer-name=grep grep:.::!<cr>
+nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
+nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 
 " =============================================== {{{1
