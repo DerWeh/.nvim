@@ -560,7 +560,14 @@ nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 
 " =============================================== {{{1
+
+" Latex {{{
 let g:tex_flavor = 'latex'
+let g:vimtex_latexmk_progname = 'nvr'
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
+" }}}
 
 " Denite "{{{
 if executable('ag')
