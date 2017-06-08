@@ -377,14 +377,17 @@ let g:signify_vcs_list = ['git']
 " ----------------- Coding ----------------------- {{{2
 Plug 'ludovicchabant/vim-gutentags'
 " set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins'
+      \ .'\|pip install --user --process-dependency-links git+https://github.com/palantir/python-language-server'
+      \ }
+
 let g:LanguageClient_autoStart = 1
 
 let g:LanguageClient_serverCommands = {
       \ 'python': ['pyls'],
       \ }
 
-" ----------------- File type --------------------- {{{2
+" ----------------- File type -------------------- {{{2
 Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
 " let g:riv_python_rst_hl=1
