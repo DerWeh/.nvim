@@ -311,7 +311,6 @@ let g:echodoc#highlight_arguments='Visual'
 "}}}
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
-Plug 'zchee/deoplete-jedi', {'for': ['python']}
 
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
@@ -378,6 +377,12 @@ let g:signify_vcs_list = ['git']
 " ----------------- Coding ----------------------- {{{2
 Plug 'ludovicchabant/vim-gutentags'
 " set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {
+      \ 'python': ['pyls'],
+      \ }
 
 " ----------------- File type --------------------- {{{2
 Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
@@ -467,10 +472,6 @@ Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
 Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 " Plug 'tmhedberg/SimpylFold', {'for': 'python'}  "very slow startup
-" TODO: add further commands for which `jedi` should be loaded.
-Plug 'davidhalter/jedi-vim', {'on': []} "{{{
-let g:jedi#force_py_version = 2
-"}}}
 Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 
 " ----------------- Folding ---------------------- {{{2
