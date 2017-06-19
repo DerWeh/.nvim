@@ -447,6 +447,8 @@ Plug 'will133/vim-dirdiff', {'on': ['DirDiff']} "{{{
 let g:DirDiffExcludes = '.*,*.exe,*.swp'
 "}}}
 " Plug 'vim-scripts/TaskList.vim' " replaced by Denite:grep
+Plug 'andrewradev/linediff.vim', {'on': ['Linediff', 'LinediffAdd']}
+
 
 " ----------------- Readability ------------------ {{{2
 Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
