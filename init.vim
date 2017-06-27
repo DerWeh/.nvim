@@ -360,7 +360,7 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 "}}}
-Plug 'brooth/far.vim', {'on': ['Far', 'Farp', 'F'], 'do': 'UpdateRemotePlugins'} "{{{
+Plug 'brooth/far.vim', {'on': ['Far', 'Farp', 'F'], 'do': ':UpdateRemotePlugins'} "{{{
 if executable('ag')
   let g:far#source = 'agnvim'
 endif
