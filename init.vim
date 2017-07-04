@@ -339,6 +339,7 @@ if has('clipboard')
 endif
 let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
+Plug 'machakann/vim-highlightedyank'
 "}}}
 
 " ----------------- Search ----------------------- {{{2
