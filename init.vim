@@ -311,6 +311,7 @@ let g:echodoc#highlight_arguments='Visual'
 "}}}
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
+Plug 'ujihisa/neco-look'
 
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
@@ -562,6 +563,7 @@ nmap <leader>u [unite]
 nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
+nnoremap <leader>/ :Denite -buffer-name=search line -auto-highlight -auto-resize<CR>
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space><leader>/ :Denite -buffer-name=grep grep:.::!<cr>
