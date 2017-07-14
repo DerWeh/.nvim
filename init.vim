@@ -58,6 +58,7 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set inccommand=split  " preview for substitute command
 
 
 " ================= Caps Lock =================== {{{1
@@ -169,7 +170,7 @@ function! s:cond(cond, ...)
   return a:cond ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
 endfunction
 
-" ----------------- Appearance ------------------ {{{2
+" ----------------- Appearance ------------------- {{{2
 " these are relevant if speed-up is desired
 Plug 'DerWeh/papercolor-theme' "{{{
 let g:papercolor_theme_options = {
