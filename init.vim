@@ -392,11 +392,19 @@ let g:LanguageClient_serverCommands = {
       \ }
 
 " ----------------- File type -------------------- {{{2
+" ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~
 Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
+" ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
 " let g:riv_python_rst_hl=1
 "}}}
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
+Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+" Plug 'tmhedberg/SimpylFold', {'for': 'python'}  "very slow startup
+Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 
 
 " ----------------- Linting ---------------------- {{{2
@@ -476,12 +484,6 @@ Plug 'thinca/vim-qfreplace'
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
 let g:vimfiler_as_default_explorer = 1
 
-" ----------------- Python ----------------------- {{{2
-Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
-Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-" Plug 'tmhedberg/SimpylFold', {'for': 'python'}  "very slow startup
-Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 
 " ----------------- Folding ---------------------- {{{2
 Plug 'Konfekt/FastFold'
