@@ -343,6 +343,7 @@ let g:yankring_replace_n_nkey = '<C-n>'
 let g:yankring_replace_n_pkey = '<C-p>'
 Plug 'machakann/vim-highlightedyank'
 "}}}
+Plug 'junegunn/vim-peekaboo'
 
 " ----------------- Search ----------------------- {{{2
 Plug 'google/vim-searchindex'
