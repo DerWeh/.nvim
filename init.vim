@@ -423,7 +423,7 @@ augroup END
 "}}}
 
 " ----------------- Special buffers -------------- {{{2
-Plug 'mbbill/undotree', {'on': ['UndotreeShow', 'UndotreeToggle']}
+Plug 'simnalamburt/vim-mundo'
 Plug 'kassio/neoterm', {'on': ['T', 'Tnew', 'Tmap', 'Topen', 'Ttoggle'], 'do': ':UpdateRemotePlugins' } " {{{
 let g:neoterm_autoscroll = 1
 let g:neoterm_fixedsize = 1
@@ -557,6 +557,7 @@ nmap <C-w>f <C-w><Bar><C-w>_
 nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
 nnoremap <silent> <F10> :YRShow<CR>
+nnoremap <silent> <F9> :MundoToggle<CR>
 nmap <Leader>ww <Plug>VimwikiIndex
 nmap <Leader>wt <Plug>VimwikiTabIndex
 nmap <Leader>ws <Plug>VimwikiUISelect
