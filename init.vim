@@ -444,6 +444,7 @@ let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'},
       \{'z': '~/.zshrc'},
       \{'p': '~/pyplot'}]
 "}}}
+Plug 'tweekmonster/startuptime.vim', {'on': ['StartupTime']}
 
 " ----------------- Utility ---------------------- {{{2
 Plug 'nixon/vim-vmath' "{{{
@@ -485,7 +486,8 @@ Plug 'osyo-manga/unite-quickfix'
 Plug 'thinca/vim-qfreplace'
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
 let g:vimfiler_as_default_explorer = 1
-
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 " ----------------- Folding ---------------------- {{{2
 Plug 'Konfekt/FastFold'
@@ -593,17 +595,17 @@ onoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
 xnoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
 
 function! s:NextTextObject(motion, dir)
-  let c = nr2char(getchar())
+  let l:c = nr2char(getchar())
 
-  if c ==# "b"
-      let c = "("
-  elseif c ==# "B"
-      let c = "{"
-  elseif c ==# "d"
-      let c = "["
+  if l:c ==# 'b'
+      let l:c = '('
+  elseif l:c ==# 'B'
+      let l:c = '{'
+  elseif l:c ==# 'd'
+      let l:c = '['
   endif
 
-  exe "normal! ".a:dir.c."v".a:motion.c
+  exe 'normal! '.a:dir.l:c.'v'.a:motion.l:c
 endfunction
 " Latex {{{
 let g:tex_flavor = 'latex'
