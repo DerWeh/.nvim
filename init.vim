@@ -373,7 +373,8 @@ endif
 "}}}
 
 " ----------------- Version control -------------- {{{2
-Plug 'tpope/vim-fugitive' | Plug 'gregsexton/gitv', { 'on': ['Gitv']}
+Plug 'lambdalisue/gina.vim'
+Plug 'lambdalisue/agit.vim'
 Plug 'jreybert/vimagit'
 Plug 'mhinz/vim-signify' "{{{
 let g:signify_vcs_list = ['git']
@@ -685,4 +686,7 @@ call unite#custom#profile('action', 'context', {
       \ })
 "}}}
 
+" TODO commits behind remote
+call airline#parts#define_function('gina', 'gina#component#repo#branch')
+let g:airline_section_b = airline#section#create(['hunks', g:airline_symbols.branch,'gina'])
 " ===============================================
