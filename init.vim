@@ -407,7 +407,7 @@ Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 " Plug 'tmhedberg/SimpylFold', {'for': 'python'}  "very slow startup
 Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 Plug 'tweekmonster/impsort.vim', {'for': 'python'}
-
+Plug 'vim-scripts/python_match.vim', {'for': 'python'}
 
 " ----------------- Linting ---------------------- {{{2
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
@@ -463,7 +463,6 @@ let g:DirDiffExcludes = '.*,*.exe,*.swp'
 "}}}
 " Plug 'vim-scripts/TaskList.vim' " replaced by Denite:grep
 Plug 'andrewradev/linediff.vim', {'on': ['Linediff', 'LinediffAdd']}
-
 
 " ----------------- Readability ------------------ {{{2
 Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
@@ -629,7 +628,7 @@ endif
 
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '.git/', '.ropeproject/', '__pycache__/',
-      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'tags'])
 
 
 " call denite#custom#var('menu', 'menus', s:menus)
