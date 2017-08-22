@@ -163,6 +163,7 @@ set completeopt=menu,preview,longest
 
 
 " ================= Plug-ins ==================== {{{1
+let s:special_buffers = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
 " Make sure you use single quotes
 call plug#begin(s:vimdir.'/plugged')
 function! s:cond(cond, ...)
@@ -250,17 +251,15 @@ let g:airline_symbols.linenr = ''
 "}}}
 "}}}
 Plug 'ryanoasis/vim-devicons'
-"Plug 'nathanaelkane/vim-indent-guides' " would be faster then indentLine
-"Plug 'Yggdroot/indentLine' "{{{
-"let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
-"let g:indentLine_setConceal = 0
-"let g:indentLine_showFirstIndentLevel = 1
-"let g:indentLine_first_char = '│'
+Plug 'nathanaelkane/vim-indent-guides' " would be faster then indentLine
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = s:special_buffers
+
+"Plug 'thaerkh/vim-indentguides' "{{{ # possible indent char: │
+"let g:indentguides_firstlevel=0
+"let g:indentguides_ignorelist = s:special_buffers
 ""}}}
-Plug 'thaerkh/vim-indentguides' "{{{
-let g:indentguides_firstlevel=0
-let g:indentguides_ignorelist = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
-"}}}
 Plug 'blueyed/cursorcross.vim'
 "Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
 
@@ -500,7 +499,7 @@ call plug#end()
 set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
-colorscheme PaperColor
+colorscheme one
 syntax enable     " keeps highlighting
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
