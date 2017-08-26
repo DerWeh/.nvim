@@ -574,10 +574,14 @@ nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit
 nnoremap <leader>/ :Denite -buffer-name=search line -auto-highlight -auto-resize<CR>
 nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
-nnoremap <space><leader>/ :Denite -buffer-name=grep grep:.::!<cr>
+nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty grep:.<cr>
+nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep grep:.::!<cr>
 nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
+nnoremap <space>r :Denite -resume<cr>
+nnoremap <space>n :Denite -resume -cursor-pos=+1 -immediately<cr>
+nnoremap <space>p :Denite -resume -cursor-pos=-1 -immediately<cr>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair

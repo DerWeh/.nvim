@@ -1,5 +1,5 @@
 plugged/*
-tags
+tags*
 .backup
 .undo
 .pythonprovider.vim
