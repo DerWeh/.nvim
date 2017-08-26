@@ -193,7 +193,7 @@ Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
 "let g:airline_extensions = ['tabline', 'vimagit', 'branch', 'quickfix', 'hunks']
 let g:airline#extensions#tagbar#enabled = 0
-let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#branch#vcs_priority = ['git']
 let g:airline_detect_spell = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -393,14 +393,14 @@ let g:LanguageClient_serverCommands = {
       \ }
 
 " ----------------- File type -------------------- {{{2
-" ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~
-Plug 'lervag/vimtex', {'for': ['latex', 'tex'], 'do' : 'pip3 install --user neovim-remote'}
-" ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~
+" ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
+Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip3 install --user neovim-remote'}
+" ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
 " let g:riv_python_rst_hl=1
 "}}}
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" ~~~~~~~~~~~~~~~~~ Python ~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
 Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
