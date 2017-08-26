@@ -261,6 +261,9 @@ let g:indent_guides_exclude_filetypes = s:special_buffers
 "let g:indentguides_ignorelist = s:special_buffers
 ""}}}
 Plug 'blueyed/cursorcross.vim'
+let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
+autocmd vimrc BufEnter * set relativenumber " number
+autocmd vimrc BufLeave,WinLeave * set norelativenumber " nonumber
 "Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
 
 " ----------------- Text Objects ----------------- {{{2
