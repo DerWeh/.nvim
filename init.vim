@@ -535,8 +535,10 @@ set pastetoggle=<F3>|                  " toggle paste mode for pasting code with
 
 noremap <leader>h :<C-u>nohl<CR>|      " Remove highlight from search results
 
-vmap < <gv                             " reselect after shifting indent
-vmap > >gv
+vmap < <gv|                            " reselect after shifting indent
+vmap > >gv|
+
+imap <c-z> <c-g>u<Esc>[s1z=`]a<c-g>u|  " correct last spelling error
 
 " ----------------- Window Management ------------- {{{2
 " move with <C-?>
