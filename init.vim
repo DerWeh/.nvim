@@ -277,7 +277,10 @@ Plug 'glts/vim-textobj-comment'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "{{{
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 let g:deoplete#enable_at_startup = 0
-autocmd vimrc InsertEnter * call deoplete#enable()
+augroup load_on_insert
+  autocmd!
+  autocmd load_on_insert InsertEnter * call deoplete#enable()|autocmd! load_on_insert 
+augroup END
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#auto_completion_start_length = 2
