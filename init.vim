@@ -320,6 +320,7 @@ let g:echodoc#highlight_arguments='Visual'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'ujihisa/neco-look'
+Plug 'Shougo/neco-vim'
 
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
