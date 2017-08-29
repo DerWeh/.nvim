@@ -14,6 +14,7 @@ augroup vimrc
 augroup END
 let s:vimdir = expand('~').'/.config/nvim'
 
+set updatetime=1000
 set hidden
 set autoread                    "Reload files changed outside vim
 set visualbell
