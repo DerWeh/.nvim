@@ -401,9 +401,35 @@ let g:LanguageClient_serverCommands = {
       \ 'python': ['pyls'],
       \ }
 
+" ----------------- Writing ---------------------- {{{2
+Plug 'davidbeckingsale/writegood.vim'
+Plug 'Ron89/thesaurus_query.vim'
+
 " ----------------- File type -------------------- {{{2
 " ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip3 install --user neovim-remote'}
+augroup vimtex
+  autocmd!
+  autocmd User vimtex call vimtex#imaps#add_map({
+        \'lhs':'..', 
+        \'rhs':'.<CR>%%<CR>', 
+        \'leader': '', 
+        \'wrapper' : 'vimtex#imaps#wrap_trivial'
+        \})
+  autocmd User vimtex call vimtex#imaps#add_map({
+        \'lhs':'!!',
+        \'rhs':'!<CR>%%<CR>',
+        \'leader': '',
+        \'wrapper' : 'vimtex#imaps#wrap_trivial'
+        \})
+  autocmd User vimtex call vimtex#imaps#add_map({
+        \'lhs':'??',
+        \'rhs':'?<CR>%%<CR>',
+        \'leader': '',
+        \'wrapper' : 'vimtex#imaps#wrap_trivial'
+        \})
+augroup END
+
 " ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
 " let g:riv_python_rst_hl=1
