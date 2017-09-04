@@ -16,6 +16,8 @@ let s:vimdir = expand('~').'/.config/nvim'
 
 set updatetime=1000
 set hidden
+set splitbelow splitright
+set shell=/bin/zsh
 set autoread                    "Reload files changed outside vim
 set visualbell
 set noerrorbells
