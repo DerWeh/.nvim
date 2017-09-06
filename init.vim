@@ -555,11 +555,11 @@ tnoremap <ESC> <C-\><C-n>
 nnoremap p p=`]<C-o>|                  " Auto indent pasted text
 nnoremap P P=`]<C-o>|
 
-cabbrev w!! w !sudo tee % >/dev/null| " writing files needing sudo
+cabbrev w!! w !sudo tee % >/dev/null|  " writing files needing sudo
 nmap Q <Nop>|                          " Remove mapping for `Ex` mode
 
 nnoremap <F2> :w<CR>|                  " save file via F2
-inoremap <F2> <C-o>:w<CR>|             " save file via F2
+inoremap <F2> <ESC>:w<CR>gi|           " save file via F2
 set pastetoggle=<F3>|                  " toggle paste mode for pasting code without intend
 
 noremap <leader>h :<C-u>nohl<CR>|      " Remove highlight from search results
@@ -620,8 +620,8 @@ nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME
 nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 nnoremap <space>r :Denite -resume<cr>
-nnoremap <space>n :Denite -resume -cursor-pos=+1 -immediately<cr>
-nnoremap <space>p :Denite -resume -cursor-pos=-1 -immediately<cr>
+nnoremap <space>n :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
+nnoremap <space>p :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
