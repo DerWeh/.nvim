@@ -515,10 +515,10 @@ Plug 'chrisbra/NrrwRgn'
 
 " ----------------- Denite ----------------------- {{{2
 Plug 'Shougo/denite.nvim'
+Plug 'chemzqm/unite-location'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite-session'
-Plug 'osyo-manga/unite-quickfix'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'thinca/vim-qfreplace'
 Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
@@ -622,6 +622,8 @@ nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 nnoremap <space>r :Denite -resume<cr>
 nnoremap <space>n :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
 nnoremap <space>p :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
+nnoremap <silent> <space>q  :<C-u>Denite -mode=normal -auto-highlight -auto-resize quickfix<CR>
+nnoremap <silent> <space>l  :<C-u>Denite -mode=normal -auto-highlight -auto-resize location_list<CR>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
