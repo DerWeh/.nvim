@@ -343,16 +343,13 @@ nmap ga <Plug>(EasyAlign)
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/YankRing.vim' " {{{
-" don't populate yank ring with singe elements
-let g:yankring_min_element_length = 2
-" only works if you have Vim with clipboard support
-if has('clipboard')
-  let g:yankring_manual_clipboard_check = 1
-endif
-let g:yankring_replace_n_nkey = '<C-n>'
-let g:yankring_replace_n_pkey = '<C-p>'
 Plug 'machakann/vim-highlightedyank'
+Plug 'bfredl/nvim-miniyank' "{{{
+
+map p <Plug>(miniyank-startput)
+map P <Plug>(miniyank-startPut)
+
+map <C-n> <Plug>(miniyank-cycle)
 "}}}
 Plug 'junegunn/vim-peekaboo'
 
