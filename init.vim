@@ -268,7 +268,7 @@ Plug 'blueyed/cursorcross.vim'
 let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
 autocmd vimrc BufEnter * set relativenumber " number
 autocmd vimrc BufLeave,WinLeave * set norelativenumber " nonumber
-"Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
+" Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
 
 " ----------------- Text Objects ----------------- {{{2
 Plug 'kana/vim-textobj-user'
@@ -291,8 +291,8 @@ let g:deoplete#auto_completion_start_length = 2
 let g:deoplete#sources#tags#cache_limit_size = 16777216 " 16MB
 " default: 100, more to get more methods (e.g. np.<TAB>)
 let g:deoplete#max_list = 1000
-let g:neosnippet#enable_completed_snippet = 1
 let g:deoplete#omni#input_patterns = {}
+let g:neosnippet#enable_completed_snippet = 1
 
 " mappings "{{{
 function! s:check_back_space() "{{{
@@ -445,17 +445,15 @@ Plug 'tweekmonster/impsort.vim', {'for': 'python'}
 Plug 'vim-scripts/python_match.vim', {'for': 'python'}
 
 " ----------------- Linting ---------------------- {{{2
-Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'}
-      \| Plug 'dojoteef/neomake-autolint' "{{{
+Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'} "{{{
 let g:neomake_python_enabled_makers = ['pyflakes', 'pylint']
-let g:neomake_autolint_sign_column_always = 1
-let g:neomake_error_sign = {'texthl': 'Debug'}
-augroup my_neomake_highlights
-  autocmd!
-  autocmd ColorScheme *
-        \ hi link NeomakeError SpellBad |
-        \ hi link NeomakeWarning SpellCap
-augroup END
+" let g:neomake_error_sign = {'texthl': 'Debug'}
+" augroup my_neomake_highlights
+"   autocmd!
+"   autocmd ColorScheme *
+"         \ hi link NeomakeError SpellBad |
+"         \ hi link NeomakeWarning SpellCap
+" augroup END
 "}}}
 
 " ----------------- Special buffers -------------- {{{2
@@ -730,4 +728,9 @@ call unite#custom#profile('action', 'context', {
 " TODO commits behind remote
 call airline#parts#define_function('gina', 'gina#component#repo#branch')
 let g:airline_section_b = airline#section#create(['hunks', g:airline_symbols.branch,'gina'])
+
+" neomake {{{
+call neomake#configure#automake('wrin')
+"}}}
+
 " ===============================================
