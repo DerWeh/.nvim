@@ -7,8 +7,6 @@ set nocompatible
 
 
 " ================= General setup =============== {{{1
-filetype plugin indent on
-set backspace=2
 augroup vimrc
   autocmd!
 augroup END
@@ -18,7 +16,6 @@ set updatetime=1000
 set hidden
 set splitbelow splitright
 set shell=/bin/zsh
-set autoread                    "Reload files changed outside vim
 set visualbell
 set noerrorbells
 set clipboard+=unnamedplus
@@ -38,8 +35,6 @@ endif
 set showcmd                     "Show incomplete cmds down the bottom
 set noshowmode                  "Don't show current mode down the bottom
 set shortmess+=c "don't give |ins-completion-menu| messages
-set laststatus=2
-set wildmenu
 set wildmode=longest,full
 set wildignore+=*.pyc,__cache__,*.o,*.obj
 
@@ -58,7 +53,6 @@ execute 'set undofile undodir='.s:vimdir.'/.undo//'
 
 
 " ================= Search ====================== {{{1
-set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -71,11 +65,9 @@ autocmd vimrc VimLeave,FocusLost * :silent exec "!xmodmap -e 'clear Lock' -e 'ke
 
 
 " ================= Intention =================== {{{1
-set autoindent
 set smartindent                 " use indentation of previous line
 set cindent                     " Each new line will be automatically indented the correct amount according to
                                 " the C indentation standard.
-set smarttab
 set tabstop=2 shiftwidth=2 softtabstop=2
 set expandtab
 
@@ -90,7 +82,6 @@ set formatoptions+=w " trailing whitespace indicates paragraph continuation
 set formatoptions+=t " auto-wrap text
 set formatoptions+=q " allow formating of comments with `gq`
 set formatoptions+=l " don't break long lines in insert mode
-set formatoptions+=j " remove comment leader when joining lines
 set formatoptions-=r
 set formatoptions-=o
 
@@ -174,6 +165,8 @@ function! s:cond(cond, ...)
   let l:opts = get(a:000, 0, {})
   return a:cond ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
 endfunction
+
+Plug 'tpope/vim-sensible'
 
 " ----------------- Appearance ------------------- {{{2
 " these are relevant if speed-up is desired
@@ -269,6 +262,7 @@ let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
 autocmd vimrc BufEnter * set relativenumber " number
 autocmd vimrc BufLeave,WinLeave * set norelativenumber " nonumber
 " Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
+
 
 " ----------------- Text Objects ----------------- {{{2
 Plug 'kana/vim-textobj-user'
@@ -532,7 +526,6 @@ set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
 colorscheme one
-syntax enable     " keeps highlighting
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
 set synmaxcol=800 " Don't try to highlight lines longer than 800 characters,
