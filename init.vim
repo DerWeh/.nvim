@@ -548,9 +548,10 @@ nnoremap : ;
 vnoremap ; :|                          " faster `commands` using ;
 vnoremap : ;
 
-tnoremap <ESC> <C-\><C-n>
-nnoremap p p=`]<C-o>|                  " Auto indent pasted text
-nnoremap P P=`]<C-o>|
+tnoremap <ESC> <C-\><C-n>|
+tnoremap <leader><ESC> <ESC>
+" nnoremap p p=`]<C-o>|                  " Auto indent pasted text
+" nnoremap P P=`]<C-o>|
 
 cabbrev w!! w !sudo tee % >/dev/null|  " writing files needing sudo
 nmap Q <Nop>|                          " Remove mapping for `Ex` mode
@@ -609,7 +610,7 @@ nnoremap [unite] :Unite |
 nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
 nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
 nnoremap <leader>/ :Denite -buffer-name=search line -auto-highlight -auto-resize<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files -short-source-names file_rec file_old<CR>
+nnoremap <silent> <space>f :Denite -buffer-name=files -source-names=short file_rec file_old<CR>
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep grep:.::!<cr>
