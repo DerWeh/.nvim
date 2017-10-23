@@ -15,7 +15,10 @@ let s:vimdir = expand('~').'/.config/nvim'
 set updatetime=1000
 set hidden
 set splitbelow splitright
-set shell=/bin/zsh
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+  set shell=/bin/zsh
+endif
 set visualbell
 set noerrorbells
 set clipboard+=unnamedplus
