@@ -265,6 +265,10 @@ let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
 autocmd vimrc BufEnter * set relativenumber " number
 autocmd vimrc BufLeave,WinLeave * set norelativenumber " nonumber
 " Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
+Plug 'Yggdroot/hiPairs'
+let g:hiPairs_stopline_more = 800
+let g:hiPairs_timeout = 2
+let g:hiPairs_insert_timeout = 2
 
 
 " ----------------- Text Objects ----------------- {{{2
