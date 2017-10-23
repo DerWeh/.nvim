@@ -400,7 +400,7 @@ Plug 'Ron89/thesaurus_query.vim'
 
 " ----------------- File type -------------------- {{{2
 " ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
-Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip3 install --user neovim-remote'}
+Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip3 install --user neovim-remote'} " {{{
 augroup vimtex
   autocmd!
   autocmd User vimtex call vimtex#imaps#add_map({
@@ -422,6 +422,8 @@ augroup vimtex
         \'wrapper' : 'vimtex#imaps#wrap_trivial'
         \})
 augroup END
+" }}}
+Plug 'brennier/quicktex' " , {'for': ['latex', 'tex', 'bib']}
 
 " ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
