@@ -728,9 +728,13 @@ call unite#custom#profile('action', 'context', {
       \ })
 "}}}
 
+" Gina {{{
 " TODO commits behind remote
 call airline#parts#define_function('gina', 'gina#component#repo#branch')
 let g:airline_section_b = airline#section#create(['hunks', g:airline_symbols.branch,'gina'])
+call gina#custom#execute('commit', 'setlocal spell')
+" call gina#custom#execute('commit', "call committia#open('git')")
+"}}}
 
 " neomake {{{
 call neomake#configure#automake('wrin')
