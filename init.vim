@@ -386,13 +386,14 @@ Plug 'lambdalisue/agit.vim'
 Plug 'jreybert/vimagit'
 Plug 'mhinz/vim-signify' "{{{
 let g:signify_vcs_list = ['git']
+" let g:signify_realtime = 1
 "}}}
 
 " ----------------- Coding ----------------------- {{{2
 Plug 'ludovicchabant/vim-gutentags'
 " set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
 Plug 'autozimu/LanguageClient-neovim', { 'do':
-      \ ':!pip install --user -U python-language-server <bar> UpdateRemotePlugins'
+      \ ':!pip install --user -U python-language-server'
       \ }
 
 let g:LanguageClient_autoStart = 1
