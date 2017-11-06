@@ -87,7 +87,7 @@ set formatoptions+=l " don't break long lines in insert mode
 set formatoptions-=r
 set formatoptions-=o
 
-let &colorcolumn='80,'.join(range(120,999),',')
+let &colorcolumn='80,120,121,122'
 
 
 " ================= Nvim ======================== {{{1
