@@ -352,6 +352,9 @@ map P <Plug>(miniyank-startPut)
 map <C-n> <Plug>(miniyank-cycle)
 "}}}
 Plug 'junegunn/vim-peekaboo'
+Plug 'cohama/lexima.vim'
+imap <C-h> <BS>
+cmap <C-h> <BS>
 
 " ----------------- Search ----------------------- {{{2
 Plug 'google/vim-searchindex'
