@@ -503,6 +503,7 @@ let g:DirDiffExcludes = '.*,*.exe,*.swp'
 "}}}
 " Plug 'vim-scripts/TaskList.vim' " replaced by Denite:grep
 Plug 'andrewradev/linediff.vim', {'on': ['Linediff', 'LinediffAdd']}
+Plug 'rickhowe/diffchar.vim'
 
 " ----------------- Readability ------------------ {{{2
 Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
