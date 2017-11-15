@@ -662,6 +662,8 @@ let g:vimtex_latexmk_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
+autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>l :Denite vimtex_labels<CR>
+autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>t :Denite vimtex_toc<CR>
 " }}}
 
 " Denite "{{{
