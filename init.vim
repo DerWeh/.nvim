@@ -270,6 +270,7 @@ let g:hiPairs_timeout = 2
 let g:hiPairs_insert_timeout = 2
 
 
+
 " ----------------- Text Objects ----------------- {{{2
 Plug 'kana/vim-textobj-user'
 Plug 'gaving/vim-textobj-argument'
@@ -569,6 +570,8 @@ vmap < <gv|                            " reselect after shifting indent
 vmap > >gv|
 
 imap <c-z> <c-g>u<Esc>[s1z=`]a<c-g>u|  " correct last spelling error
+imap <c-l> <Right>
+imap <c-a> <c-o>A
 
 " ----------------- Window Management ------------- {{{2
 " move with <C-?>
