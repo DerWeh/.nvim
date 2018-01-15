@@ -6,6 +6,7 @@ setl expandtab
 
 let g:echodoc_enable_at_startup = 1
 
+let g:pydocstring_templates_dir = g:vimdir.'/templates/pydocstring/'
 nmap <silent> <LocalLeader>pd <Plug>(pydocstring)
 
 nnoremap <buffer> K :call LanguageClient_textDocument_hover()<CR>

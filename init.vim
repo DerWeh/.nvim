@@ -10,7 +10,7 @@ set nocompatible
 augroup vimrc
   autocmd!
 augroup END
-let s:vimdir = expand('~').'/.config/nvim'
+let g:vimdir = expand('~').'/.config/nvim'
 
 set updatetime=1000
 set hidden
@@ -43,15 +43,15 @@ set wildignore+=*.pyc,__cache__,*.o,*.obj
 " ================= Backup Settings ============= {{{1
 set writebackup
 if !isdirectory(expand('~').'/.config/nvim/.backup')
-  silent execute '!mkdir '.s:vimdir.'/.backup > /dev/null 2>&1'
+  silent execute '!mkdir '.g:vimdir.'/.backup > /dev/null 2>&1'
 endif
 let &backupext = '~' . substitute(expand('%:p'), '/', '%', 'g')
-execute 'set backup backupdir='.s:vimdir.'/.backup//'
+execute 'set backup backupdir='.g:vimdir.'/.backup//'
 if !isdirectory(expand('~').'/.config/nvim/.undo')
-  silent execute '!mkdir '.s:vimdir.'/.undo > /dev/null 2>&1'
+  silent execute '!mkdir '.g:vimdir.'/.undo > /dev/null 2>&1'
 endif
 " ending with `//` creates unique names
-execute 'set undofile undodir='.s:vimdir.'/.undo//'
+execute 'set undofile undodir='.g:vimdir.'/.undo//'
 
 
 " ================= Search ====================== {{{1
@@ -91,7 +91,7 @@ let &colorcolumn='80,120,121,122'
 
 
 " ================= Nvim ======================== {{{1
-execute 'source '.s:vimdir.'/.pythonprovider.vim'
+execute 'source '.g:vimdir.'/.pythonprovider.vim'
 
 
 " ================= Diff-mode =================== {{{1
@@ -162,7 +162,7 @@ set completeopt=menu,preview,longest
 " ================= Plug-ins ==================== {{{1
 let s:special_buffers = ['help', 'text', 'markdown', 'vimfiler', 'tagbar']
 " Make sure you use single quotes
-call plug#begin(s:vimdir.'/plugged')
+call plug#begin(g:vimdir.'/plugged')
 function! s:cond(cond, ...)
   let l:opts = get(a:000, 0, {})
   return a:cond ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
