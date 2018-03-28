@@ -1,8 +1,10 @@
-setl foldlevel=1
-setl tabstop=4        " tab width is 4 spaces
-setl shiftwidth=4     " indent also with 4 spaces
-setl softtabstop=4
-setl expandtab
+setlocal foldlevel=1
+setlocal tabstop=4        " tab width is 4 spaces
+setlocal shiftwidth=4     " indent also with 4 spaces
+setlocal softtabstop=4
+setlocal expandtab
+
+setlocal foldtext=foldtext#python()
 
 let g:echodoc_enable_at_startup = 1
 
