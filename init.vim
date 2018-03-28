@@ -410,6 +410,7 @@ augroup vimtex
 augroup END
 " }}}
 Plug 'DerWeh/quicktex' " , {'for': ['latex', 'tex', 'bib']}
+let g:quicktex_dollarcheck = 0  " don't check for $...$
 
 " ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'Rykka/riv.vim' ", {'for': ['rst', 'python']} "{{{
