@@ -409,7 +409,7 @@ augroup vimtex
         \})
 augroup END
 " }}}
-Plug 'brennier/quicktex' " , {'for': ['latex', 'tex', 'bib']}
+Plug 'DerWeh/quicktex' " , {'for': ['latex', 'tex', 'bib']}
 
 " ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
 Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
