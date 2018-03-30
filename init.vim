@@ -412,8 +412,8 @@ augroup END
 Plug 'DerWeh/quicktex' " , {'for': ['latex', 'tex', 'bib']}
 
 " ~~~~~~~~~~~~~~~~~ RST ~~~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
-Plug 'Rykka/riv.vim', {'for': ['rst']} "{{{
-" let g:riv_python_rst_hl=1
+Plug 'Rykka/riv.vim' ", {'for': ['rst, python']} {{{
+let g:riv_python_rst_hl=1
 "}}}
 Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.com/Rykka/instant-rst.py/archive/master.zip --user'}
 " ~~~~~~~~~~~~~~~~~ Python ~~~~~~~~~~~~~~~~~~~~~~~ {{{3
