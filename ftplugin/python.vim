@@ -12,7 +12,7 @@ let g:pydocstring_templates_dir = g:vimdir.'/templates/pydocstring/'
 nmap <silent> <LocalLeader>pd <Plug>(pydocstring)
 
 nnoremap <buffer> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <buffer> gD :call LanguageClient_textDocument_definition()<CR>
+nnoremap <buffer> gD :call LanguageClient_textDocument_definition()<CR>:normal! m'<CR>
 nnoremap <buffer> <LocalLeader>r :call LanguageClient_textDocument_rename()<CR>
 nnoremap <buffer> <LocalLeader>s :Denite documentSymbol<CR>
 nnoremap <buffer> <LocalLeader>S :DeniteCursorWord -auto-highlight documentSymbol<CR>
