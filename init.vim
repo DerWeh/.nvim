@@ -421,8 +421,7 @@ Plug 'Rykka/InstantRst', {'on': 'InstantRst', 'do': 'pip install https://github.
 Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
 Plug 'alfredodeza/pytest.vim', {'on': 'Pytest'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'tmhedberg/simpylfold'  " , {'for': 'python'}  "very slow startup
-let g:SimpylFold_docstring_preview=1
+Plug 'tmhedberg/simpylfold', {'for': 'python'}  "very slow startup
 Plug 'DerWeh/vim-ipython', {'on': ['IPython', 'IPythonNew']}
 Plug 'tweekmonster/impsort.vim', {'for': 'python'}
 Plug 'vim-scripts/python_match.vim', {'for': 'python'}
