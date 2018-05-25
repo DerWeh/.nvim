@@ -586,7 +586,6 @@ nmap <C-w>f <C-w><Bar><C-w>_
 " ----------------- Plug-in Mappings ------------- {{{2
 nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
-nnoremap <silent> <F10> :YRShow<CR>
 nnoremap <silent> <F9> :MundoToggle<CR>
 nmap <Leader>ww <Plug>VimwikiIndex
 nmap <Leader>wt <Plug>VimwikiTabIndex
