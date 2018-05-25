@@ -376,9 +376,10 @@ let g:signify_vcs_list = ['git']
 " ----------------- Coding ----------------------- {{{2
 Plug 'ludovicchabant/vim-gutentags'
 " set regexpengine=1  " https://gist.github.com/glts/5646749#file-readme-L8
-Plug 'autozimu/LanguageClient-neovim', { 'do':
-      \ ':!pip install --user -U python-language-server'
-      \ }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 let g:LanguageClient_autoStart = 1
 
