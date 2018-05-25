@@ -333,6 +333,10 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'cohama/lexima.vim'
 imap <C-h> <BS>
 cmap <C-h> <BS>
+Plug 'joom/latex-unicoder.vim'
+let g:unicoder_cancel_normal = 1
+let g:unicoder_cancel_insert = 1
+let g:unicoder_cancel_visual = 1
 
 " ----------------- Search ----------------------- {{{2
 Plug 'google/vim-searchindex'
@@ -585,6 +589,9 @@ nnoremap <silent> <F9> :MundoToggle<CR>
 nmap <Leader>ww <Plug>VimwikiIndex
 nmap <Leader>wt <Plug>VimwikiTabIndex
 nmap <Leader>ws <Plug>VimwikiUISelect
+nmap <Leader>ss <plug>(matchup-hi-surround)
+inoremap <Leader>ll <Esc>:call unicoder#start(1)<CR>
+vnoremap <Leader>ll :<C-u>call unicoder#selection()<CR>
 
 " ----------------- Denite/Unite ----------------- {{{2
 nnoremap <F1> :Denite -buffer-name=help help<CR>
