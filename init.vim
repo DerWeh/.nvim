@@ -244,6 +244,7 @@ Plug 'Yggdroot/hiPairs'
 let g:hiPairs_stopline_more = 800
 let g:hiPairs_timeout = 2
 let g:hiPairs_insert_timeout = 2
+Plug 'andymass/vim-matchup'
 
 
 
