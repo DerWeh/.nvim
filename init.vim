@@ -606,8 +606,8 @@ nnoremap <silent> <space>f :Denite -buffer-name=files -source-names=short file_r
 nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
 nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty grep:.<cr>
 nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep grep:.::!<cr>
-nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
-nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:-s:FIXME\|TODO\|XXX<cr>
+nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:'-s -G <C-R>%$':FIXME\|TODO\|XXX<CR>
+nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
 nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
 nnoremap <space>r :Denite -resume<cr>
 nnoremap <space>n :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
