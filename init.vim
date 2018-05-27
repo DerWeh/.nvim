@@ -334,9 +334,7 @@ Plug 'cohama/lexima.vim'
 imap <C-h> <BS>
 cmap <C-h> <BS>
 Plug 'joom/latex-unicoder.vim'
-let g:unicoder_cancel_normal = 1
-let g:unicoder_cancel_insert = 1
-let g:unicoder_cancel_visual = 1
+let g:unicoder_no_map = 1
 
 " ----------------- Search ----------------------- {{{2
 Plug 'google/vim-searchindex'
