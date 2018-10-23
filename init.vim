@@ -324,8 +324,8 @@ Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'bfredl/nvim-miniyank' "{{{
 
-map p <Plug>(miniyank-startput)
-map P <Plug>(miniyank-startPut)
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
 
 map <C-n> <Plug>(miniyank-cycle)
 "}}}
