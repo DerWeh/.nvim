@@ -517,6 +517,7 @@ Plug 'Konfekt/FastFold'
 
 call plug#end()
 
+call gina#core#get()  " needed to work with RiV see Charge reconstruction and Friedel sum rule in heterostructures
 
 " ================= Color settings ============== {{{1
 set t_Co=256      " turn syntax highlighting on
