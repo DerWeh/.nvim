@@ -499,6 +499,8 @@ Plug 'chrisbra/NrrwRgn'
 
 " ----------------- Denite ----------------------- {{{2
 Plug 'Shougo/denite.nvim'
+Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
+let g:fruzzy#usenative = 1
 Plug 'chemzqm/unite-location'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
@@ -651,6 +653,7 @@ autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>t :Denite vimtex_toc
 " }}}
 
 " Denite "{{{
+call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 if executable('ag')
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
