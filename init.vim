@@ -225,7 +225,6 @@ let g:airline_symbols.linenr = ''
 "let g:airline_symbols.linenr = '⭡'
 "}}}
 "}}}
-Plug 'ryanoasis/vim-devicons'
 Plug 'nathanaelkane/vim-indent-guides' " would be faster then indentLine
 let g:indent_guides_color_change_percent = 3
 let g:indent_guides_enable_on_vim_startup = 1
@@ -515,6 +514,8 @@ let g:loaded_netrwPlugin = 1
 " ----------------- Folding ---------------------- {{{2
 Plug 'Konfekt/FastFold'
 
+" load last
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 call gina#core#get()  " needed to work with RiV see Charge reconstruction and Friedel sum rule in heterostructures
