@@ -15,5 +15,5 @@ nnoremap <buffer> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <buffer> gD :call LanguageClient_textDocument_definition()<CR>:normal! m'<CR>
 nnoremap <buffer> <LocalLeader>r :call LanguageClient_textDocument_rename()<CR>
 nnoremap <buffer> <LocalLeader>s :Denite documentSymbol<CR>
-nnoremap <buffer> <LocalLeader>S :DeniteCursorWord -auto-highlight documentSymbol<CR>
-nnoremap <buffer> <LocalLeader>n :Denite -auto-highlight references<CR>
+nnoremap <buffer> <LocalLeader>S :DeniteCursorWord documentSymbol -auto-action=highlight<CR>
+nnoremap <buffer> <LocalLeader>n :Denite references -auto-action=highlight<CR>

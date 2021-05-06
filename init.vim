@@ -599,23 +599,19 @@ vnoremap <Leader>ll :<C-u>call unicoder#selection()<CR>
 " ----------------- Denite/Unite ----------------- {{{2
 nnoremap <F1> :Denite -buffer-name=help help<CR>
 nnoremap [unite] <Nop>
-nmap <leader>u [unite]
-nnoremap [unite] :Unite |
-nnoremap [unite]b :Unite -buffer-name=bookmark bookmark<cr>
-nnoremap [unite]/ :Unite -buffer-name=search line:forward -start-insert -no-quit -custom-line-enable-highlight<CR>
-nnoremap <leader>/ :Denite -buffer-name=search line -auto-highlight -auto-resize<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files -source-names=short file_rec file_old<CR>
-nnoremap <space>/ :Denite -buffer-name=grep -no-empty grep:.<cr>
-nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty grep:.<cr>
-nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep grep:.::!<cr>
-nnoremap <space>t :Denite -buffer-name=Task_List -auto-highlight grep:.:'-s -G <C-R>%$':FIXME\|TODO\|XXX<CR>
-nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-highlight grep:.:-s:FIXME\|TODO\|XXX<cr>
-nnoremap <space>s :Unite -buffer-name=buffers -quick-match buffer<cr>
+nnoremap <leader>/ :Denite -buffer-name=search line -auto-action=highlight -start-filter -auto-resize<CR>
+nnoremap <silent> <space>f :Denite -buffer-name=files -source-names=short -start-filter file/rec file/old<CR>
+nnoremap <space>/ :Denite -buffer-name=grep -no-empty -start-filter grep:.<cr>
+nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty -start-filter grep:.<cr>
+nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep -start-filter grep:.::!<cr>
+nnoremap <space>t :Denite -buffer-name=Task_List -auto-action=highlight -start-filter grep:.:'-s -G <C-R>%$':FIXME\\|TODO\\|XXX<CR>
+nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-action=highlight -start-filter grep:.:-s:FIXME\|TODO\|XXX<cr>
+nnoremap <space>s :Denite buffer -quick-move="immediately"<cr>
 nnoremap <space>r :Denite -resume<cr>
 nnoremap <space>n :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
 nnoremap <space>p :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
-nnoremap <silent> <space>q  :<C-u>Denite -mode=normal -auto-highlight -auto-resize quickfix<CR>
-nnoremap <silent> <space>l  :<C-u>Denite -mode=normal -auto-highlight -auto-resize location_list<CR>
+nnoremap <silent> <space>q  :<C-u>Denite -auto-action=highlight -auto-resize quickfix<CR>
+nnoremap <silent> <space>l  :<C-u>Denite -auto-action=highlight -auto-resize location_list<CR>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
@@ -657,14 +653,16 @@ autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>t :Denite vimtex_toc
 " Denite "{{{
 call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 if executable('ag')
-  call denite#custom#var('file_rec', 'command',
+  call denite#custom#var('file/rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'default_opts', ['-i', '--hidden'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('grep', {
+		\ 'command': ['ag'],
+		\ 'default_opts': ['-i', '--vimgrep'],
+		\ 'recursive_opts': [],
+		\ 'pattern_opt': [],
+		\ 'separator': ['--'],
+		\ 'final_opts': [],
+		\ })
 endif
 
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
