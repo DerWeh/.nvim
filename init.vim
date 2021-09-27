@@ -225,10 +225,7 @@ let g:airline_symbols.linenr = ''
 "let g:airline_symbols.linenr = '⭡'
 "}}}
 "}}}
-Plug 'nathanaelkane/vim-indent-guides' " would be faster then indentLine
-let g:indent_guides_color_change_percent = 3
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_exclude_filetypes = s:special_buffers
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 "Plug 'thaerkh/vim-indentguides' "{{{ # possible indent char: │
 "let g:indentguides_firstlevel=0
