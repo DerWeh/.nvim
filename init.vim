@@ -195,20 +195,20 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 ""}}}
-"Plug 'Shougo/echodoc.vim' "{{{
-"let g:echodoc_enable_at_startup = 1
-"let g:echodoc#highlight_arguments='Visual'
-"" let g:echodoc#type='virtual'
-""}}}
+Plug 'Shougo/echodoc.vim' "{{{
+let g:echodoc_enable_at_startup = 1
+" let g:echodoc#highlight_arguments='Visual'
+let g:echodoc#type='floating'
+"}}}
 "Plug 'Shougo/neoinclude.vim'
 "Plug 'Shougo/neco-syntax'
 "Plug 'ujihisa/neco-look'
 "Plug 'Shougo/neco-vim'
-"if has('nvim-0.4')
-"  Plug 'ncm2/float-preview.nvim'
-"  let g:echodoc#type='floating'
-"  set completeopt-=preview
-"endif
+if has('nvim-0.4')
+  Plug 'ncm2/float-preview.nvim'
+  let g:echodoc#type='floating'
+  set completeopt-=preview
+endif
 
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
