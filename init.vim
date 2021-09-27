@@ -323,7 +323,8 @@ Plug 'vim-scripts/python_match.vim', {'for': 'python'}
 
 " ----------------- Linting ---------------------- {{{2
 Plug 'neomake/neomake', { 'do': ':UpdateRemotePlugins'} "{{{
-let g:neomake_python_enabled_makers = ['pyflakes', 'pylint']
+let g:neomake_python_enabled_makers = ['pyflakes', 'pylint', 'pydocstyle']
+" let g:neomake_logfile = '/ltmp/neomake.log'
 " let g:neomake_error_sign = {'texthl': 'Debug'}
 " augroup my_neomake_highlights
 "   autocmd!
