@@ -503,6 +503,7 @@ nnoremap <silent> <space>q <cmd>Telescope quickfix<cr>
 nnoremap <silent> <space>l <cmd>Telescope loclist<cr>
 nnoremap <space>r <cmd>Telescope resume<cr>
 nnoremap <space>t <cmd>TodoTelescope<cr>
+nnoremap <space>ms <cmd>lua require'telescope.builtin'.symbols{ sources = {'math'} }<cr>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
