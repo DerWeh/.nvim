@@ -490,6 +490,16 @@ set synmaxcol=800 " Don't try to highlight lines longer than 800 characters,
 set lazyredraw    " can lead to problems with splits?
 set ttyfast
 
+" let g:indent_blankline_char = '│'
+let g:indent_blankline_buftype_exclude = ['terminal']
+" " let g:indent_blankline_show_current_context = v:true
+
+lua << EOF
+require("indent_blankline").setup {
+    char = "│",
+}
+EOF
+
 " ================= Key-mappings ================ {{{1
 nnoremap ; :|                          " faster `commands` using ;
 nnoremap : ;
