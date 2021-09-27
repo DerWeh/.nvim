@@ -274,10 +274,7 @@ Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-Plug 'justinmk/vim-sneak' "{{{
-let g:sneak#label = 1
-"}}}
-" Plug 'easymotion/vim-easymotion'
+Plug 'ggandor/lightspeed.nvim'
 
 " ----------------- Editing ---------------------- {{{2
 " Plug 'scrooloose/nerdcommenter'
