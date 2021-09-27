@@ -251,53 +251,25 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'glts/vim-textobj-comment'
 
 " ----------------- Auto Completion -------------- {{{2
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "{{{
-Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
-let g:deoplete#enable_at_startup = 0
-augroup load_on_insert
-  autocmd!
-  autocmd load_on_insert InsertEnter * call deoplete#enable()|autocmd! load_on_insert 
-augroup END
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#auto_completion_start_length = 2
-" increase limit for tag cache files
-let g:deoplete#sources#tags#cache_limit_size = 16777216 " 16MB
-" default: 100, more to get more methods (e.g. np.<TAB>)
-let g:deoplete#max_list = 1000
-let g:deoplete#omni#input_patterns = {}
-let g:neosnippet#enable_completed_snippet = 1
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
-" mappings "{{{
-function! s:check_back_space() "{{{
-  let l:col = col('.') - 1
-  return !l:col || getline('.')[l:col - 1]  =~ '\s'
-endfunction "}}}
-
-inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' :
-      \ <SID>check_back_space() ? '<S-TAB>' :
-      \ deoplete#manual_complete()
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><TAB>
-      \ pumvisible() ? '<C-n>' :
-      \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-      \ ! <SID>check_back_space() ? deoplete#mappings#manual_complete():
-      \ "\<TAB>"
-
-imap <c-j> <Plug>(neosnippet_expand_or_jump)
-smap <c-j> <Plug>(neosnippet_expand_or_jump)
-xmap <c-j> <Plug>(neosnippet_expand_target)
-"}}}
-"}}}
-Plug 'Shougo/echodoc.vim' "{{{
-let g:echodoc_enable_at_startup = 1
-let g:echodoc#highlight_arguments='Visual'
-"}}}
-Plug 'Shougo/neoinclude.vim'
-Plug 'Shougo/neco-syntax'
-Plug 'ujihisa/neco-look'
-Plug 'Shougo/neco-vim'
+""}}}
+"Plug 'Shougo/echodoc.vim' "{{{
+"let g:echodoc_enable_at_startup = 1
+"let g:echodoc#highlight_arguments='Visual'
+"" let g:echodoc#type='virtual'
+""}}}
+"Plug 'Shougo/neoinclude.vim'
+"Plug 'Shougo/neco-syntax'
+"Plug 'ujihisa/neco-look'
+"Plug 'Shougo/neco-vim'
+"if has('nvim-0.4')
+"  Plug 'ncm2/float-preview.nvim'
+"  let g:echodoc#type='floating'
+"  set completeopt-=preview
+"endif
 
 " ----------------- Motions ---------------------- {{{2
 Plug 'tpope/vim-repeat'
@@ -733,3 +705,12 @@ call neomake#configure#automake('wrin')
 "}}}
 
 " ===============================================
+
+let g:coq_settings = { 'auto_start': v:true }
+lua << EOF
+require("coq_3p") {
+  { src = "nvimlua", short_name = "nLUA" },
+  { src = "vimtex", short_name = "vTEX" },
+  { src = "bc", short_name = "MATH", precision = 6 },
+}
+EOF
