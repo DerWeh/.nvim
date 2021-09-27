@@ -113,7 +113,7 @@ endfunction
 
 
 " ================= Spelling ==================== {{{1
-autocmd vimrc BufRead * call s:set_spell()
+autocmd vimrc BufNewFile,BufRead * call s:set_spell()
 function! s:set_spell() abort
   if &readonly || !&modifiable
     setlocal nospell
