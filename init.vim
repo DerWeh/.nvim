@@ -333,10 +333,7 @@ endif
 Plug 'lambdalisue/gina.vim'
 Plug 'lambdalisue/agit.vim'
 Plug 'jreybert/vimagit'
-Plug 'mhinz/vim-signify' "{{{
-let g:signify_vcs_list = ['git']
-" let g:signify_realtime = 1
-"}}}
+Plug 'lewis6991/gitsigns.nvim/'
 
 " ----------------- Coding ----------------------- {{{2
 Plug 'ludovicchabant/vim-gutentags'
