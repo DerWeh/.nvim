@@ -305,7 +305,6 @@ Plug 'joom/latex-unicoder.vim'
 let g:unicoder_no_map = 1
 
 " ----------------- Search ----------------------- {{{2
-Plug 'google/vim-searchindex'
 Plug 'haya14busa/incsearch.vim', {'on': ['<Plug>(incsearch-forward)', '<Plug>(incsearch-stay)', '<Plug>(incsearch-backward)']} "{{{
 let g:incsearch#magic = '\v'
 map /  <Plug>(incsearch-forward)
