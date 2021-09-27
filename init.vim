@@ -171,10 +171,11 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'blueyed/cursorcross.vim'
-let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
-autocmd vimrc BufEnter * set relativenumber " number
-autocmd vimrc BufLeave,WinLeave * set norelativenumber " nonumber
-" Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
+Plug 'auwsmit/vim-active-numbers'
+set relativenumber number
+let g:actnum_exclude =
+      \ ['unite', 'tagbar', 'startify', 'undotree', 'gundo', 'vimshell', 'w3m', 'gina-blame']
+autocmd vimrc TermOpen * :set nonumber norelativenumber
 Plug 'Yggdroot/hiPairs'
 let g:hiPairs_stopline_more = 800
 let g:hiPairs_timeout = 2
