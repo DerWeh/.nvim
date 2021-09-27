@@ -176,11 +176,10 @@ set relativenumber number
 let g:actnum_exclude =
       \ ['unite', 'tagbar', 'startify', 'undotree', 'gundo', 'vimshell', 'w3m', 'gina-blame']
 autocmd vimrc TermOpen * :set nonumber norelativenumber
-Plug 'Yggdroot/hiPairs'
-let g:hiPairs_stopline_more = 800
-let g:hiPairs_timeout = 2
-let g:hiPairs_insert_timeout = 2
 Plug 'andymass/vim-matchup'
+let g:matchup_matchparen_deferred = 1
+let g:matchup_matchparen_hi_surround_always = 1
+let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 
 
