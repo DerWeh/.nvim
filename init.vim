@@ -459,6 +459,7 @@ Plug 'chrisbra/NrrwRgn'
 
 " ----------------- Telescope ----------------------- {{{2
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
@@ -626,6 +627,13 @@ call neomake#configure#automake('wrin')
 
 let g:coq_settings = { 'auto_start': v:true }
 lua << EOF
+require('telescope').setup {
+    extensions = {
+        media_files = {
+            find_cmd = "rg"
+        }
+    }
+}
 require('telescope').load_extension('media_files')
 require'telescope'.setup {
   extensions = {
