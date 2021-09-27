@@ -227,10 +227,6 @@ let g:airline_symbols.linenr = ''
 "}}}
 Plug 'lukas-reineke/indent-blankline.nvim'
 
-"Plug 'thaerkh/vim-indentguides' "{{{ # possible indent char: │
-"let g:indentguides_firstlevel=0
-"let g:indentguides_ignorelist = s:special_buffers
-""}}}
 Plug 'blueyed/cursorcross.vim'
 let g:cursorcross_dynamic = 'cw'  " add `l` for cursorline
 autocmd vimrc BufEnter * set relativenumber " number
