@@ -445,7 +445,6 @@ Plug 'vim-scripts/vis', {'on': ['B', 'S']}
 Plug 'will133/vim-dirdiff', {'on': ['DirDiff']} "{{{
 let g:DirDiffExcludes = '.*,*.exe,*.swp'
 "}}}
-" Plug 'vim-scripts/TaskList.vim' " replaced by Denite:grep
 Plug 'andrewradev/linediff.vim', {'on': ['Linediff', 'LinediffAdd']}
 Plug 'rickhowe/diffchar.vim'
 Plug 'chrisbra/Recover.vim'
@@ -461,20 +460,14 @@ let g:golden_ratio_exclude_nonmodifiable = 1
 " }}}
 Plug 'chrisbra/NrrwRgn'
 
-" ----------------- Denite ----------------------- {{{2
-Plug 'Shougo/denite.nvim'
-Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
-let g:fruzzy#usenative = 1
-Plug 'chemzqm/unite-location'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
-Plug 'Shougo/unite-session'
+" ----------------- Telescope ----------------------- {{{2
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'folke/todo-comments.nvim'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'thinca/vim-qfreplace'
-Plug 'Shougo/vimfiler.vim' | Plug 'romgrk/vimfiler-prompt', { 'on' : 'VimFilerPrompt'}
-let g:vimfiler_as_default_explorer = 1
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
 
 " ----------------- Folding ---------------------- {{{2
 Plug 'Konfekt/FastFold'
@@ -561,22 +554,17 @@ nmap <Leader>ss <plug>(matchup-hi-surround)
 inoremap <Leader>ll <Esc>:call unicoder#start(1)<CR>
 vnoremap <Leader>ll :<C-u>call unicoder#selection()<CR>
 
-" ----------------- Denite/Unite ----------------- {{{2
-nnoremap <F1> :Denite -buffer-name=help help<CR>
-nnoremap [unite] <Nop>
-nnoremap <leader>/ :Denite -buffer-name=search line -auto-action=highlight -start-filter -auto-resize<CR>
-nnoremap <silent> <space>f :Denite -buffer-name=files -source-names=short -start-filter file/rec file/old<CR>
-nnoremap <space>/ :Denite -buffer-name=grep -no-empty -start-filter grep:.<cr>
-nnoremap g<space>/ :DeniteCursorWord -buffer-name=grep -no-empty -start-filter grep:.<cr>
-nnoremap <space><leader>/ :Denite -buffer-name=interactive-grep -start-filter grep:.::!<cr>
-nnoremap <space>t :Denite -buffer-name=Task_List -auto-action=highlight -start-filter grep:.:'-s -G <C-R>%$':FIXME\\|TODO\\|XXX<CR>
-nnoremap <space><leader>t :Denite -buffer-name=Task_List -auto-action=highlight -start-filter grep:.:-s:FIXME\|TODO\|XXX<cr>
-nnoremap <space>s :Denite buffer -quick-move="immediately"<cr>
-nnoremap <space>r :Denite -resume<cr>
-nnoremap <space>n :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
-nnoremap <space>p :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
-nnoremap <silent> <space>q  :<C-u>Denite -auto-action=highlight -auto-resize quickfix<CR>
-nnoremap <silent> <space>l  :<C-u>Denite -auto-action=highlight -auto-resize location_list<CR>
+" ----------------- Telescope ----------------- {{{2
+nnoremap <F1> <cmd>Telescope help_tags<CR>
+nnoremap <leader>/ <cmd>Telescope current_buffer_fuzzy_find<CR>
+nnoremap <silent> <space>f <cmd>Telescope find_files<CR>
+nnoremap <space>/ <cmd>Telescope live_grep<cr>
+nnoremap g<space>/ <cmd>Telescope grep_string<cr>
+nnoremap <space>s <cmd>Telescope buffers<cr>
+nnoremap <silent> <space>q <cmd>Telescope quickfix<cr>
+nnoremap <silent> <space>l <cmd>Telescope loclist<cr>
+nnoremap <space>r <cmd>Telescope resume<cr>
+nnoremap <space>t <cmd>TodoTelescope<cr>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
@@ -611,82 +599,9 @@ let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
-autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>l :Denite vimtex_labels<CR>
-autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>t :Denite vimtex_toc<CR>
+" autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>l :Denite vimtex_labels<CR>
+" autocmd vimrc FileType tex,bib nnoremap <LocalLeader><space>t :Denite vimtex_toc<CR>
 " }}}
-
-" Denite "{{{
-call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
-if executable('ag')
-  call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-	call denite#custom#var('grep', {
-		\ 'command': ['ag'],
-		\ 'default_opts': ['-i', '--vimgrep'],
-		\ 'recursive_opts': [],
-		\ 'pattern_opt': [],
-		\ 'separator': ['--'],
-		\ 'final_opts': [],
-		\ })
-endif
-
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-      \ [ '.git/', '.ropeproject/', '__pycache__/',
-      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'tags'])
-
-
-" call denite#custom#var('menu', 'menus', s:menus)
-let s:menus = {}
-
-let s:menus.search = {
-      \ 'description': 'Search using grep'
-      \ }
-
-let s:menus.search.command_candidates = [
-      \ ['▷ Grep in CURRENT directory                     ⌘ <space>//',
-          \ 'Denite -buffer-name=grep grep:.'],
-      \ ['▷ Grep in CUSTOM directory                     ⌘ <space>/',
-          \ 'Denite -buffer-name=grep grep:`input("Enter directory: ")`'],
-      \ ['▷ Grep for CURSORWORD                     ⌘ <space>/',
-          \ 'DeniteCursorWord -buffer-name=grep grep:.'],
-      \]
-
-call denite#custom#var('menu', 'menus', s:menus)
-"}}}
-
-" Unite "{{{
-if executable('ag') == 1
-  "let g:unite_source_grep_command = 'ag'
-  let g:unite_source_rec_async_command =
-        \['ag', '--follow', '--nocolor', '--hidden', '-g', '']
-  "let g:unite_source_grep_default_opts =
-        "\ '-i --vimgrep --hidden --ignore ' .
-        "\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-endif
-
-call unite#custom#profile('default', 'context', {
-\   'direction': 'botright',
-\ })
-call unite#custom#profile('outline', 'context', {'direction': 'topleft'})
-
-call unite#custom_source('file_rec,file_rec/async,file_rec/neovim,file_mru,file,buffer,grep',
-    \ 'ignore_pattern', join([
-    \ '\.git/',
-    \ '__cache__/',
-    \ '\.undo/',
-    \ '\.backup/',
-    \ '__pycache__/',
-    \ ], '\|'))
-
-call unite#custom#source('files,file,file/async,file/new,buffer, '.
-      \ 'file_rec,file_rec/async, file_rec/git, file_rec/neovim, file_mru, '.
-      \ 'file_include, file_list, file_point', 'matchers', 'matcher_fuzzy')
-
-
-call unite#custom#profile('action', 'context', {
-      \ 'start_insert' : 1
-      \ })
-"}}}
 
 " Gina {{{
 " TODO commits behind remote
@@ -704,6 +619,15 @@ call neomake#configure#automake('wrin')
 
 let g:coq_settings = { 'auto_start': v:true }
 lua << EOF
+require('telescope').load_extension('media_files')
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      find_cmd = "rg"
+    }
+  },
+}
+require('todo-comments').setup {}
 require("coq_3p") {
   { src = "nvimlua", short_name = "nLUA" },
   { src = "vimtex", short_name = "vTEX" },
