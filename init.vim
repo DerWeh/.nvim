@@ -627,6 +627,7 @@ require'telescope'.setup {
     }
   },
 }
+require('gitsigns').setup()
 require('todo-comments').setup {}
 require("coq_3p") {
   { src = "nvimlua", short_name = "nLUA" },
