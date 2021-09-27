@@ -225,7 +225,6 @@ nmap ga <Plug>(EasyAlign)
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
-Plug 'machakann/vim-highlightedyank'
 Plug 'bfredl/nvim-miniyank' "{{{
 
 map p <Plug>(miniyank-autoput)
@@ -417,6 +416,10 @@ set synmaxcol=800 " Don't try to highlight lines longer than 800 characters,
                   " in order to speed up the view port.
 set lazyredraw    " can lead to problems with splits?
 set ttyfast
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+augroup END
 
 " let g:indent_blankline_char = '│'
 let g:indent_blankline_buftype_exclude = ['terminal']
