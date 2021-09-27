@@ -88,7 +88,7 @@ set formatoptions-=r
 set formatoptions-=o
 
 let &colorcolumn='80,120,121,122'
-set listchars=tab:│\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨,
+set listchars=tab:│\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 
 " ================= Nvim ======================== {{{1
