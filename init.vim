@@ -401,7 +401,7 @@ Plug 'thinca/vim-qfreplace'
 Plug 'Konfekt/FastFold'
 
 " load last
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 call gina#core#get()  " needed to work with RiV see Charge reconstruction and Friedel sum rule in heterostructures
