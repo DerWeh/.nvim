@@ -10,7 +10,7 @@ set nocompatible
 augroup vimrc
   autocmd!
 augroup END
-let g:vimdir = expand('~').'/.config/nvim'
+let g:vimdir = stdpath('config')
 
 set updatetime=1000
 set hidden
