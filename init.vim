@@ -174,8 +174,8 @@ Plug 'blueyed/cursorcross.vim'
 Plug 'auwsmit/vim-active-numbers'
 set relativenumber number
 let g:actnum_exclude =
-      \ ['unite', 'tagbar', 'startify', 'undotree', 'gundo', 'vimshell', 'w3m', 'gina-blame']
-autocmd vimrc TermOpen * :set nonumber norelativenumber
+      \ ['TelescopePrompt', 'tagbar', 'startify', 'undotree', 'gundo', 'terminal', 'w3m', 'gina-blame']
+autocmd vimrc TermOpen * :set filetype=terminal norelativenumber nonumber
 Plug 'andymass/vim-matchup'
 let g:matchup_matchparen_deferred = 1
 let g:matchup_matchparen_hi_surround_always = 1
@@ -225,10 +225,8 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'bfredl/nvim-miniyank' "{{{
-
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
-
 map <C-n> <Plug>(miniyank-cycle)
 "}}}
 Plug 'junegunn/vim-peekaboo'
@@ -273,7 +271,7 @@ Plug 'Ron89/thesaurus_query.vim'
 
 " ----------------- File type -------------------- {{{2
 " ~~~~~~~~~~~~~~~~~ Latex ~~~~~~~~~~~~~~~~~~~~~~~~ {{{3
-Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip3 install --user neovim-remote'} " {{{
+Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib'], 'do' : 'pip install --user neovim-remote'} " {{{
 augroup vimtex
   autocmd!
   autocmd User vimtex call vimtex#imaps#add_map({
@@ -404,7 +402,9 @@ call gina#core#get()  " needed to work with RiV see Charge reconstruction and Fr
 set t_Co=256      " turn syntax highlighting on
 set termguicolors
 set background=light
+let g:one_allow_italics=1
 colorscheme one
+call one#highlight('Folded', 'cccccc', '', 'bold,underline')
 set showmatch     " highlight matching braces
 syntax sync minlines=100 maxlines=260
 set synmaxcol=800 " Don't try to highlight lines longer than 800 characters,
@@ -417,7 +417,7 @@ augroup highlight_yank
 augroup END
 
 " let g:indent_blankline_char = '│'
-let g:indent_blankline_buftype_exclude = ['terminal']
+let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 " " let g:indent_blankline_show_current_context = v:true
 
 lua << EOF
@@ -480,7 +480,6 @@ nmap <C-w>f <C-w><Bar><C-w>_
 " noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
 
 " ----------------- Plug-in Mappings ------------- {{{2
-nnoremap <leader>fe :VimFilerExplorer<CR>
 nmap <leader>ct <Plug>Colorizer
 nnoremap <silent> <F9> :MundoToggle<CR>
 nmap <Leader>ww <Plug>VimwikiIndex
@@ -541,9 +540,6 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 " }}}
 
 " Gina {{{
-" TODO commits behind remote
-call airline#parts#define_function('gina', 'gina#component#repo#branch')
-let g:airline_section_b = airline#section#create(['hunks', g:airline_symbols.branch,'gina'])
 call gina#custom#execute('commit', 'setlocal spell')
 " call gina#custom#execute('commit', "call committia#open('git')")
 "}}}
