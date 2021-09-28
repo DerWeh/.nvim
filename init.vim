@@ -367,6 +367,10 @@ let g:DirDiffExcludes = '.*,*.exe,*.swp'
 Plug 'andrewradev/linediff.vim', {'on': ['Linediff', 'LinediffAdd']}
 Plug 'rickhowe/diffchar.vim'
 Plug 'chrisbra/Recover.vim'
+Plug 'alpertuna/vim-header'
+let g:header_field_author = 'Weh Andreas'
+let g:header_field_author_email = 'andreas.weh@physik.uni-augsburg.de'
+let g:header_auto_update_header = 0
 
 " ----------------- Readability ------------------ {{{2
 Plug 'junegunn/limelight.vim', {'on': ['Limelight',]} " {{{
