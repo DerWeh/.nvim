@@ -377,7 +377,6 @@ Plug 'roman/golden-ratio', { 'on': ['<Plug>(golden_ratio_resize)']} " {{{
 let g:golden_ratio_autocommand = 0
 let g:golden_ratio_exclude_nonmodifiable = 1
 " }}}
-Plug 'chrisbra/NrrwRgn'
 
 " ----------------- Telescope ----------------------- {{{2
 Plug 'nvim-lua/plenary.nvim'
@@ -386,7 +385,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'folke/todo-comments.nvim'
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'thinca/vim-qfreplace'
 
 " ----------------- Folding ---------------------- {{{2
