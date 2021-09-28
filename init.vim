@@ -216,7 +216,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'ggandor/lightspeed.nvim'
 
 " ----------------- Editing ---------------------- {{{2
-" Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-commentary' " smaller than nerdcommenter, but lack partial and multi-line comments
 Plug 'junegunn/vim-easy-align', {'on': ['<Plug>(EasyAlign)', 'EasyAlign','<Plug>(LiveEasyAlign)', 'LiveEasyAlign']} "{{{
 xmap ga <Plug>(EasyAlign)
