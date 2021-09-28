@@ -145,6 +145,7 @@ function! s:cond(cond, ...)
 endfunction
 
 Plug 'tpope/vim-sensible'
+Plug 'folke/which-key.nvim'
 
 " ----------------- Appearance ------------------- {{{2
 " these are relevant if speed-up is desired
@@ -334,7 +335,6 @@ let g:neoterm_size = 18
 Plug 'majutsushi/tagbar' "{{{
 let g:tagbar_sort = 0
 let g:tagbar_autoshowtag = 1
-noremap <F8> <Esc>:Tagbar<CR>
 noremap g<F8> <Esc>:TagbarShow<CR>
 " }}}
 Plug 'vim-scripts/vimwiki', { 'on': ['<Plug>VimwikiIndex','<Plug>VimwikiTabIndex', '<Plug>VimwikiUISelect']}
@@ -444,7 +444,6 @@ nnoremap <F2> :w<CR>|                  " save file via F2
 inoremap <F2> <ESC>:w<CR>gi|           " save file via F2
 set pastetoggle=<F3>|                  " toggle paste mode for pasting code without intend
 
-noremap <leader>h :<C-u>nohl<CR>|      " Remove highlight from search results
 
 vmap < <gv|                            " reselect after shifting indent
 vmap > >gv|
@@ -459,48 +458,20 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-" create new split with c<C-?>
-nnoremap c<C-j> :bel sp new<cr>
-nnoremap c<C-k> :abo sp new<cr>
-nnoremap c<C-h> :lefta vsp new<cr>
-nnoremap c<C-l> :rightb vsp new<cr>
 " move and focus (resize) with g<C-?>
 nnoremap g<C-j> <C-w>j:let &winheight = &lines * 7 / 10<cr>
 nnoremap g<C-k> <C-w>k:let &winheight = &lines * 7 / 10<cr>
 onoremap g<C-h> <C-w>h<C-w>_
 nnoremap g<C-l> <C-w>l<C-w>_
-" delete window with d<C-?>
-nnoremap d<C-j> <C-w>j<C-w>c
-nnoremap d<C-k> <C-w>k<C-w>c
-nnoremap d<C-h> <C-w>h<C-w>c
-nnoremap d<C-l> <C-w>l<C-w>c
-nmap <C-w>r <Plug>(golden_ratio_resize)
-nmap <C-w>f <C-w><Bar><C-w>_
 
 " noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
 
+nnoremap <LocalLeader>n <cmd>Telescope lsp_refernces<cr>
+nnoremap <LocalLeader>s <cmd>Telescope lsp_document_symbols<cr>
 " ----------------- Plug-in Mappings ------------- {{{2
-nmap <leader>ct <Plug>Colorizer
-nnoremap <silent> <F9> :MundoToggle<CR>
-nmap <Leader>ww <Plug>VimwikiIndex
-nmap <Leader>wt <Plug>VimwikiTabIndex
-nmap <Leader>ws <Plug>VimwikiUISelect
-nmap <Leader>ss <plug>(matchup-hi-surround)
 inoremap <Leader>ll <Esc>:call unicoder#start(1)<CR>
 vnoremap <Leader>ll :<C-u>call unicoder#selection()<CR>
 
-" ----------------- Telescope ----------------- {{{2
-nnoremap <F1> <cmd>Telescope help_tags<CR>
-nnoremap <leader>/ <cmd>Telescope current_buffer_fuzzy_find<CR>
-nnoremap <silent> <space>f <cmd>Telescope find_files<CR>
-nnoremap <space>/ <cmd>Telescope live_grep<cr>
-nnoremap g<space>/ <cmd>Telescope grep_string<cr>
-nnoremap <space>s <cmd>Telescope buffers<cr>
-nnoremap <silent> <space>q <cmd>Telescope quickfix<cr>
-nnoremap <silent> <space>l <cmd>Telescope loclist<cr>
-nnoremap <space>r <cmd>Telescope resume<cr>
-nnoremap <space>t <cmd>TodoTelescope<cr>
-nnoremap <space>ms <cmd>lua require'telescope.builtin'.symbols{ sources = {'math'} }<cr>
 
 " =============================================== {{{1
 " Motion for "next/last object". For example, "din(" would go to the next "()" pair
@@ -552,6 +523,7 @@ call neomake#configure#automake('wrin')
 
 let g:coq_settings = { 'auto_start': v:true }
 lua << EOF
+require('which-key').setup { }
 require('telescope').setup {
     extensions = {
         media_files = {
@@ -601,7 +573,61 @@ buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnosti
 buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+buf_set_keymap('n', '<LocalLeader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+
+
+local wk = require("which-key")
+wk.register({
+  ["<space>"] = {
+    name = "Telescope",
+    ["s"] = {"<CMD>Telescope buffers<CR>", "buffer"},
+    ["/"] = {"<CMD>Telescope live_grep<CR>", "live grep"},
+    ["f"] = {"<CMD>Telescope find_files<CR>", "Files"},
+    ["r"] = {"<CMD>Telescope oldfiles<CR>", "Recent files" },
+    ["q"] = {"<CMD>Telescope quickfix<CR>", "Quickfix"},
+    ["l"] = {"<CMD>Telescope loclist<CR>", "Location"},
+    ["t"] = {"<CMD>TodoTelescope<cr>", "TODOs"},
+    ["r"] = {"<CMD>Telescope resume<cr>", "Resume Telescope"},
+    ["ms"] = {"<CMD>lua require'telescope.builtin'.symbols{sources={'math'}}<cr>", "MathSymbols"},
+    ["g"] = {
+      name = 'mod',
+      ["/"] = {"<cmd>Telescope grep_string<cr>", "grep word"},
+      },
+    },
+  ["<leader>"] = {
+    ["/"] = {"<CMD>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search"},
+    ["ct"] = {"<Plug>Colorizer", "ColorToggle"},
+    ["w"] = {
+      name = "Wiki",
+      ["w"] = {"<Plug>VimwikiIndex", "edit"},
+      ["t"] = {"<Plug>VimwikiTabIndex", "new Tab"},
+      ["s"] = {"<Plug>VimwikiUISelect", "Select"},
+      },
+    ["ss"] = {"<Plug>(matchup-hi-surround)", "hl-Surround"},
+    ["h"] = {"<CMD>nohl<CR>", "remove search Highlight"}
+    },
+  ["<C-w>"] = {
+    -- name = "Window",
+    ["r"] = {"<Plug>(golden_ratio_resize)", "golden Ratio"},
+    ["f"] = {"<C-w><Bar><C-w>_", "Full size"},
+    },
+  ["c"] = {
+    -- name = "Create split",
+    ["<C-j>"] = {"<CMD>below sp new<cr>", "split below"},
+    ["<C-k>"] = {"<CMD>above sp new<cr>", "split above"},
+    ["<C-h>"] = {"<CMD>lefta sp new<cr>", "split left"},
+    ["<C-l>"] = {"<CMD>rightb sp new<cr>", "split right"},
+    },
+  ["d"] = {
+    -- name = "Delete split",
+    ["<C-j>"] = {"<C-w>j<C-w>c", "delete below"},
+    ["<C-k>"] = {"<C-w>k<C-w>c", "delete above"},
+    ["<C-h>"] = {"<C-w>h<C-w>c", "delete left"},
+    ["<C-l>"] = {"<C-w>l<C-w>c", "delete right"},
+    },
+  ["<F1>"] = {"<CMD>Telescope help_tags<CR>", "Help"},
+  ["<F8>"] = {"<CMD>Tagbar<CR>", "Tagbar"},
+  ["<F9>"] = {"<CMD>MundoToggle<CR>", "Undo History"},
+  })
 EOF
-nnoremap <LocalLeader>n <cmd>Telescope lsp_refernces<cr>
-nnoremap <LocalLeader>s <cmd>Telescope lsp_document_symbols<cr>
