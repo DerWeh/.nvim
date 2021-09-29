@@ -26,7 +26,7 @@ set clipboard+=unnamedplus
 autocmd vimrc BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal! g'\"" | endif
 
-let g:maplocalleader="'"
+let g:maplocalleader="\\"
 let g:mapleader=','
 
 if has('conceal')
@@ -457,8 +457,6 @@ nnoremap g<C-l> <C-w>l<C-w>_
 
 " noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
 
-nnoremap <LocalLeader>n <cmd>Telescope lsp_refernces<cr>
-nnoremap <LocalLeader>s <cmd>Telescope lsp_document_symbols<cr>
 " ----------------- Plug-in Mappings ------------- {{{2
 inoremap <Leader>ll <Esc>:call unicoder#start(1)<CR>
 vnoremap <Leader>ll :<C-u>call unicoder#selection()<CR>
