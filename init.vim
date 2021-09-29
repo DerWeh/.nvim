@@ -225,9 +225,6 @@ map P <Plug>(miniyank-autoPut)
 map <C-n> <Plug>(miniyank-cycle)
 "}}}
 
-" Plug 'cohama/lexima.vim'
-" imap <C-h> <BS>
-" cmap <C-h> <BS>
 Plug 'windwp/nvim-autopairs'
 Plug 'joom/latex-unicoder.vim'
 let g:unicoder_no_map = 1
