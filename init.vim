@@ -62,8 +62,9 @@ set inccommand=split  " preview for substitute command
 
 
 " ================= Caps Lock =================== {{{1
-autocmd vimrc VimEnter,FocusGained * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' &>/dev/null"
-autocmd vimrc VimLeave,FocusLost * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' &>/dev/null"
+" not working, <C> triggers FocusLost -> FocusGained
+" autocmd vimrc VimEnter,FocusGained * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' &>/dev/null"
+" autocmd vimrc VimLeave,FocusLost * :silent exec "!xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock' &>/dev/null"
 
 
 " ================= Intention =================== {{{1
@@ -144,7 +145,6 @@ function! s:cond(cond, ...)
   return a:cond ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
 endfunction
 
-Plug 'tpope/vim-sensible'
 Plug 'folke/which-key.nvim'
 
 " ----------------- Appearance ------------------- {{{2
