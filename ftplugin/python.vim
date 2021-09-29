@@ -10,10 +10,3 @@ let g:echodoc_enable_at_startup = 1
 
 let g:pydocstring_templates_dir = g:vimdir.'/templates/pydocstring/'
 nmap <silent> <LocalLeader>pd <Plug>(pydocstring)
-
-nnoremap <buffer> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <buffer> gD :call LanguageClient_textDocument_definition()<CR>:normal! m'<CR>
-nnoremap <buffer> <LocalLeader>r :call LanguageClient_textDocument_rename()<CR>
-nnoremap <buffer> <LocalLeader>s :Denite documentSymbol<CR>
-nnoremap <buffer> <LocalLeader>S :DeniteCursorWord documentSymbol -auto-action=highlight<CR>
-nnoremap <buffer> <LocalLeader>n :Denite references -auto-action=highlight<CR>
