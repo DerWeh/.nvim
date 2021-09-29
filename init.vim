@@ -416,11 +416,6 @@ augroup END
 let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 " " let g:indent_blankline_show_current_context = v:true
 
-lua << EOF
-require("indent_blankline").setup {
-    char = "│",
-}
-EOF
 
 " ================= Key-mappings ================ {{{1
 nnoremap ; :|                          " faster `commands` using ;
@@ -517,130 +512,7 @@ call neomake#configure#automake('wrin')
 
 " ===============================================
 
-let g:coq_settings = { 'auto_start': v:true }
-lua << EOF
-require('which-key').setup { }
-require('telescope').setup {
-    extensions = {
-        media_files = {
-            find_cmd = "rg"
-        }
-    }
-}
-require('telescope').load_extension('media_files')
-require'telescope'.setup {
-  extensions = {
-    media_files = {
-      find_cmd = "rg"
-    }
-  },
-}
-require('gitsigns').setup()
-require('todo-comments').setup {}
-require("coq_3p") {
-  { src = "nvimlua", short_name = "nLUA" },
-  { src = "vimtex", short_name = "vTEX" },
-  { src = "bc", short_name = "MATH", precision = 6 },
-}
-local lsp = require "lspconfig"
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  require "lsp_signature".on_attach() 
+let g:coq_settings = {'auto_start': 'shut-up', 'display.pum.fast_close': v:false}
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=false }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<LocalLeader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<LocalLeader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp' }
-for _, server in ipairs(servers) do
-  lsp[server].setup {
-    coq.lsp_ensure_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-
-
-
-local wk = require("which-key")
-wk.register({
-  ["<space>"] = {
-    name = "Telescope",
-    ["s"] = {"<CMD>Telescope buffers<CR>", "buffer"},
-    ["/"] = {"<CMD>Telescope live_grep<CR>", "live grep"},
-    ["f"] = {"<CMD>Telescope find_files<CR>", "Files"},
-    ["r"] = {"<CMD>Telescope oldfiles<CR>", "Recent files" },
-    ["q"] = {"<CMD>Telescope quickfix<CR>", "Quickfix"},
-    ["l"] = {"<CMD>Telescope loclist<CR>", "Location"},
-    ["t"] = {"<CMD>TodoTelescope<cr>", "TODOs"},
-    ["r"] = {"<CMD>Telescope resume<cr>", "Resume Telescope"},
-    ["ms"] = {"<CMD>lua require'telescope.builtin'.symbols{sources={'math'}}<cr>", "MathSymbols"},
-    ["g"] = {
-      name = 'mod',
-      ["/"] = {"<cmd>Telescope grep_string<cr>", "grep word"},
-      },
-    },
-  ["<leader>"] = {
-    ["/"] = {"<CMD>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search"},
-    ["ct"] = {"<Plug>Colorizer", "ColorToggle"},
-    ["w"] = {
-      name = "Wiki",
-      ["w"] = {"<Plug>VimwikiIndex", "edit"},
-      ["t"] = {"<Plug>VimwikiTabIndex", "new Tab"},
-      ["s"] = {"<Plug>VimwikiUISelect", "Select"},
-      },
-    ["ss"] = {"<Plug>(matchup-hi-surround)", "hl-Surround"},
-    ["h"] = {"<CMD>nohl<CR>", "remove search Highlight"}
-    },
-  ["<C-w>"] = {
-    -- name = "Window",
-    ["r"] = {"<Plug>(golden_ratio_resize)", "golden Ratio"},
-    ["f"] = {"<C-w><Bar><C-w>_", "Full size"},
-    },
-  ["c"] = {
-    -- name = "Create split",
-    ["<C-j>"] = {"<CMD>below sp new<cr>", "split below"},
-    ["<C-k>"] = {"<CMD>above sp new<cr>", "split above"},
-    ["<C-h>"] = {"<CMD>lefta sp new<cr>", "split left"},
-    ["<C-l>"] = {"<CMD>rightb sp new<cr>", "split right"},
-    },
-  ["d"] = {
-    -- name = "Delete split",
-    ["<C-j>"] = {"<C-w>j<C-w>c", "delete below"},
-    ["<C-k>"] = {"<C-w>k<C-w>c", "delete above"},
-    ["<C-h>"] = {"<C-w>h<C-w>c", "delete left"},
-    ["<C-l>"] = {"<C-w>l<C-w>c", "delete right"},
-    },
-  ["<F1>"] = {"<CMD>Telescope help_tags<CR>", "Help"},
-  ["<F8>"] = {"<CMD>Tagbar<CR>", "Tagbar"},
-  ["<F9>"] = {"<CMD>MundoToggle<CR>", "Undo History"},
-  })
-EOF
+runtime plugin_config.lua
+runtime which_key.lua
