@@ -1,7 +1,7 @@
 -- Key-mappings using which-key
 
 local wk = require("which-key")
-wk.register({
+wk.register({ -- normal mode mappings
   ["<space>"] = {
     name = "Telescope",
     ["s"] = {"<CMD>Telescope buffers<CR>", "buffer"},
@@ -53,3 +53,7 @@ wk.register({
   ["<F8>"] = {"<CMD>Tagbar<CR>", "Tagbar"},
   ["<F9>"] = {"<CMD>MundoToggle<CR>", "Undo History"},
   })
+wk.register({ -- visual mode mappings
+  ["++"] = {"y:call VMATH_Analyse()<CR>gv", "statistics"},
+  ["<Leader>ll"] = {":<C-u>call unicoder#selection()<CR>", "Latex unicode"},
+  }, {mode = 'v'})
