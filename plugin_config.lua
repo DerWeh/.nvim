@@ -59,6 +59,7 @@ local on_attach = function(client, bufnr)
       name = "Language",
       ["n"] = {"<CMD>Telescope lsp_references<CR>", "references"},
       ["s"] = {"<CMD>Telescope lsp_document_symbols<CR>", "Symbols"},
+      ["d"] = {"<CMD>Telescope lsp_document_diagnostics<CR>", "Diagnostic"},
       ["r"] = {"<CMD>lua vim.lsp.buf.rename()<CR>", "Rename"},
       ["f"] = {
         name = 'File',
@@ -70,6 +71,8 @@ local on_attach = function(client, bufnr)
         ["a"] = {"<CMD>lua vim.lsp.buf.add_workspace_folder()<CR>", "Add folder"},
         ["r"] = {"<CMD>lua vim.lsp.buf.remove_workspace_folder()<CR>", "Remove folder"},
         ["l"] = {"<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List folder"},
+        ["s"] = {"<CMD>Telescope lsp_workspace_symbols<CR>", "Symbols"},
+        ["d"] = {"<CMD>Telescope lsp_workspace_diagnostics<CR>", "Diagnostic"},
       },
       ["ca"] = {"<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action"},
       ["e"] = {"<CMD>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show diagnostics"},
