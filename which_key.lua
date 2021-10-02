@@ -48,8 +48,8 @@ wk.register({ -- normal mode mappings
     -- name = "Create split",
     ["<C-j>"] = {"<CMD>below sp new<cr>", "split below"},
     ["<C-k>"] = {"<CMD>above sp new<cr>", "split above"},
-    ["<C-h>"] = {"<CMD>lefta sp new<cr>", "split left"},
-    ["<C-l>"] = {"<CMD>rightb sp new<cr>", "split right"},
+    ["<C-h>"] = {"<CMD>lefta vsp new<cr>", "split left"},
+    ["<C-l>"] = {"<CMD>rightb vsp new<cr>", "split right"},
     },
   ["d"] = {
     -- name = "Delete split",
