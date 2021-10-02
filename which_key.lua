@@ -19,6 +19,16 @@ wk.register({ -- normal mode mappings
       },
     },
   ["<leader>"] = {
+    ["s"] = {
+      name = "Send to iron",
+      ["s"] = {"<Plug>(iron-send-lines)", "Send line"},
+      ["m"] = {"<Plug>(iron-send-motion)", "Send Motion"},  -- TODO: write issue
+      ["i"] = {"<CMD>Iron! %matplotlib", "Interactive plot"},
+      ["<C-c>"] = {"<Plug>(iron-interrupt)", "interrupt"},
+      ["<C-l>"] = {"<Plug>(iron-clear)", "clear"},
+      ["Q"] = {"<Plug>(iron-exit)", "Quit"},
+			["."] = {"<Plug>(iron-repeat-cmd)", "repeat"},
+    },
     ["/"] = {"<CMD>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search"},
     ["ct"] = {"<Plug>Colorizer", "ColorToggle"},
     ["w"] = {
@@ -27,8 +37,7 @@ wk.register({ -- normal mode mappings
       ["t"] = {"<Plug>VimwikiTabIndex", "new Tab"},
       ["s"] = {"<Plug>VimwikiUISelect", "Select"},
       },
-    ["ss"] = {"<Plug>(matchup-hi-surround)", "hl-Surround"},
-    ["h"] = {"<CMD>nohl<CR>", "remove search Highlight"}
+    ["h"] = {"<CMD>nohl<CR>", "remove search Highlight"},
     },
   ["<C-w>"] = {
     -- name = "Window",
@@ -56,4 +65,5 @@ wk.register({ -- normal mode mappings
 wk.register({ -- visual mode mappings
   ["++"] = {"y:call VMATH_Analyse()<CR>gv", "statistics"},
   ["<Leader>ll"] = {":<C-u>call unicoder#selection()<CR>", "Latex unicode"},
+  ["<leader>s"] = {":Iron<CR>", "Send iron"},
   }, {mode = 'v'})
