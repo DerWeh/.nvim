@@ -303,6 +303,7 @@ Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tmhedberg/simpylfold', {'for': 'python'}  "very slow startup
 Plug 'tweekmonster/impsort.vim', {'for': 'python'}
 Plug 'vim-scripts/python_match.vim', {'for': 'python'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'mnacamura/iron.nvim'
 
 " ----------------- Linting ---------------------- {{{2

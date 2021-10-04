@@ -5,8 +5,7 @@ setlocal softtabstop=4
 setlocal expandtab
 
 setlocal foldtext=foldtext#python()
-
-let g:echodoc_enable_at_startup = 1
+call semshihl#custom()
 
 let g:pydocstring_templates_dir = g:vimdir.'/templates/pydocstring/'
 nmap <silent> <LocalLeader>pd <Plug>(pydocstring)
