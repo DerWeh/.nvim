@@ -97,7 +97,7 @@ execute 'source '.g:vimdir.'/.pythonprovider.vim'
 
 
 " ================= Diff-mode =================== {{{1
-set diffopt+=vertical
+set diffopt+=vertical,hiddenoff,algorithm:patience,indent-heuristic
 
 " show the difference between the current buffer and the file it was loaded from
 if !exists(':DiffOrig')
@@ -351,7 +351,6 @@ let g:qf_mapping_ack_style = 1 "}}}
 Plug 'lilydjwg/colorizer', { 'on':  ['<Plug>Colorizer', 'ColorHighlight', 'ColorToggle']} " {{{
 let g:colorizer_startup = 0
 " }}}
-Plug 'chrisbra/vim-diff-enhanced', { 'on': ['PatienceDiff', 'EnhancedDiff']}
 Plug 'vim-scripts/vis', {'on': ['B', 'S']}
 Plug 'will133/vim-dirdiff', {'on': ['DirDiff']} "{{{
 let g:DirDiffExcludes = '.*,*.exe,*.swp'
