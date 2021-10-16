@@ -23,7 +23,9 @@ wk.register({ -- normal mode mappings
       name = "Send to iron",
       ["s"] = {"<Plug>(iron-send-lines)", "Send line"},
       ["m"] = {"<Plug>(iron-send-motion)", "Send Motion"},  -- TODO: write issue
-      ["i"] = {"<CMD>Iron! %matplotlib", "Interactive plot"},
+      ["i"] = {"<CMD>Iron! %matplotlib<CR>", "Interactive plot"},
+      ["c"] = {"<CMD>Iron! plt.clf()<CR>", "Clear figure"},
+      ["C"] = {"<CMD>Iron! plt.close()<CR>", "Close figure"},
       ["<C-c>"] = {"<Plug>(iron-interrupt)", "interrupt"},
       ["<C-l>"] = {"<Plug>(iron-clear)", "clear"},
       ["Q"] = {"<Plug>(iron-exit)", "Quit"},
