@@ -450,7 +450,7 @@ map <C-l> <C-w>l
 " move and focus (resize) with g<C-?>
 nnoremap g<C-j> <C-w>j:let &winheight = &lines * 7 / 10<cr>
 nnoremap g<C-k> <C-w>k:let &winheight = &lines * 7 / 10<cr>
-onoremap g<C-h> <C-w>h<C-w>_
+nnoremap g<C-h> <C-w>h<C-w>_
 nnoremap g<C-l> <C-w>l<C-w>_
 
 " noremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>| " switch between header/source with F4
