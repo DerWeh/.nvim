@@ -250,6 +250,7 @@ map gz# <Plug>(asterisk-gz#)
 
 " ----------------- Version control -------------- {{{2
 Plug 'lambdalisue/gina.vim'
+Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/agit.vim'
 Plug 'jreybert/vimagit'
 Plug 'lewis6991/gitsigns.nvim/'
@@ -507,7 +508,10 @@ call neomake#configure#automake('wrin')
 
 " ===============================================
 
-let g:coq_settings = {'auto_start': 'shut-up', 'display.pum.fast_close': v:false}
-
+let g:coq_settings = {
+      \'auto_start': 'shut-up',
+      \'display.pum.fast_close': v:false,
+      \'keymap.jump_to_mark': '<None>',
+      \}
 runtime plugin_config.lua
 runtime which_key.lua

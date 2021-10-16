@@ -67,3 +67,6 @@ wk.register({ -- visual mode mappings
   ["<Leader>ll"] = {":<C-u>call unicoder#selection()<CR>", "Latex unicode"},
   ["<leader>s"] = {":Iron<CR>", "Send iron"},
   }, {mode = 'v'})
+wk.register({ -- insert mode mappings
+  ["<C-j>"] = {"<CMD>lua COQ.Nav_mark()<CR>", "COQ edit mark"},
+  }, {mode = 'i'})
