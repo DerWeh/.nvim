@@ -38,7 +38,7 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Looks
-  use "lukas-reineke/indent-blankline.nvim"
+  use({ "lukas-reineke/indent-blankline.nvim", tag = "*" })
 
   -- Mappings
   use({
@@ -50,6 +50,7 @@ require('packer').startup(function(use)
   })
   use({
     'numToStr/Comment.nvim',
+    tag = "*",
     config = function()
       require('Comment').setup()
     end
@@ -66,7 +67,7 @@ require('packer').startup(function(use)
   use({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
+    { "neovim/nvim-lspconfig", tag = "*" },
     config = function()
       require("mason").setup({})
       require("mason-lspconfig").setup({})
@@ -76,6 +77,7 @@ require('packer').startup(function(use)
   -- Git support
   use({
     'lewis6991/gitsigns.nvim',
+    tag = "*",
     -- config = function()
     --   require('gitsigns').setup()
     -- end
@@ -83,7 +85,7 @@ require('packer').startup(function(use)
 
   use({
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.0',
+    tag = '*',
     requires = { { 'nvim-lua/plenary.nvim' } }
   })
 
@@ -131,14 +133,14 @@ local on_attach = function(_, bufnr)
       ["ca"] = { vim.lsp.buf.code_action, "Code Action" },
       ["f"] = {
         name = 'File',
-        ["f"] = {function() vim.lsp.buf.format({ async = false}) end, "Format" },
+        ["f"] = { function() vim.lsp.buf.format({ async = false }) end, "Format" },
       },
       ["w"] = {
         name = "Workspace",
         ["a"] = { vim.lsp.buf.add_workspace_folder, "Add folder" },
         ["r"] = { vim.lsp.buf.remove_workspace_folder, "Remove folder" },
-      },
         ["l"] = { "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List folder" },
+      },
     },
   }, { silent = false, buffer = bufnr })
   -- vim.keymap.set('n', '<space>wl', function()
@@ -204,9 +206,9 @@ require('gitsigns').setup({
     end
 
     wk.register({ -- Navigation
-      [']c'] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next change"},
-      ['[c'] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Prev change"},
-    }, {expr=true})
+      [']c'] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next change" },
+      ['[c'] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Prev change" },
+    }, { expr = true })
 
     wk.register({ -- Actions
       ["<leader>h"] = {
@@ -218,13 +220,13 @@ require('gitsigns').setup({
         ["u"] = { '<cmd>Gitsigns undo_stage_hunk<CR>', "Hunk Undo" },
         ["p"] = { '<cmd>Gitsigns preview_hunk<CR>', "Hunk Preview" },
         ["b"] = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Hunk Blame" },
-        ["d"] = { '<cmd>Gitsigns diffthis<CR>', "Hunk Diff"},
-        ["D"] = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Hunk Diff"},
+        ["d"] = { '<cmd>Gitsigns diffthis<CR>', "Hunk Diff" },
+        ["D"] = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Hunk Diff" },
       },
       ["<leader>t"] = {
         name = "toggle",
-        ["b"] = { '<cmd>Gitsigns toggle_current_line_blame<CR>', "Toggle Blame"},
-        ["d"] = { '<cmd>Gitsigns toggle_deleted<CR>', "Toggle Delete"},
+        ["b"] = { '<cmd>Gitsigns toggle_current_line_blame<CR>', "Toggle Blame" },
+        ["d"] = { '<cmd>Gitsigns toggle_deleted<CR>', "Toggle Delete" },
       }
     })
     wk.register({
@@ -239,4 +241,3 @@ require('gitsigns').setup({
     map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 })
-
