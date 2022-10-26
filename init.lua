@@ -196,6 +196,9 @@ wk.register({ -- visual mode mappings
   ['<A-h>'] = { ":MoveHBlock(-1)<CR>", 'Move left' },
   ['<A-l>'] = { ":MoveHBlock(1)<CR>", 'Move right' },
 }, { mode = 'v' })
+wk.register({ -- insert mode mappings
+  ['<C-z>'] = { "<c-g>u<Esc>[s1z=`]a<c-g>u", "Correct last error" },
+}, { mode = 'i' })
 
 
 require('gitsigns').setup({
