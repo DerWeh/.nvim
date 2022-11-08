@@ -203,11 +203,11 @@ wk.register({ -- visual mode mappings
 }, { mode = 'v' })
 wk.register({ -- insert mode mappings
   ['<C-z>'] = { "<c-g>u<Esc>[s1z=`]a<c-g>u", "Correct last error" },
-  ['<C-l>'] = { "<Right>", "Move right"},
+  ['<C-l>'] = { "<Right>", "Move right" },
 }, { mode = 'i' })
 wk.register({ -- terminal mode mappings
-  ['<ESC>'] = { "<C-\\><C-n>", "Exit terminal mode"},
-  ['<leader><ESC>'] = { "<ESC>", "Send <ESC> to terminal"},
+  ['<ESC>'] = { "<C-\\><C-n>", "Exit terminal mode" },
+  ['<leader><ESC>'] = { "<ESC>", "Send <ESC> to terminal" },
 }, { mode = 't' })
 
 
@@ -261,4 +261,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = "highlight_yank",
   callback = function() vim.highlight.on_yank { higroup = "IncSearch", timeout = 700 } end
 })
-
