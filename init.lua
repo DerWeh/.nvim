@@ -152,6 +152,11 @@ require('mason-lspconfig').setup_handlers({
   function(server)
     if server == "sumneko_lua" then
       lspconfig[server].setup({ on_attach = on_attach, settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
+    elseif server == "pylsp" then
+      lspconfig[server].setup({ on_attach = on_attach, settings = { pylsp = { plugins = {
+        pycodestyle = { maxLineLength = 100 },
+        pydocstyle = { enabled = true, convention = 'numpy' }
+      } } } })
     else
       lspconfig[server].setup({ on_attach = on_attach })
     end
