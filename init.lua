@@ -39,6 +39,7 @@ require('packer').startup(function(use)
 
   -- Looks
   use({ "lukas-reineke/indent-blankline.nvim", tag = "*" })
+  use({ "RRethy/vim-illuminate" })
 
   -- Mappings
   use({
