@@ -23,8 +23,8 @@ set noerrorbells
 set clipboard+=unnamedplus
 
 " go to last cursor position upon opening files
-autocmd vimrc BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-      \| exe "normal! g'\"" | endif
+autocmd vimrc BufWinEnter * if line("'\"") > 0 && line("'\"") <= line("$")
+      \| exe "normal! g'\"zv" | endif
 
 let g:maplocalleader="\\"
 let g:mapleader=','
