@@ -102,6 +102,8 @@ require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     tag = "*",
   })
+  -- snippet engine
+  use({ "L3MON4D3/LuaSnip", tag = "v1.*" })
 
   use({
     'nvim-telescope/telescope.nvim',
@@ -121,6 +123,11 @@ end)
 -- Set up nvim-cmp.
 local cmp = require('cmp')
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
   window = {
     -- completion = cmp.config.window.bordered(),
     -- documentation = cmp.config.window.bordered(),
@@ -134,7 +141,8 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    -- { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' }, -- For luasnip users.
     { name = 'buffer' },
     { name = 'path' },
   })
