@@ -64,6 +64,12 @@ require('packer').startup(function(use)
     end
   })
 
+  -- Text objects
+  use({
+    { "wellle/targets.vim", tag = "v0.5.0" }, --arguments
+    { "michaeljsmith/vim-indent-object", tag = "1.1.2" }
+  })
+
   -- Language server
   use({
     "williamboman/mason.nvim",
