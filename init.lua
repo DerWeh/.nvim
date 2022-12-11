@@ -111,6 +111,11 @@ require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   })
 
+  use({
+    'hkupty/iron.nvim',
+    tag = "*"
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
@@ -329,6 +334,39 @@ require('gitsigns').setup({
   end
 })
 
+local iron = require("iron.core")
+iron.setup {
+  config = {
+    scratch_repl = true,
+    repl_open_cmd = "topleft vsplit",
+    repl_definition = {
+      python = require("iron.fts.python").ipython,
+    }
+  },
+  -- keymaps = {
+  --   send_motion = "<space>sc",
+  --   visual_send = "<space>sc",
+  --   repeat_cmd = "<space>s.",
+  --   cr = "<space>s<cr>",
+  --   interrupt = "<space>s<space>",
+  --   exit = "<space>sq",
+  --   clear = "<space>cl",
+  -- }
+}
+wk.register({
+  ["<leader>s"] = {
+    name = "Send",
+    ["s"] = { "<CMD>lua require('iron.core').send_line()<CR>", "Send Line" },
+    ["m"] = { "<CMD>lua require('iron.core').run_motion('send_motion')<CR>", "Send Motion" },
+    ["f"] = { "<CMD>lua require('iron.core').send_file()<CR>", "Send File" },
+    ["Q"] = { "<CMD>lua require('iron.core').close_repl()<CR>", "Quit" },
+    ["c"] = { "<CMD>lua require('iron.core').send(nil, string.char(03))<CR>", "Interrupt" },
+    ["l"] = { "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", "clar" },
+  }
+})
+wk.register({
+  ["<leader>s"] = { "<CMD>lua require('iron.core').visual_send()<CR>", "Send Visual" }
+}, { mode = 'v' })
 -- autocmds
 vim.api.nvim_create_augroup("highlight_yank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
