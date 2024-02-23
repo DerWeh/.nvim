@@ -46,15 +46,10 @@ require("lazy").setup({
     "kylechui/nvim-surround",
     version = "~2",
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({})
-    end
+    config = true,
   },
-  {
-    'numToStr/Comment.nvim',
-    lazy = false,
-  },
-  'fedepujol/move.nvim',
+  { 'numToStr/Comment.nvim', opts = {}, lazy = false },
+  { 'fedepujol/move.nvim', opts = {} },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -69,8 +64,8 @@ require("lazy").setup({
   { "michaeljsmith/vim-indent-object", version = "~1" },
 
   -- Language server
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
+  { "williamboman/mason.nvim", config = true },
+  { "williamboman/mason-lspconfig.nvim", config = true },
   { "neovim/nvim-lspconfig", version = "~0.1.7" },
 
   -- Git support
@@ -78,7 +73,7 @@ require("lazy").setup({
 
   -- auto completion
   'hrsh7th/cmp-nvim-lsp',
-  'ray-x/lsp_signature.nvim',
+  { 'ray-x/lsp_signature.nvim', config = true },
   -- 'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
@@ -92,9 +87,7 @@ require("lazy").setup({
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
 
-  {
-    'hkupty/iron.nvim',
-  }
+  { 'hkupty/iron.nvim', }
 })
 -- END: lazy
 
@@ -144,13 +137,10 @@ cmp.setup.cmdline(':', {
   })
 })
 
-require("lsp_signature").setup()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
 -- language server configuration
-require("mason").setup()
-require("mason-lspconfig").setup({})
 
 local lspconfig = require('lspconfig')
 -- Mappings.
