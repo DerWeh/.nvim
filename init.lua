@@ -18,111 +18,83 @@ vim.opt.background = "light"
 vim.opt.termguicolors = true
 
 
--- BEGIN: set up packer outomatically
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- BEGIN: set up lazy automatically
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
 -- regular configuration
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+require("lazy").setup({
 
   -- Looks
-  use({ "lukas-reineke/indent-blankline.nvim", tag = "*" })
-  use({ "RRethy/vim-illuminate" })
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, version = "~3" },
+  { "RRethy/vim-illuminate" },
 
   -- Mappings
-  use({
+  {
     "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "~2",
+    event = "VeryLazy",
     config = function()
       require("nvim-surround").setup({})
     end
-  })
-  use({
+  },
+  {
     'numToStr/Comment.nvim',
-    tag = "*",
-    config = function()
-      require('Comment').setup()
-    end
-  })
-  use 'fedepujol/move.nvim'
-  use({
+    lazy = false,
+  },
+  'fedepujol/move.nvim',
+  {
     "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup({})
-    end
-  })
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+  },
 
   -- Text objects
-  use({
-    { "wellle/targets.vim", tag = "v0.5.0" }, --arguments
-    { "michaeljsmith/vim-indent-object", tag = "1.1.2" }
-  })
+  { "wellle/targets.vim", tag = "v0.5.0" }, --arguments
+  { "michaeljsmith/vim-indent-object", version = "~1" },
 
   -- Language server
-  use({
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    { "neovim/nvim-lspconfig", tag = "*" },
-    config = function()
-      require("mason").setup({})
-      require("mason-lspconfig").setup({})
-    end,
-  })
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  { "neovim/nvim-lspconfig", version = "~0.1.7" },
 
   -- Git support
-  use({
-    'lewis6991/gitsigns.nvim',
-    tag = "*",
-    -- config = function()
-    --   require('gitsigns').setup()
-    -- end
-  })
+  { 'lewis6991/gitsigns.nvim', version = "~0.7" },
 
   -- auto completion
-  use({
-    'hrsh7th/cmp-nvim-lsp',
-    'ray-x/lsp_signature.nvim',
-    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-  })
-  use({
-    'hrsh7th/nvim-cmp',
-    tag = "*",
-  })
+  'hrsh7th/cmp-nvim-lsp',
+  'ray-x/lsp_signature.nvim',
+  -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  { 'hrsh7th/nvim-cmp', version = "0.0.1" },
   -- snippet engine
-  use({ "L3MON4D3/LuaSnip", tag = "v1.*" })
+  { "L3MON4D3/LuaSnip", version = "~2" },
 
-  use({
+  {
     'nvim-telescope/telescope.nvim',
-    tag = '*',
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  })
+    version = '~0.1',
+    dependencies = { { 'nvim-lua/plenary.nvim' } }
+  },
 
-  use({
+  {
     'hkupty/iron.nvim',
-    tag = "*"
-  })
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
--- END: packer
+  }
+})
+-- END: lazy
 
 -- setup cmp
 -- Set up nvim-cmp.
