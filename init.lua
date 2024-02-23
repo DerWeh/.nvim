@@ -19,6 +19,8 @@ vim.opt.termguicolors = true
 
 vim.opt.cursorline = true
 
+vim.opt.spell = true
+
 
 -- BEGIN: set up lazy automatically
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -336,4 +338,9 @@ vim.api.nvim_create_augroup("highlight_yank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = "highlight_yank",
   callback = function() vim.highlight.on_yank { higroup = "IncSearch", timeout = 700 } end
+})
+vim.api.nvim_create_augroup("spell", { clear = true})
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = "spell",
+  callback = function () vim.opt_local.spell = false end
 })
