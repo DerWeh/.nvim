@@ -17,6 +17,8 @@ vim.g.mapleader = ","
 vim.opt.background = "light"
 vim.opt.termguicolors = true
 
+vim.opt.cursorline = true
+
 
 -- BEGIN: set up lazy automatically
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
