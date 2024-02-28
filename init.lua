@@ -14,6 +14,7 @@ vim.opt.inccommand = 'split'
 vim.g.maplocalleader = "\\"
 vim.g.mapleader = ","
 
+vim.opt.mouse = ""
 vim.opt.background = "light"
 vim.opt.termguicolors = true
 
