@@ -73,6 +73,15 @@ require("lazy").setup({
 
   -- Git support
   { 'lewis6991/gitsigns.nvim', version = "~0.7" },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true
+  },
 
   -- auto completion
   'hrsh7th/cmp-nvim-lsp',
