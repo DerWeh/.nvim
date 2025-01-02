@@ -90,7 +90,7 @@ require("lazy").setup({
   -- 'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
-  { 'hrsh7th/nvim-cmp', version = "0.0.1" },
+  { 'hrsh7th/nvim-cmp' }, -- , version = "0.0.1" },
   -- snippet engine
   { "L3MON4D3/LuaSnip", version = "~2" },
 
@@ -132,23 +132,24 @@ cmp.setup({
     { name = 'path' },
   })
 })
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline({ '/', '?' }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   }),
+--   matching = { disallow_symbol_nonprefix_matching = false }
+-- })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
