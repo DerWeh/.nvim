@@ -51,7 +51,6 @@ require("lazy").setup({
     event = "VeryLazy",
     config = true,
   },
-  { 'numToStr/Comment.nvim', opts = {}, lazy = false },
   { 'fedepujol/move.nvim', opts = { char = { enable = true } } },
   {
     "folke/which-key.nvim",
