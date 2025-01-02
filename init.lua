@@ -171,35 +171,27 @@ local on_attach = function(_, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local wk = require("which-key")
-  wk.register({
-    ["gD"] = { vim.lsp.buf.declaration, "Go Declaration" },
-    ["gd"] = { vim.lsp.buf.definition, "Go Declaration" },
-    ["K"] = { vim.lsp.buf.hover, "documentation" },
-    -- ['gi'] = { vim.lsp.buf.implementation(), "Go Implementation"},
-    ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature" },
-    ["<LocalLeader>"] = {
-      name = "Language",
-      ["n"] = { "<CMD>Telescope lsp_references<CR>", "references" },
-      ["s"] = { "<CMD>Telescope lsp_document_symbols<CR>", "Symbols" },
-      ["d"] = { "<CMD>Telescope diagnostics<CR>", "Diagnostic" },
-      ["r"] = { vim.lsp.buf.rename, "Rename" },
-      ["D"] = { vim.lsp.buf.type_definition, "go type Defintion" },
-      ["ca"] = { vim.lsp.buf.code_action, "Code Action" },
-      ["f"] = {
-        name = 'File',
-        ["f"] = { function() vim.lsp.buf.format({ async = false }) end, "Format" },
-      },
-      ["w"] = {
-        name = "Workspace",
-        ["a"] = { vim.lsp.buf.add_workspace_folder, "Add folder" },
-        ["r"] = { vim.lsp.buf.remove_workspace_folder, "Remove folder" },
-        ["l"] = { "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List folder" },
-      },
-    },
-  }, { silent = false, buffer = bufnr })
-  -- vim.keymap.set('n', '<space>wl', function()
-  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  -- end, bufopts)
+  wk.add({
+    silent = false, buffer = bufnr,
+    {"gD", vim.lsp.buf.declaration, desc = "Go Declaration" },
+    {"gd", vim.lsp.buf.definition, desc = "Go Declaration" },
+    {"K", vim.lsp.buf.hover, desc = "documentation" },
+    -- {'gi', vim.lsp.buf.implementation(), desc = "Go Implementation"},
+    {"<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
+    {"<LocalLeader>", group = "Language"},
+    {"<LocalLeader>n", "<CMD>Telescope lsp_references<CR>", desc = "references" },
+    {"<LocalLeader>s", "<CMD>Telescope lsp_document_symbols<CR>", desc = "Symbols" },
+    {"<LocalLeader>d", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
+    {"<LocalLeader>r", vim.lsp.buf.rename, desc = "Rename" },
+    {"<LocalLeader>D", vim.lsp.buf.type_definition, desc = "go type Defintion" },
+    {"<LocalLeader>ca", vim.lsp.buf.code_action, desc = "Code Action" },
+    {"<LocalLeader>f", group = "File" },
+    {"<LocalLeader>ff", function() vim.lsp.buf.format({ async = false }) end, desc = "Format" },
+    {"<LocalLeader>w", group = "Workspace" },
+    {"<LocalLeader>wa", vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
+    {"<LocalLeader>wr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
+    {"<LocalLeader>wl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
+  })
 end
 require('mason-lspconfig').setup_handlers({
   function(server)
@@ -222,49 +214,45 @@ require('mason-lspconfig').setup_handlers({
 
 -- Key-mappings using which-key
 local wk = require("which-key")
-wk.register({ -- normal mode mappings
-  ["<space>"] = {
-    name = "Telescope",
-    ["s"] = { "<CMD>Telescope buffers<CR>", "buffer" },
-    ["/"] = { "<CMD>Telescope live_grep<CR>", "live grep" },
-    ["f"] = { "<CMD>Telescope find_files<CR>", "Files" },
-    ["o"] = { "<CMD>Telescope oldfiles<CR>", "Recent files" },
-    ["q"] = { "<CMD>Telescope quickfix<CR>", "Quickfix" },
-    ["l"] = { "<CMD>Telescope loclist<CR>", "Location" },
-    ["r"] = { "<CMD>Telescope resume<cr>", "Resume Telescope" },
-    ["g"] = {
-      name = 'mod',
-      ["/"] = { "<cmd>Telescope grep_string<cr>", "grep word" },
-    },
-  },
-  ["<leader>"] = {
-    ["/"] = { "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
-    -- ["h"] = { "<CMD>nohl<CR>", "remove search Highlight" },
-  },
-  ["<C-w>"] = {
-    -- name = "Window",
-    ["f"] = { "<C-w><Bar><C-w>_", "Full size" },
-  },
-  ["<F1>"] = { "<CMD>Telescope help_tags<CR>", "Help" },
-  ['<A-j>'] = { '<CMD>MoveLine(1)<CR>', 'Move down' },
-  ['<A-k>'] = { '<CMD>MoveLine(-1)<CR>', 'Move up' },
-  ['<A-h>'] = { '<CMD>MoveHChar(-1)<CR>', 'Move left' },
-  ['<A-l>'] = { '<CMD>MoveHChar(1)<CR>', 'Move right' },
+wk.add({ -- normal mode mappings
+  {"<space>", group = "Telescope"},
+  {"<space>s", "<CMD>Telescope buffers<CR>", desc = "buffer" },
+  {"<space>/", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
+  {"<space>f", "<CMD>Telescope find_files<CR>", desc = "Files" },
+  {"<space>o", "<CMD>Telescope oldfiles<CR>", desc = "Recent files" },
+  {"<space>q", "<CMD>Telescope quickfix<CR>", desc = "Quickfix" },
+  {"<space>l", "<CMD>Telescope loclist<CR>", desc = "Location" },
+  {"<space>r", "<CMD>Telescope resume<cr>", desc = "Resume Telescope" },
+  -- END: Telescope
+  {"<space>g", group = "mod"},
+  {"<space>g/", "<CMD>Telescope grep_string<cr>", desc = "grep word" },
+  -- END: mod
+  {"<leader>/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
+  -- {"<leader>h", "<CMD>nohlsearch<CR>", desc = "remove search Highlight" },
+  {"<C-w>f", "<C-w><Bar><C-w>_", desc = "Full size"},
+  {"<F1>", "<CMD>Telescope help_tags<CR>", desc = "Help" },
+  {'<A-j>', '<CMD>MoveLine(1)<CR>', desc = 'Move down' },
+  {'<A-k>', '<CMD>MoveLine(-1)<CR>', desc = 'Move up' },
+  {'<A-h>', '<CMD>MoveHChar(-1)<CR>', desc = 'Move left' },
+  {'<A-l>', '<CMD>MoveHChar(1)<CR>', desc = 'Move right' },
 })
-wk.register({ -- visual mode mappings
-  ['<A-j>'] = { ":MoveBlock(1)<CR>", 'Move down' },
-  ['<A-k>'] = { ":MoveBlock(-1)<CR>", 'Move up' },
-  ['<A-h>'] = { ":MoveHBlock(-1)<CR>", 'Move left' },
-  ['<A-l>'] = { ":MoveHBlock(1)<CR>", 'Move right' },
-}, { mode = 'v' })
-wk.register({ -- insert mode mappings
-  ['<C-z>'] = { "<c-g>u<Esc>[s1z=`]a<c-g>u", "Correct last error" },
-  ['<C-l>'] = { "<Right>", "Move right" },
-}, { mode = 'i' })
-wk.register({ -- terminal mode mappings
-  ['<ESC>'] = { "<C-\\><C-n>", "Exit terminal mode" },
-  ['<leader><ESC>'] = { "<ESC>", "Send <ESC> to terminal" },
-}, { mode = 't' })
+wk.add({ -- visual mode mappings
+  mode = "v",
+  {'<A-j>', ":MoveBlock(1)<CR>", desc = 'Move down' },
+  {'<A-k>', ":MoveBlock(-1)<CR>", desc = 'Move up' },
+  {'<A-h>', ":MoveHBlock(-1)<CR>", desc = 'Move left' },
+  {'<A-l>', ":MoveHBlock(1)<CR>", desc = 'Move right' },
+})
+wk.add({ -- insert mode mappings
+  mode = "i",
+  {'<C-z>', "<c-g>u<Esc>[s1z=`]a<c-g>u", desc = "Correct last error" },
+  {'<C-l>', "<Right>", desc = "Move right" },
+})
+wk.add({ -- terminal mode mappings
+  mode = "t",
+  {'<ESC>', "<C-\\><C-n>", desc = "Exit terminal mode" },
+  {'<leader><ESC>', "<ESC>", desc = "Send <ESC> to terminal" },
+})
 
 
 require('gitsigns').setup({
@@ -274,36 +262,26 @@ require('gitsigns').setup({
       vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, gs_opts)
     end
 
-    wk.register({ -- Navigation
-      [']c'] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next change" },
-      ['[c'] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Prev change" },
-    }, { expr = true })
-
-    wk.register({ -- Actions
-      ["<leader>h"] = {
-        name = "Hunk",
-        ["s"] = { "<cmd>Gitsigns stage_hunk<CR>", "Hunk Stage" },
-        ["S"] = { "<cmd>Gitsigns stage_buffer<CR>", "Stage buffer" },
-        ["r"] = { "<cmd>Gitsigns reset_hunk<CR>", "Hunk Reset" },
-        ["R"] = { "<cmd>Gitsigns reset_buffer<CR>", "Reset buffer" },
-        ["u"] = { '<cmd>Gitsigns undo_stage_hunk<CR>', "Hunk Undo" },
-        ["p"] = { '<cmd>Gitsigns preview_hunk<CR>', "Hunk Preview" },
-        ["b"] = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', "Hunk Blame" },
-        ["d"] = { '<cmd>Gitsigns diffthis<CR>', "Hunk Diff" },
-        ["D"] = { '<cmd>lua require"gitsigns".diffthis("~")<CR>', "Hunk Diff" },
-      },
-      ["<leader>t"] = {
-        name = "toggle",
-        ["b"] = { '<cmd>Gitsigns toggle_current_line_blame<CR>', "Toggle Blame" },
-        ["d"] = { '<cmd>Gitsigns toggle_deleted<CR>', "Toggle Delete" },
-      }
+    wk.add({ -- Navigation
+      {']c', function() if vim.wo.diff then vim.cmd.normal({']c', bang = true}) else require('gitsigns').nav_hunk('next') end end, desc = "Next change" },
+      {'[c', function() if vim.wo.diff then vim.cmd.normal({'[c', bang = true}) else require('gitsigns').nav_hunk('prev') end end, desc = "Prev change" },
     })
-    wk.register({
-      ["<leader>h"] = {
-        name = "Hunk",
-        ["s"] = { ':Gitsigns stage_hunk<CR>', "Hunk Stage" },
-      }
-    }, { mode = 'v' })
+
+    wk.add({ -- Actions
+      {"<leader>h", group = "Hunk", mode = {"n", "v"} },
+      {"<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Hunk Stage", mode = {"n", "v"} },
+      {"<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage buffer" },
+      {"<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Hunk Reset" },
+      {"<leader>hR", "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
+      {"<leader>hu", '<cmd>Gitsigns undo_stage_hunk<CR>', desc = "Hunk Undo" },
+      {"<leader>hp", '<cmd>Gitsigns preview_hunk<CR>', desc = "Hunk Preview" },
+      {"<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', desc = "Hunk Blame" },
+      {"<leader>hd", '<cmd>Gitsigns diffthis<CR>', desc = "Hunk Diff" },
+      {"<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>', desc = "Hunk Diff" },
+      {"<leader>t", group = "toggle"},
+      {"<leader>tb", '<cmd>Gitsigns toggle_current_line_blame<CR>', desc = "Toggle Blame" },
+      {"<leader>td", '<cmd>Gitsigns toggle_deleted<CR>', desc = "Toggle Delete" },
+    })
 
     -- Text object
     map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -330,20 +308,16 @@ iron.setup {
   --   clear = "<space>cl",
   -- }
 }
-wk.register({
-  ["<leader>s"] = {
-    name = "Send",
-    ["s"] = { "<CMD>lua require('iron.core').send_line()<CR>", "Send Line" },
-    ["m"] = { "<CMD>lua require('iron.core').run_motion('send_motion')<CR>", "Send Motion" },
-    ["f"] = { "<CMD>lua require('iron.core').send_file()<CR>", "Send File" },
-    ["Q"] = { "<CMD>lua require('iron.core').close_repl()<CR>", "Quit" },
-    ["c"] = { "<CMD>lua require('iron.core').send(nil, string.char(03))<CR>", "Interrupt" },
-    ["l"] = { "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", "clar" },
-  }
+wk.add({
+  {"<leader>s", group = "Send"},
+  {"<leader>s", "<CMD>lua require('iron.core').visual_send()<CR>", desc = "Send Visual", mode = "v" },
+  {"<leader>ss", "<CMD>lua require('iron.core').send_line()<CR>", desc = "Send Line" },
+  {"<leader>sm", "<CMD>lua require('iron.core').run_motion('send_motion')<CR>", desc = "Send Motion" },
+  {"<leader>sf", "<CMD>lua require('iron.core').send_file()<CR>", desc = "Send File" },
+  {"<leader>sQ", "<CMD>lua require('iron.core').close_repl()<CR>", desc = "Quit" },
+  {"<leader>sc", "<CMD>lua require('iron.core').send(nil, string.char(03))<CR>", desc = "Interrupt" },
+  {"<leader>sl", "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", desc = "clar" },
 })
-wk.register({
-  ["<leader>s"] = { "<CMD>lua require('iron.core').visual_send()<CR>", "Send Visual" }
-}, { mode = 'v' })
 -- autocmds
 vim.api.nvim_create_augroup("highlight_yank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
