@@ -51,7 +51,7 @@ require("lazy").setup({
     event = "VeryLazy",
     config = true,
   },
-  { 'fedepujol/move.nvim', opts = { char = { enable = true } } },
+  { 'fedepujol/move.nvim', opts = { char = { enable = true } }, version = "~2" },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -59,6 +59,7 @@ require("lazy").setup({
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
+    version = "~3",
   },
 
   -- Text objects
@@ -66,12 +67,12 @@ require("lazy").setup({
   { "michaeljsmith/vim-indent-object", version = "~1" },
 
   -- Language server
-  { "williamboman/mason.nvim", config = true },
-  { "williamboman/mason-lspconfig.nvim", config = true },
-  { "neovim/nvim-lspconfig", version = "~0.1.7" },
+  { "williamboman/mason.nvim", config = true, version = "~1" },
+  { "williamboman/mason-lspconfig.nvim", config = true, version = "~1" },
+  { "neovim/nvim-lspconfig", version = "~1" },
 
   -- Git support
-  { 'lewis6991/gitsigns.nvim', version = "~0.7" },
+  { 'lewis6991/gitsigns.nvim', version = "~0.9" },
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -79,12 +80,13 @@ require("lazy").setup({
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    config = true
+    config = true,
+    version = "~v2",
   },
 
   -- auto completion
   'hrsh7th/cmp-nvim-lsp',
-  { 'ray-x/lsp_signature.nvim', config = true },
+  { 'ray-x/lsp_signature.nvim', config = true, version = "~v0.3.1" },
   -- 'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
