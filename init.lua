@@ -67,9 +67,9 @@ require("lazy").setup({
   { "michaeljsmith/vim-indent-object", version = "~1" },
 
   -- Language server
-  { "williamboman/mason.nvim", config = true, version = "~1" },
-  { "williamboman/mason-lspconfig.nvim", config = true, version = "~1" },
-  { "neovim/nvim-lspconfig", version = "~1" },
+  { "williamboman/mason.nvim", config = true, version = "^1.11" },
+  { "williamboman/mason-lspconfig.nvim", config = true, version = "^1.32" },
+  { "neovim/nvim-lspconfig", version = "^2.1" },
 
   -- Git support
   { 'lewis6991/gitsigns.nvim', version = "~0.9" },
@@ -167,48 +167,44 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-  -- print('Starting language server')
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local wk = require("which-key")
-  wk.add({
-    silent = false, buffer = bufnr,
-    {"gD", vim.lsp.buf.declaration, desc = "Go Declaration" },
-    {"gd", vim.lsp.buf.definition, desc = "Go Declaration" },
-    {"K", vim.lsp.buf.hover, desc = "documentation" },
-    -- {'gi', vim.lsp.buf.implementation(), desc = "Go Implementation"},
-    {"<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
-    {"<LocalLeader>", group = "Language"},
-    {"<LocalLeader>n", "<CMD>Telescope lsp_references<CR>", desc = "references" },
-    {"<LocalLeader>s", "<CMD>Telescope lsp_document_symbols<CR>", desc = "Symbols" },
-    {"<LocalLeader>d", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
-    {"<LocalLeader>r", vim.lsp.buf.rename, desc = "Rename" },
-    {"<LocalLeader>D", vim.lsp.buf.type_definition, desc = "go type Defintion" },
-    {"<LocalLeader>ca", vim.lsp.buf.code_action, desc = "Code Action" },
-    {"<LocalLeader>f", group = "File" },
-    {"<LocalLeader>ff", function() vim.lsp.buf.format({ async = false }) end, desc = "Format" },
-    {"<LocalLeader>w", group = "Workspace" },
-    {"<LocalLeader>wa", vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
-    {"<LocalLeader>wr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
-    {"<LocalLeader>wl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
-  })
-end
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    print('Starting language server')
+    local bufnr = args.buf
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local wk = require("which-key")
+    wk.add({
+      silent = false, buffer = bufnr,
+      {"gD", vim.lsp.buf.declaration, desc = "Go Declaration" },
+      {"gd", vim.lsp.buf.definition, desc = "Go Declaration" },
+      {"K", vim.lsp.buf.hover, desc = "documentation" },
+      -- {'gi', vim.lsp.buf.implementation(), desc = "Go Implementation"},
+      {"<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
+      {"<LocalLeader>", group = "Language"},
+      {"<LocalLeader>n", "<CMD>Telescope lsp_references<CR>", desc = "references" },
+      {"<LocalLeader>s", "<CMD>Telescope lsp_document_symbols<CR>", desc = "Symbols" },
+      {"<LocalLeader>d", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
+      {"<LocalLeader>r", vim.lsp.buf.rename, desc = "Rename" },
+      {"<LocalLeader>D", vim.lsp.buf.type_definition, desc = "go type Defintion" },
+      {"<LocalLeader>ca", vim.lsp.buf.code_action, desc = "Code Action" },
+      {"<LocalLeader>f", group = "File" },
+      {"<LocalLeader>ff", function() vim.lsp.buf.format({ async = false }) end, desc = "Format" },
+      {"<LocalLeader>w", group = "Workspace" },
+      {"<LocalLeader>wa", vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
+      {"<LocalLeader>wr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
+      {"<LocalLeader>wl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
+    })
+  end
+})
+
 require('mason-lspconfig').setup_handlers({
-  function(server)
-    if server == "sumneko_lua" then
-      lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities,
-        settings = { Lua = { diagnostics = { globals = { 'vim' } } } }
-      })
-    elseif server == "pylsp" then
-      lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities,
-        settings = { pylsp = { plugins = {
-          pycodestyle = { maxLineLength = 100 },
-          pydocstyle = { enabled = true, convention = 'numpy' }
-        } } } })
-    else
-      lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })
-    end
+  -- default handler
+  function (server_name)
+    vim.lsp.enable(server_name)
+  end,
+  ["lua_ls"] = function ()
+    vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
+    vim.lsp.enable("lua_ls")
   end,
 })
 
