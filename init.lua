@@ -161,8 +161,6 @@ local lspconfig = require('lspconfig')
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
@@ -176,23 +174,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     wk.add({
       silent = false, buffer = bufnr,
       {"gD", vim.lsp.buf.declaration, desc = "Go Declaration" },
-      {"gd", vim.lsp.buf.definition, desc = "Go Declaration" },
-      {"K", vim.lsp.buf.hover, desc = "documentation" },
-      -- {'gi', vim.lsp.buf.implementation(), desc = "Go Implementation"},
-      {"<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
-      {"<LocalLeader>", group = "Language"},
-      {"<LocalLeader>n", "<CMD>Telescope lsp_references<CR>", desc = "references" },
-      {"<LocalLeader>s", "<CMD>Telescope lsp_document_symbols<CR>", desc = "Symbols" },
-      {"<LocalLeader>d", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
-      {"<LocalLeader>r", vim.lsp.buf.rename, desc = "Rename" },
-      {"<LocalLeader>D", vim.lsp.buf.type_definition, desc = "go type Defintion" },
-      {"<LocalLeader>ca", vim.lsp.buf.code_action, desc = "Code Action" },
-      {"<LocalLeader>f", group = "File" },
-      {"<LocalLeader>ff", function() vim.lsp.buf.format({ async = false }) end, desc = "Format" },
-      {"<LocalLeader>w", group = "Workspace" },
-      {"<LocalLeader>wa", vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
-      {"<LocalLeader>wr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
-      {"<LocalLeader>wl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
+      {"gd", vim.lsp.buf.definition, desc = "Go Definition" },
+      {"<C-s>", vim.lsp.buf.signature_help, desc = "Signature" },
+      {"gr", group = "LSP"},
+      {"gri", vim.lsp.buf.implementation(), desc = "Go Implementation"},
+      {"grr", "<CMD>Telescope lsp_references<CR>", desc = "references" },
+      {"gO", "<CMD>Telescope lsp_document_symbols<CR>", desc = "LSP Symbols" },
+      {"grd", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
+      {"grD", "<CMD>Telescope lsp_definitions<CR>", desc = "go type Defintion" },
+      {"grf", group = "File" },
+      {"grff", function() vim.lsp.buf.format({ async = false }) end, desc = "Format" },
+      {"grw", group = "Workspace" },
+      {"grwa", vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
+      {"grwr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
+      {"grwl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
     })
   end
 })
