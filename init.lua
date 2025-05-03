@@ -79,8 +79,9 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
+      "rbong/vim-flog",  -- optional: nicer git graph
     },
-    config = true,
+    config = { graph_style = "unicode" },
     version = "~v2",
   },
 
