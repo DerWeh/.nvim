@@ -67,9 +67,16 @@ require("lazy").setup({
   { "michaeljsmith/vim-indent-object", version = "~1" },
 
   -- Language server
-  { "williamboman/mason.nvim", config = true, version = "^1.11" },
-  { "williamboman/mason-lspconfig.nvim", config = true, version = "^1.32" },
-  { "neovim/nvim-lspconfig", version = "^2.1" },
+  { "mason-org/mason.nvim", config = true, version = "^2.0" },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    config = true,
+    version = "^2.0",
+    dependencies = {
+      {"mason-org/mason.nvim", version="^2.0"},
+      {"neovim/nvim-lspconfig", version="^2.1"},
+    },
+  },
 
   -- Git support
   { 'lewis6991/gitsigns.nvim', version = "^1.0" },
@@ -141,16 +148,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-require('mason-lspconfig').setup_handlers({
-  -- default handler
-  function (server_name)
-    vim.lsp.enable(server_name)
-  end,
-  ["lua_ls"] = function ()
-    vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
-    vim.lsp.enable("lua_ls")
-  end,
-})
+vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
 
 
 -- Key-mappings using which-key
