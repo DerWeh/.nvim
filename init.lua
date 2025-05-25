@@ -109,7 +109,7 @@ require("lazy").setup({
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
 
-  { 'hkupty/iron.nvim', }
+  { 'Vigemus/iron.nvim', }
 })
 -- END: lazy
 
