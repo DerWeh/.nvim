@@ -136,6 +136,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {"gd", vim.lsp.buf.definition, desc = "Go Definition" },
       {"<C-s>", vim.lsp.buf.signature_help, desc = "Signature" },
       {"gr", group = "LSP"},
+      {"grh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "toggle inlay Hints" },
       {"grr", "<CMD>Telescope lsp_references<CR>", desc = "references" },
       {"gO", "<CMD>Telescope lsp_document_symbols<CR>", desc = "LSP Symbols" },
       {"grd", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
