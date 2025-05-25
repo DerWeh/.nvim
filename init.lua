@@ -47,7 +47,7 @@ require("lazy").setup({
   -- Mappings
   {
     "kylechui/nvim-surround",
-    version = "~2",
+    version = "~3",
     event = "VeryLazy",
     config = true,
   },
