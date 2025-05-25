@@ -88,7 +88,7 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
       "rbong/vim-flog",  -- optional: nicer git graph
     },
-    config = { graph_style = "unicode" },
+    opts = { graph_style = "unicode" },
     version = "~v2",
   },
 
