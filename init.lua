@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {"grwr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
       {"grwl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
     })
-    if client.supports_method("textDocument/implementation") then
+    if client:supports_method("textDocument/implementation") then
       wk.add({
         silent = false, buffer = bufnr,
         { "gri", vim.lsp.buf.implementation(), desc = "Go Implementation" },
