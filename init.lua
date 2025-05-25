@@ -121,10 +121,13 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+vim.api.nvim_create_augroup("LspMappings", { clear = true })
 vim.api.nvim_create_autocmd('LspAttach', {
+  group = "LspMappings",
   callback = function(args)
-    print('Starting language server')
+    -- print('Starting language server')
     local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local wk = require("which-key")
     wk.add({
@@ -133,7 +136,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {"gd", vim.lsp.buf.definition, desc = "Go Definition" },
       {"<C-s>", vim.lsp.buf.signature_help, desc = "Signature" },
       {"gr", group = "LSP"},
-      {"gri", vim.lsp.buf.implementation(), desc = "Go Implementation"},
       {"grr", "<CMD>Telescope lsp_references<CR>", desc = "references" },
       {"gO", "<CMD>Telescope lsp_document_symbols<CR>", desc = "LSP Symbols" },
       {"grd", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostic" },
@@ -145,6 +147,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {"grwr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
       {"grwl", "<CMD>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "List folder" },
     })
+    if client.supports_method("textDocument/implementation") then
+      wk.add({
+        silent = false, buffer = bufnr,
+        { "gri", vim.lsp.buf.implementation(), desc = "Go Implementation" },
+      })
+    end
   end
 })
 
