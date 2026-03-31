@@ -22,6 +22,8 @@ vim.opt.cursorline = true
 
 vim.opt.spell = true
 
+vim.opt.synmaxcol = 300  -- prevent freeze on huge lines
+
 
 -- BEGIN: set up lazy automatically
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
