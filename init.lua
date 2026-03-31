@@ -79,7 +79,7 @@ require("lazy").setup({
   },
 
   -- Git support
-  { 'lewis6991/gitsigns.nvim', version = "^1.0" },
+  { 'lewis6991/gitsigns.nvim', version = "^2.1" },
   {
     "NeogitOrg/neogit",
     dependencies = {
