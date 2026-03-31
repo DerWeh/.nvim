@@ -201,6 +201,15 @@ wk.add({ -- terminal mode mappings
   {'<ESC>', "<C-\\><C-n>", desc = "Exit terminal mode" },
   {'<leader><ESC>', "<ESC>", desc = "Send <ESC> to terminal" },
 })
+wk.add({ -- Git mappings
+  mode = "n",
+  { "<leader>g",  group = "Git" },
+  { "<leader>gg", "<CMD>Neogit<CR>",         desc = "neoGit" },
+  { "<leader>gl", "<CMD>Neogit log<CR>",     desc = "git Log" },
+  { "<leader>gc", "<CMD>Neogit commit<CR>",  desc = "git Commit" },
+  { "<leader>gd", "<CMD>DiffviewOpen<CR>",   desc = "git Diff" },
+  { "<leader>gb", "<CMD>Gitsigns blame<CR>", desc = "git Blame" },
+})
 
 
 require('gitsigns').setup({
