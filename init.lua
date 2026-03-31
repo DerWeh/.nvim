@@ -257,25 +257,19 @@ iron.setup {
       python = require("iron.fts.python").ipython,
     }
   },
-  -- keymaps = {
-  --   send_motion = "<space>sc",
-  --   visual_send = "<space>sc",
-  --   repeat_cmd = "<space>s.",
-  --   cr = "<space>s<cr>",
-  --   interrupt = "<space>s<space>",
-  --   exit = "<space>sq",
-  --   clear = "<space>cl",
-  -- }
 }
 wk.add({
   {"<leader>s", group = "Send"},
   {"<leader>s", "<CMD>lua require('iron.core').visual_send()<CR>", desc = "Send Visual", mode = "v" },
+  {"<leader>so", "<CMD>IronRepl<CR>", desc = "Open REPL"},
   {"<leader>ss", "<CMD>lua require('iron.core').send_line()<CR>", desc = "Send Line" },
   {"<leader>sm", "<CMD>lua require('iron.core').run_motion('send_motion')<CR>", desc = "Send Motion" },
   {"<leader>sf", "<CMD>lua require('iron.core').send_file()<CR>", desc = "Send File" },
+  {"<leader>sh", "<CMD>lua require('iron.core').hide_repl()<CR>", desc = "Hide REPL"},
+  {"<leader>sR", "<CMD>IronRestart<CR>", desc = "Restart REPL"},
   {"<leader>sQ", "<CMD>lua require('iron.core').close_repl()<CR>", desc = "Quit" },
   {"<leader>sc", "<CMD>lua require('iron.core').send(nil, string.char(03))<CR>", desc = "Interrupt" },
-  {"<leader>sl", "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", desc = "clar" },
+  {"<leader>sl", "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", desc = "cLear" },
 })
 -- autocmds
 local yank_group = vim.api.nvim_create_augroup("highlight_yank", { clear = true })
