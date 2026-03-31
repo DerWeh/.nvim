@@ -89,7 +89,7 @@ require("lazy").setup({
       "rbong/vim-flog",  -- optional: nicer git graph
     },
     opts = { graph_style = "unicode" },
-    version = "~v2",
+    version = "~v3",
   },
 
   -- auto completion
