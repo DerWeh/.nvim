@@ -238,6 +238,7 @@ require('gitsigns').setup({
       {"<leader>t", group = "toggle"},
       {"<leader>tb", '<CMD>Gitsigns toggle_current_line_blame<CR>', desc = "Toggle Blame" },
       {"<leader>td", '<CMD>Gitsigns toggle_deleted<CR>', desc = "Toggle Delete" },
+      {"<leader>tw", '<CMD>Gitsigns toggle_word_diff<CR>', desc = "Toggle Word diff" },
     })
 
     -- Text object
