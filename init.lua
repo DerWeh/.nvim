@@ -178,7 +178,7 @@ wk.add({ -- normal mode mappings
   -- END: mod
   {"<leader>/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
   -- {"<leader>h", "<CMD>nohlsearch<CR>", desc = "remove search Highlight" },
-  {"<C-w>f", "<C-w><Bar><C-w>_", desc = "Full size"},
+  {"<C-w>m", "<C-w><Bar><C-w>_", desc = "Max size"},
   {"<F1>", "<CMD>Telescope help_tags<CR>", desc = "Help" },
   {'<A-j>', '<CMD>MoveLine(1)<CR>', desc = 'Move down' },
   {'<A-k>', '<CMD>MoveLine(-1)<CR>', desc = 'Move up' },
