@@ -278,10 +278,10 @@ wk.add({
   {"<leader>sl", "<CMD>lua require('iron.core').send(nil, string.char(12))<CR>", desc = "clar" },
 })
 -- autocmds
-vim.api.nvim_create_augroup("highlight_yank", { clear = true })
+local yank_group = vim.api.nvim_create_augroup("highlight_yank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = "highlight_yank",
-  callback = function() vim.highlight.on_yank { higroup = "IncSearch", timeout = 700 } end
+  group = yank_group,
+  callback = function() vim.hl.on_yank { higroup = "IncSearch", timeout = 700 } end
 })
 vim.api.nvim_create_augroup("spell", { clear = true})
 vim.api.nvim_create_autocmd("TermOpen", {
