@@ -115,8 +115,6 @@ require("lazy").setup({
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -170,6 +168,8 @@ wk.add({ -- normal mode mappings
   {"<space>q", "<CMD>Telescope quickfix<CR>", desc = "Quickfix" },
   {"<space>l", "<CMD>Telescope loclist<CR>", desc = "Location" },
   {"<space>r", "<CMD>Telescope resume<CR>", desc = "Resume Telescope" },
+  -- not telescope but standard mapping
+  {"<space>e", vim.diagnostic.open_float, desc = "diagonstic Errors"},
   -- END: Telescope
   {"<space>g", group = "mod"},
   {"<space>g/", "<CMD>Telescope grep_string<CR>", desc = "grep word" },
