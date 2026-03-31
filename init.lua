@@ -43,7 +43,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
   -- Looks
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, version = "~3" },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = { scope= { enabled = true }  }, version = "~3" },
   { "RRethy/vim-illuminate" },
 
   -- Mappings
