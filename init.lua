@@ -170,10 +170,10 @@ wk.add({ -- normal mode mappings
   {"<space>o", "<CMD>Telescope oldfiles<CR>", desc = "Recent files" },
   {"<space>q", "<CMD>Telescope quickfix<CR>", desc = "Quickfix" },
   {"<space>l", "<CMD>Telescope loclist<CR>", desc = "Location" },
-  {"<space>r", "<CMD>Telescope resume<cr>", desc = "Resume Telescope" },
+  {"<space>r", "<CMD>Telescope resume<CR>", desc = "Resume Telescope" },
   -- END: Telescope
   {"<space>g", group = "mod"},
-  {"<space>g/", "<CMD>Telescope grep_string<cr>", desc = "grep word" },
+  {"<space>g/", "<CMD>Telescope grep_string<CR>", desc = "grep word" },
   -- END: mod
   {"<leader>/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy search" },
   -- {"<leader>h", "<CMD>nohlsearch<CR>", desc = "remove search Highlight" },
@@ -217,18 +217,18 @@ require('gitsigns').setup({
 
     wk.add({ -- Actions
       {"<leader>h", group = "Hunk", mode = {"n", "v"} },
-      {"<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Hunk Stage", mode = {"n", "v"} },
-      {"<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage buffer" },
-      {"<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Hunk Reset" },
-      {"<leader>hR", "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
-      {"<leader>hu", '<cmd>Gitsigns undo_stage_hunk<CR>', desc = "Hunk Undo" },
-      {"<leader>hp", '<cmd>Gitsigns preview_hunk<CR>', desc = "Hunk Preview" },
-      {"<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', desc = "Hunk Blame" },
-      {"<leader>hd", '<cmd>Gitsigns diffthis<CR>', desc = "Hunk Diff" },
-      {"<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>', desc = "Hunk Diff" },
+      {"<leader>hs", "<CMD>Gitsigns stage_hunk<CR>", desc = "Hunk Stage", mode = {"n", "v"} },
+      {"<leader>hS", "<CMD>Gitsigns stage_buffer<CR>", desc = "Stage buffer" },
+      {"<leader>hr", "<CMD>Gitsigns reset_hunk<CR>", desc = "Hunk Reset" },
+      {"<leader>hR", "<CMD>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
+      {"<leader>hu", '<CMD>Gitsigns undo_stage_hunk<CR>', desc = "Hunk Undo" },
+      {"<leader>hp", '<CMD>Gitsigns preview_hunk<CR>', desc = "Hunk Preview" },
+      {"<leader>hb", '<CMD>lua require"gitsigns".blame_line{full=true}<CR>', desc = "Hunk Blame" },
+      {"<leader>hd", '<CMD>Gitsigns diffthis<CR>', desc = "Hunk Diff" },
+      {"<leader>hD", '<CMD>lua require"gitsigns".diffthis("~")<CR>', desc = "Hunk Diff" },
       {"<leader>t", group = "toggle"},
-      {"<leader>tb", '<cmd>Gitsigns toggle_current_line_blame<CR>', desc = "Toggle Blame" },
-      {"<leader>td", '<cmd>Gitsigns toggle_deleted<CR>', desc = "Toggle Delete" },
+      {"<leader>tb", '<CMD>Gitsigns toggle_current_line_blame<CR>', desc = "Toggle Blame" },
+      {"<leader>td", '<CMD>Gitsigns toggle_deleted<CR>', desc = "Toggle Delete" },
     })
 
     -- Text object
