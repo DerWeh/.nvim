@@ -151,7 +151,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method("textDocument/implementation") then
       wk.add({
         silent = false, buffer = bufnr,
-        { "gri", vim.lsp.buf.implementation(), desc = "Go Implementation" },
+        { "gri", vim.lsp.buf.implementation, desc = "Go Implementation" },
       })
     end
   end
